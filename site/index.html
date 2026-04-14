@@ -25,7 +25,7 @@
         <span class="logo-sub">Dev Onboarding</span>
       </div>
       <nav class="sidebar-nav">
-        <a href="#section-01" class="nav-item active"><span class="nav-num">01</span><span class="nav-label">O Produto</span></a>
+        <a href="#section-01" class="nav-item active"><span class="nav-num">01</span><span class="nav-label">O que e o V4MOS?</span></a>
         <a href="#section-02" class="nav-item"><span class="nav-num">02</span><span class="nav-label">Features</span></a>
         <a href="#section-03" class="nav-item"><span class="nav-num">03</span><span class="nav-label">Arquitetura</span></a>
         <a href="#section-04" class="nav-item"><span class="nav-num">04</span><span class="nav-label">Stack</span></a>
@@ -39,6 +39,11 @@
         <a href="#section-12" class="nav-item"><span class="nav-num">12</span><span class="nav-label">Convencoes</span></a>
         <a href="#section-13" class="nav-item"><span class="nav-num">13</span><span class="nav-label">Gotchas</span></a>
         <a href="#section-14" class="nav-item"><span class="nav-num">14</span><span class="nav-label">Setup Local</span></a>
+        <div style="margin:12px 0; padding:8px 0; border-top:1px solid var(--border);">
+          <span style="font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:.15em; color:var(--red); padding-left:16px;">Produto</span>
+        </div>
+        <a href="#section-15" class="nav-item"><span class="nav-num">15</span><span class="nav-label">Roadmap</span></a>
+        <a href="#section-16" class="nav-item"><span class="nav-num">16</span><span class="nav-label">Extra</span></a>
       </nav>
       <div class="sidebar-footer">V4MOS &copy; 2026</div>
     </aside>
@@ -46,11 +51,11 @@
     <!-- MAIN -->
     <main class="main" id="main">
 
-      <!-- 01 O PRODUTO -->
+      <!-- 01 O QUE E O V4MOS -->
       <section class="section" id="section-01">
         <div class="section-header">
           <span class="section-number">01</span>
-          <h1 class="section-title">O Produto</h1>
+          <h1 class="section-title">O que e o V4MOS?</h1>
         </div>
         <p class="section-lead"><strong>V4 Marketing Operating System (V4MOS)</strong> — SaaS para diagnostico de marketing digital, gestao de workspaces, integracoes com plataformas de anuncios e assistente de IA. Feito para agencias e times de marketing digital.</p>
         <div class="card-grid cols-3">
@@ -1501,6 +1506,109 @@ cd packages/chat &amp;&amp; pnpm dev</code><button class="copy-btn" onclick="cop
               <tr><td>pnpm install falha no v4-marketing-api</td><td>Esse repo usa <strong>npm</strong>, nao pnpm. Use <code>npm install</code></td></tr>
             </tbody>
           </table>
+        </div>
+
+      </section>
+
+      <!-- DIVIDER: PRODUTO -->
+      <div style="padding:48px 0; text-align:center; border-top:2px solid var(--border); border-bottom:2px solid var(--border); margin:0; background:var(--surface);">
+        <span style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.2em; color:var(--red);">Produto</span>
+        <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(28px,4vw,42px); line-height:1; margin-top:8px; color:var(--text-primary);">Contexto de Produto</h2>
+        <p style="font-size:14px; color:var(--text-secondary); margin-top:8px; max-width:480px; margin-left:auto; margin-right:auto; line-height:1.6;">As secoes abaixo nao sao tecnicas — sao sobre o produto, a estrategia e para onde estamos indo.</p>
+      </div>
+
+      <!-- 15 ROADMAP -->
+      <section class="section" id="section-15">
+        <div class="section-header">
+          <span class="section-number">15</span>
+          <h1 class="section-title">Roadmap do Produto</h1>
+        </div>
+
+        <h2 class="subsection-title">O que e um Roadmap?</h2>
+        <p>Um <strong>roadmap de produto</strong> e o mapa estrategico que conecta a visao do produto com a execucao do time. Ele responde tres perguntas fundamentais:</p>
+
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:24px 0;">
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px;">
+            <div style="font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--red); line-height:1;">01</div>
+            <h3 style="margin:8px 0 4px; font-size:15px;">Para onde vamos?</h3>
+            <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Define a direcao estrategica e os objetivos que o produto precisa atingir.</p>
+          </div>
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px;">
+            <div style="font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--red); line-height:1;">02</div>
+            <h3 style="margin:8px 0 4px; font-size:15px;">O que vamos construir?</h3>
+            <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Prioriza as entregas em horizontes de tempo — o que vem primeiro e por que.</p>
+          </div>
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px;">
+            <div style="font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--red); line-height:1;">03</div>
+            <h3 style="margin:8px 0 4px; font-size:15px;">Por que isso importa?</h3>
+            <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Conecta cada entrega ao impacto no negocio, no cliente e na receita.</p>
+          </div>
+        </div>
+
+        <p>No V4MOS, o roadmap e dividido em <strong>horizontes de 90 dias</strong>. Cada horizonte tem um objetivo claro, entregas definidas, riscos mapeados e criterios de sucesso. Isso permite que o time saiba exatamente o que esta construindo, por que, e como medir se deu certo.</p>
+
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; margin:24px 0;">
+          <p style="font-size:14px; line-height:1.7; color:var(--text-secondary);"><strong style="color:var(--text-primary);">Por que voce precisa conhecer o roadmap?</strong><br/>Como dev, entender o roadmap te ajuda a tomar decisoes melhores no dia a dia: saber por que uma feature existe, qual a prioridade real, e como seu trabalho se conecta ao objetivo maior do produto.</p>
+        </div>
+
+        <div style="text-align:center; margin-top:40px;">
+          <a href="roadmap.html" target="_blank" style="display:inline-block; background:#e50914; color:#fff; font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; padding:16px 48px; border-radius:100px; text-decoration:none; transition:all .2s ease;">Ver Roadmap do Produto</a>
+        </div>
+      </section>
+
+      <!-- 16 EXTRA -->
+      <section class="section" id="section-16">
+        <div class="section-header">
+          <span class="section-number">16</span>
+          <h1 class="section-title">Extra</h1>
+        </div>
+
+        <h2 class="subsection-title">O Mentor (Reality Show)</h2>
+        <p>O Dener Lippert (fundador da V4 Company) participou do reality <strong>O Mentor</strong>, onde ajuda empresarios a destravarem seus negocios. Assistir ajuda a entender o que fazemos na pratica e como pensamos sobre crescimento de receita.</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0;">
+          <a href="https://www.youtube.com/watch?v=yBCA6Zj43iw&pp=ygUIbyBtZW50b3I%3D" target="_blank" style="display:flex; align-items:center; gap:16px; padding:20px 24px; background:var(--surface); border:1px solid var(--border); border-radius:12px; text-decoration:none; color:inherit; transition:all .2s ease;">
+            <div style="flex-shrink:0; width:48px; height:48px; background:#e50914; border-radius:12px; display:flex; align-items:center; justify-content:center;">
+              <span style="color:#fff; font-size:20px;">&#9654;</span>
+            </div>
+            <div>
+              <div style="font-size:14px; font-weight:700;">O Mentor - Episodio 1</div>
+              <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">YouTube</div>
+            </div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=RR9XwVF2qHM&pp=ygUIbyBtZW50b3I%3D" target="_blank" style="display:flex; align-items:center; gap:16px; padding:20px 24px; background:var(--surface); border:1px solid var(--border); border-radius:12px; text-decoration:none; color:inherit; transition:all .2s ease;">
+            <div style="flex-shrink:0; width:48px; height:48px; background:#e50914; border-radius:12px; display:flex; align-items:center; justify-content:center;">
+              <span style="color:#fff; font-size:20px;">&#9654;</span>
+            </div>
+            <div>
+              <div style="font-size:14px; font-weight:700;">O Mentor - Episodio 2</div>
+              <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">YouTube</div>
+            </div>
+          </a>
+        </div>
+
+        <h2 class="subsection-title" style="margin-top:40px;">Destrava Receita</h2>
+        <p>Links sobre o produto Destrava Receita — o core do V4MOS. Entender esse produto e fundamental para contextualizar tudo que voce vai construir.</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0;">
+          <a href="https://portfolio.v4company.com/produto/destrava-receita-raio-x" target="_blank" style="display:flex; align-items:center; gap:16px; padding:20px 24px; background:var(--surface); border:1px solid var(--border); border-radius:12px; text-decoration:none; color:inherit; transition:all .2s ease;">
+            <div style="flex-shrink:0; width:48px; height:48px; background:var(--dark); border-radius:12px; display:flex; align-items:center; justify-content:center;">
+              <span style="color:#fff; font-size:18px;">&#9733;</span>
+            </div>
+            <div>
+              <div style="font-size:14px; font-weight:700;">Destrava Receita - Raio X</div>
+              <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Portfolio V4 Company</div>
+            </div>
+          </a>
+          <a href="https://growth.learning.rocks/missions/azuPZQ2gaImHXozcY5yl?ref=pending_tasks" target="_blank" style="display:flex; align-items:center; gap:16px; padding:20px 24px; background:var(--surface); border:1px solid var(--border); border-radius:12px; text-decoration:none; color:inherit; transition:all .2s ease;">
+            <div style="flex-shrink:0; width:48px; height:48px; background:var(--dark); border-radius:12px; display:flex; align-items:center; justify-content:center;">
+              <span style="color:#fff; font-size:18px;">&#9733;</span>
+            </div>
+            <div>
+              <div style="font-size:14px; font-weight:700;">Missao Destrava Receita</div>
+              <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Growth Learning</div>
+            </div>
+          </a>
         </div>
 
       </section>
