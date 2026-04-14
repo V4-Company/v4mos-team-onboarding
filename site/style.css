@@ -1123,6 +1123,118 @@ code {
   color: var(--text-primary);
 }
 
+/* ========== ANIMATED FLOW ========== */
+.flow {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.flow__svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Paths */
+.flow__path {
+  fill: none;
+  stroke-width: 1.5;
+  opacity: 0.2;
+  stroke-linecap: round;
+}
+
+.flow__path--rest { stroke: #0984e3; }
+.flow__path--sse { stroke: #e17055; stroke-dasharray: 6 4; }
+.flow__path--rabbit { stroke: #6c5ce7; }
+.flow__path--sqs { stroke: #e17055; stroke-dasharray: 8 4; }
+.flow__path--db { stroke: #00cec9; }
+.flow__path--aws { stroke: #fdcb6e; }
+
+/* Nodes */
+.flow__node-bg {
+  fill: rgba(20, 20, 32, 0.95);
+  stroke-width: 1.5;
+  transition: all 0.3s;
+}
+
+.flow__node:hover .flow__node-bg {
+  filter: url(#glow-strong);
+}
+
+.flow__node-bg--green { stroke: #00b894; }
+.flow__node-bg--purple { stroke: #6c5ce7; }
+.flow__node-bg--orange { stroke: #e17055; }
+.flow__node-bg--blue { stroke: #0984e3; }
+.flow__node-bg--cyan { stroke: #00cec9; }
+.flow__node-bg--red { stroke: #d63031; }
+.flow__node-bg--pink { stroke: #e84393; }
+.flow__node-bg--yellow { stroke: #fdcb6e; }
+.flow__node-bg--accent { stroke: #6c5ce7; }
+
+.flow__node-label {
+  fill: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.flow__node-sub {
+  fill: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+/* Legend */
+.flow__legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.flow__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.flow__legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* Pulse animation on nodes */
+.flow__node {
+  cursor: default;
+}
+
+.flow__node[data-service]:hover .flow__node-bg {
+  stroke-width: 2.5;
+}
+
+@media (max-width: 768px) {
+  .flow__svg {
+    min-height: 400px;
+  }
+
+  .flow__legend {
+    gap: 12px;
+  }
+
+  .flow__legend-item {
+    font-size: 0.7rem;
+  }
+}
+
 /* ========== TABS ========== */
 .tabs {
   position: relative;

@@ -158,6 +158,292 @@
     </div>
   </section>
 
+  <!-- ========== ANIMATED FLOW ========== -->
+  <section id="flow" class="section section--dark">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Comunicacao</span>
+        <h2 class="section__title">Como os servicos se comunicam</h2>
+        <p class="section__desc">Fluxo real de dados entre os componentes do V4MOS</p>
+      </div>
+
+      <div class="flow">
+        <svg class="flow__svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <!-- Animated dot markers -->
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="glow-strong" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- ===== CONNECTION PATHS ===== -->
+          <!-- web-client → v4-marketing (REST) -->
+          <path id="path-web-core" class="flow__path flow__path--rest" d="M 500 105 L 240 215" />
+          <!-- web-client → integration-hub (REST) -->
+          <path id="path-web-hub" class="flow__path flow__path--rest" d="M 500 105 L 430 215" />
+          <!-- web-client → chat (SSE) -->
+          <path id="path-web-chat" class="flow__path flow__path--sse" d="M 500 105 L 610 215" />
+          <!-- web-client → v4-marketing-api (REST) -->
+          <path id="path-web-api" class="flow__path flow__path--rest" d="M 500 105 L 790 215" />
+
+          <!-- chat → v4-marketing (HTTP tools) -->
+          <path id="path-chat-core" class="flow__path flow__path--rest" d="M 580 260 C 450 260 350 240 270 260" />
+          <!-- chat → integration-hub (HTTP tools) -->
+          <path id="path-chat-hub" class="flow__path flow__path--rest" d="M 580 260 L 470 260" />
+          <!-- chat → Bedrock -->
+          <path id="path-chat-bedrock" class="flow__path flow__path--aws" d="M 640 280 L 640 375" />
+
+          <!-- v4-marketing → RabbitMQ -->
+          <path id="path-core-rabbit" class="flow__path flow__path--rabbit" d="M 210 280 L 130 375" />
+          <!-- v4-marketing → SQS -->
+          <path id="path-core-sqs" class="flow__path flow__path--sqs" d="M 260 280 L 310 375" />
+
+          <!-- v4-marketing → PostgreSQL -->
+          <path id="path-core-db" class="flow__path flow__path--db" d="M 240 280 L 430 520" />
+          <!-- integration-hub → PostgreSQL -->
+          <path id="path-hub-db" class="flow__path flow__path--db" d="M 430 280 L 440 520" />
+          <!-- chat → PostgreSQL -->
+          <path id="path-chat-db" class="flow__path flow__path--db" d="M 610 280 L 460 520" />
+          <!-- v4-marketing-api → PostgreSQL -->
+          <path id="path-api-db" class="flow__path flow__path--db" d="M 790 280 L 480 520" />
+
+          <!-- API Gateway → Authorizer -->
+          <path id="path-gw-auth" class="flow__path flow__path--aws" d="M 910 130 L 910 215" />
+          <!-- Authorizer → Identity -->
+          <path id="path-auth-identity" class="flow__path flow__path--rest" d="M 940 265 L 940 375" />
+
+          <!-- v4-marketing-data pipeline -->
+          <path id="path-sqs-data" class="flow__path flow__path--sqs" d="M 330 420 L 500 420" />
+          <path id="path-data-lambda" class="flow__path flow__path--aws" d="M 540 420 L 650 420" />
+          <path id="path-lambda-s3" class="flow__path flow__path--aws" d="M 700 410 L 790 520" />
+          <path id="path-lambda-aurora" class="flow__path flow__path--db" d="M 680 440 L 600 520" />
+
+          <!-- ===== ANIMATED PARTICLES ===== -->
+          <!-- REST particles (blue) -->
+          <circle r="4" fill="#0984e3" filter="url(#glow)">
+            <animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#path-web-core"/></animateMotion>
+          </circle>
+          <circle r="4" fill="#0984e3" filter="url(#glow)">
+            <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.8s"><mpath href="#path-web-hub"/></animateMotion>
+          </circle>
+          <circle r="4" fill="#0984e3" filter="url(#glow)">
+            <animateMotion dur="3s" repeatCount="indefinite" begin="0.3s"><mpath href="#path-web-api"/></animateMotion>
+          </circle>
+
+          <!-- SSE particles (orange, faster) -->
+          <circle r="3" fill="#e17055" filter="url(#glow)">
+            <animateMotion dur="1.2s" repeatCount="indefinite"><mpath href="#path-web-chat"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#e17055" filter="url(#glow)">
+            <animateMotion dur="1.2s" repeatCount="indefinite" begin="0.4s"><mpath href="#path-web-chat"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#e17055" filter="url(#glow)">
+            <animateMotion dur="1.2s" repeatCount="indefinite" begin="0.8s"><mpath href="#path-web-chat"/></animateMotion>
+          </circle>
+
+          <!-- Chat → backend tools (blue) -->
+          <circle r="3" fill="#0984e3" filter="url(#glow)">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="1s"><mpath href="#path-chat-core"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#0984e3" filter="url(#glow)">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.5s"><mpath href="#path-chat-hub"/></animateMotion>
+          </circle>
+
+          <!-- Chat → Bedrock (yellow) -->
+          <circle r="3" fill="#fdcb6e" filter="url(#glow)">
+            <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#path-chat-bedrock"/></animateMotion>
+          </circle>
+
+          <!-- RabbitMQ particles (purple) -->
+          <circle r="3" fill="#6c5ce7" filter="url(#glow)">
+            <animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#path-core-rabbit"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#6c5ce7" filter="url(#glow)">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s"><mpath href="#path-core-rabbit"/></animateMotion>
+          </circle>
+
+          <!-- SQS particles (orange) -->
+          <circle r="3" fill="#e17055" filter="url(#glow)">
+            <animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#path-core-sqs"/></animateMotion>
+          </circle>
+
+          <!-- DB particles (cyan) -->
+          <circle r="3" fill="#00cec9" filter="url(#glow)">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="0.2s"><mpath href="#path-core-db"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#00cec9" filter="url(#glow)">
+            <animateMotion dur="2.3s" repeatCount="indefinite" begin="0.7s"><mpath href="#path-hub-db"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#00cec9" filter="url(#glow)">
+            <animateMotion dur="1.9s" repeatCount="indefinite" begin="1.2s"><mpath href="#path-chat-db"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#00cec9" filter="url(#glow)">
+            <animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#path-api-db"/></animateMotion>
+          </circle>
+
+          <!-- Gateway → Auth (yellow) -->
+          <circle r="3" fill="#fdcb6e" filter="url(#glow)">
+            <animateMotion dur="1.5s" repeatCount="indefinite"><mpath href="#path-gw-auth"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#0984e3" filter="url(#glow)">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.5s"><mpath href="#path-auth-identity"/></animateMotion>
+          </circle>
+
+          <!-- Data pipeline particles -->
+          <circle r="3" fill="#e17055" filter="url(#glow)">
+            <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#path-sqs-data"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#fdcb6e" filter="url(#glow)">
+            <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.5s"><mpath href="#path-data-lambda"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#fdcb6e" filter="url(#glow)">
+            <animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#path-lambda-s3"/></animateMotion>
+          </circle>
+          <circle r="3" fill="#00cec9" filter="url(#glow)">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="0.3s"><mpath href="#path-lambda-aurora"/></animateMotion>
+          </circle>
+
+          <!-- ===== SERVICE NODES ===== -->
+          <!-- web-client -->
+          <g class="flow__node" data-service="web-client">
+            <rect x="430" y="55" width="140" height="50" rx="10" class="flow__node-bg flow__node-bg--cyan"/>
+            <text x="500" y="77" class="flow__node-label">web-client</text>
+            <text x="500" y="95" class="flow__node-sub">Next.js 15 :3000</text>
+          </g>
+
+          <!-- v4-marketing -->
+          <g class="flow__node" data-service="v4-marketing">
+            <rect x="155" y="215" width="170" height="65" rx="10" class="flow__node-bg flow__node-bg--green"/>
+            <text x="240" y="240" class="flow__node-label">v4-marketing</text>
+            <text x="240" y="258" class="flow__node-sub">Fastify :3012</text>
+            <text x="240" y="272" class="flow__node-sub">Core / DDD</text>
+          </g>
+
+          <!-- integration-hub -->
+          <g class="flow__node" data-service="integration-hub">
+            <rect x="358" y="215" width="150" height="65" rx="10" class="flow__node-bg flow__node-bg--purple"/>
+            <text x="433" y="240" class="flow__node-label">integration-hub</text>
+            <text x="433" y="258" class="flow__node-sub">Fastify :3001</text>
+            <text x="433" y="272" class="flow__node-sub">OAuth / 130+ tipos</text>
+          </g>
+
+          <!-- chat -->
+          <g class="flow__node" data-service="chat">
+            <rect x="540" y="215" width="140" height="65" rx="10" class="flow__node-bg flow__node-bg--orange"/>
+            <text x="610" y="240" class="flow__node-label">chat (AI)</text>
+            <text x="610" y="258" class="flow__node-sub">LangGraph :3013</text>
+            <text x="610" y="272" class="flow__node-sub">10 agentes / 40+ tools</text>
+          </g>
+
+          <!-- v4-marketing-api -->
+          <g class="flow__node" data-service="v4-marketing-api">
+            <rect x="710" y="215" width="160" height="65" rx="10" class="flow__node-bg flow__node-bg--blue"/>
+            <text x="790" y="240" class="flow__node-label">v4-marketing-api</text>
+            <text x="790" y="258" class="flow__node-sub">NestJS</text>
+            <text x="790" y="272" class="flow__node-sub">92 modulos / 15+ plats</text>
+          </g>
+
+          <!-- RabbitMQ -->
+          <g class="flow__node">
+            <rect x="65" y="375" width="130" height="50" rx="10" class="flow__node-bg flow__node-bg--accent"/>
+            <text x="130" y="397" class="flow__node-label">RabbitMQ</text>
+            <text x="130" y="415" class="flow__node-sub">Single events</text>
+          </g>
+
+          <!-- SQS -->
+          <g class="flow__node">
+            <rect x="230" y="375" width="130" height="50" rx="10" class="flow__node-bg flow__node-bg--orange"/>
+            <text x="295" y="397" class="flow__node-label">SQS</text>
+            <text x="295" y="415" class="flow__node-sub">Batch events</text>
+          </g>
+
+          <!-- v4-marketing-data -->
+          <g class="flow__node" data-service="v4-marketing-data">
+            <rect x="440" y="375" width="170" height="50" rx="10" class="flow__node-bg flow__node-bg--pink"/>
+            <text x="525" y="397" class="flow__node-label">v4-marketing-data</text>
+            <text x="525" y="415" class="flow__node-sub">SST / Lambda / ECS</text>
+          </g>
+
+          <!-- Bedrock -->
+          <g class="flow__node">
+            <rect x="575" y="375" width="130" height="50" rx="10" class="flow__node-bg flow__node-bg--yellow" transform="translate(0,30)"/>
+            <text x="640" y="427" class="flow__node-label">AWS Bedrock</text>
+            <text x="640" y="445" class="flow__node-sub">Sub-agentes AI</text>
+          </g>
+
+          <!-- API Gateway -->
+          <g class="flow__node">
+            <rect x="850" y="85" width="120" height="50" rx="10" class="flow__node-bg flow__node-bg--yellow"/>
+            <text x="910" y="107" class="flow__node-label">API Gateway</text>
+            <text x="910" y="125" class="flow__node-sub">AWS</text>
+          </g>
+
+          <!-- Authorizer -->
+          <g class="flow__node" data-service="authorizer">
+            <rect x="845" y="215" width="130" height="50" rx="10" class="flow__node-bg flow__node-bg--red"/>
+            <text x="910" y="237" class="flow__node-label">authorizer</text>
+            <text x="910" y="255" class="flow__node-sub">Lambda / JWT</text>
+          </g>
+
+          <!-- Identity -->
+          <g class="flow__node">
+            <rect x="870" y="375" width="140" height="50" rx="10" class="flow__node-bg flow__node-bg--accent"/>
+            <text x="940" y="397" class="flow__node-label">Identity Service</text>
+            <text x="940" y="415" class="flow__node-sub">Clerk + custom</text>
+          </g>
+
+          <!-- PostgreSQL -->
+          <g class="flow__node">
+            <rect x="370" y="500" width="180" height="55" rx="10" class="flow__node-bg flow__node-bg--cyan"/>
+            <text x="460" y="524" class="flow__node-label">PostgreSQL</text>
+            <text x="460" y="544" class="flow__node-sub">Prisma + Kysely + TypeORM</text>
+          </g>
+
+          <!-- S3 / Aurora -->
+          <g class="flow__node">
+            <rect x="600" y="500" width="100" height="55" rx="10" class="flow__node-bg flow__node-bg--cyan"/>
+            <text x="650" y="524" class="flow__node-label">Aurora</text>
+            <text x="650" y="544" class="flow__node-sub">Data Lake</text>
+          </g>
+          <g class="flow__node">
+            <rect x="730" y="500" width="100" height="55" rx="10" class="flow__node-bg flow__node-bg--yellow"/>
+            <text x="780" y="524" class="flow__node-label">S3</text>
+            <text x="780" y="544" class="flow__node-sub">Raw + Refined</text>
+          </g>
+        </svg>
+
+        <!-- Legend -->
+        <div class="flow__legend">
+          <div class="flow__legend-item">
+            <span class="flow__legend-dot" style="background:#0984e3"></span>
+            <span>REST / HTTP</span>
+          </div>
+          <div class="flow__legend-item">
+            <span class="flow__legend-dot" style="background:#e17055"></span>
+            <span>SSE Streaming / SQS</span>
+          </div>
+          <div class="flow__legend-item">
+            <span class="flow__legend-dot" style="background:#6c5ce7"></span>
+            <span>RabbitMQ Events</span>
+          </div>
+          <div class="flow__legend-item">
+            <span class="flow__legend-dot" style="background:#00cec9"></span>
+            <span>Database (SQL)</span>
+          </div>
+          <div class="flow__legend-item">
+            <span class="flow__legend-dot" style="background:#fdcb6e"></span>
+            <span>AWS Services</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== REPOS ========== -->
   <section id="repos" class="section section--dark">
     <div class="container">
