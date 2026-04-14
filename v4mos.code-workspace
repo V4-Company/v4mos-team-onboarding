@@ -1,0 +1,40 @@
+{
+  "folders": [
+    {
+      "name": "onboarding",
+      "path": "."
+    },
+    {
+      "name": "v4-marketing-backend",
+      "path": "../v4-marketing-backend"
+    },
+    {
+      "name": "v4-marketing-api",
+      "path": "../v4-marketing-api"
+    },
+    {
+      "name": "v4-marketing-data",
+      "path": "../v4-marketing-data"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "typescript.tsdk": "v4-marketing-backend/node_modules/typescript/lib",
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.git": true,
+      "**/dist": true,
+      "**/.next": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "prisma.prisma",
+      "ms-python.python",
+      "bradlc.vscode-tailwindcss"
+    ]
+  }
+}

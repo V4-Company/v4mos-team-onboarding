@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V4MOS — Developer Onboarding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ========== NAV ========== -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <span class="nav__logo-icon">V4</span>MOS
+      </a>
+      <div class="nav__links">
+        <a href="#architecture">Arquitetura</a>
+        <a href="#repos">Repos</a>
+        <a href="#quickstart">Quick Start</a>
+        <a href="#commands">Comandos</a>
+        <a href="#timeline">1a Semana</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="hero__bg">
+      <div class="hero__grid"></div>
+      <div class="hero__glow hero__glow--1"></div>
+      <div class="hero__glow hero__glow--2"></div>
+    </div>
+    <div class="hero__content">
+      <div class="hero__badge">Developer Onboarding</div>
+      <h1 class="hero__title">
+        Bem-vindo ao<br />
+        <span class="hero__highlight">V4MOS</span>
+      </h1>
+      <p class="hero__subtitle">
+        V4 Marketing Operating System — a plataforma de marketing digital da V4 Company.
+        <br />Tudo que voce precisa pra comecar a contribuir.
+      </p>
+      <div class="hero__stats">
+        <div class="stat">
+          <span class="stat__number">3</span>
+          <span class="stat__label">Repositorios</span>
+        </div>
+        <div class="stat">
+          <span class="stat__number">6</span>
+          <span class="stat__label">Servicos</span>
+        </div>
+        <div class="stat">
+          <span class="stat__number">3</span>
+          <span class="stat__label">Linguagens</span>
+        </div>
+      </div>
+      <div class="hero__actions">
+        <a href="#quickstart" class="btn btn--primary">Comecar Setup</a>
+        <a href="#architecture" class="btn btn--ghost">Ver Arquitetura</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ARCHITECTURE ========== -->
+  <section id="architecture" class="section">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Overview</span>
+        <h2 class="section__title">Arquitetura</h2>
+        <p class="section__desc">Como os servicos se conectam no ecossistema V4MOS</p>
+      </div>
+
+      <div class="arch">
+        <!-- Frontend Layer -->
+        <div class="arch__layer arch__layer--frontend">
+          <div class="arch__layer-label">Frontend</div>
+          <div class="arch__node arch__node--frontend" data-tip="Next.js 15 + React 19 + Tailwind">
+            <div class="arch__node-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <div class="arch__node-name">web-client</div>
+            <div class="arch__node-port">:3000</div>
+          </div>
+        </div>
+
+        <!-- Connection Lines -->
+        <div class="arch__connections">
+          <div class="arch__line arch__line--animated"></div>
+          <div class="arch__line-label">REST / SSE</div>
+        </div>
+
+        <!-- Backend Layer -->
+        <div class="arch__layer arch__layer--backend">
+          <div class="arch__layer-label">Backend</div>
+          <div class="arch__nodes-row">
+            <div class="arch__node arch__node--core" data-tip="Users, orgs, workspaces, diagnostics, payments">
+              <div class="arch__node-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              </div>
+              <div class="arch__node-name">v4-marketing</div>
+              <div class="arch__node-port">:3012</div>
+            </div>
+            <div class="arch__node arch__node--integrations" data-tip="Facebook Ads, Google Ads, 100+ conectores">
+              <div class="arch__node-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="arch__node-name">integration-hub</div>
+              <div class="arch__node-port">:3001</div>
+            </div>
+            <div class="arch__node arch__node--chat" data-tip="LangChain + OpenAI + Bedrock + Gemini">
+              <div class="arch__node-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div class="arch__node-name">chat (AI)</div>
+              <div class="arch__node-port">:3013</div>
+            </div>
+            <div class="arch__node arch__node--api" data-tip="NestJS — Facebook Ads, Google Ads, TikTok, LinkedIn, analytics">
+              <div class="arch__node-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div class="arch__node-name">v4-marketing-api</div>
+              <div class="arch__node-port">NestJS</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connection Lines -->
+        <div class="arch__connections">
+          <div class="arch__line arch__line--animated"></div>
+          <div class="arch__line-label">SQS / RabbitMQ / Kysely</div>
+        </div>
+
+        <!-- Data Layer -->
+        <div class="arch__layer arch__layer--data">
+          <div class="arch__layer-label">Data</div>
+          <div class="arch__nodes-row">
+            <div class="arch__node arch__node--db">
+              <div class="arch__node-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+              </div>
+              <div class="arch__node-name">PostgreSQL</div>
+              <div class="arch__node-port">Prisma + Kysely</div>
+            </div>
+            <div class="arch__node arch__node--pipeline" data-tip="SST v3 — Lambda + ECS + S3 + Aurora">
+              <div class="arch__node-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div class="arch__node-name">v4-marketing-data</div>
+              <div class="arch__node-port">Python + SST</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== REPOS ========== -->
+  <section id="repos" class="section section--dark">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Repositorios</span>
+        <h2 class="section__title">Os 3 repos do V4MOS</h2>
+        <p class="section__desc">Cada repo tem seu papel no ecossistema</p>
+      </div>
+
+      <div class="repos">
+        <!-- Backend Monorepo -->
+        <div class="repo-card repo-card--featured">
+          <div class="repo-card__header">
+            <div class="repo-card__icon repo-card__icon--backend">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <span class="repo-card__badge">Monorepo Principal</span>
+          </div>
+          <h3 class="repo-card__name">v4-marketing-backend</h3>
+          <p class="repo-card__desc">
+            Core da plataforma: usuarios, workspaces, diagnosticos, integracoes, chat AI, autorizador e frontend.
+            Arquitetura Clean/DDD com 6 packages.
+          </p>
+          <div class="repo-card__packages">
+            <span class="pkg" data-color="blue">lib</span>
+            <span class="pkg" data-color="green">v4-marketing</span>
+            <span class="pkg" data-color="purple">integration-hub</span>
+            <span class="pkg" data-color="orange">chat</span>
+            <span class="pkg" data-color="red">authorizer</span>
+            <span class="pkg" data-color="cyan">web-client</span>
+          </div>
+          <div class="repo-card__tech">
+            <span class="tech">TypeScript</span>
+            <span class="tech">Fastify 5</span>
+            <span class="tech">Inversify</span>
+            <span class="tech">Kysely</span>
+            <span class="tech">Prisma</span>
+            <span class="tech">LangChain</span>
+            <span class="tech">Next.js 15</span>
+            <span class="tech">React 19</span>
+          </div>
+          <a href="https://github.com/V4-Company/v4-marketing-backend" class="repo-card__link" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Ver no GitHub
+          </a>
+        </div>
+
+        <!-- Marketing API -->
+        <div class="repo-card">
+          <div class="repo-card__header">
+            <div class="repo-card__icon repo-card__icon--api">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+          </div>
+          <h3 class="repo-card__name">v4-marketing-api</h3>
+          <p class="repo-card__desc">
+            API de dados de marketing. Consome dados de 15+ plataformas de ads e analytics
+            (Facebook, Google, TikTok, LinkedIn, Shopify, VTEX, Pipedrive, etc).
+          </p>
+          <div class="repo-card__modules">
+            <span class="module">Facebook Ads</span>
+            <span class="module">Google Ads</span>
+            <span class="module">Google Analytics</span>
+            <span class="module">TikTok</span>
+            <span class="module">LinkedIn</span>
+            <span class="module">Instagram</span>
+            <span class="module">Shopify</span>
+            <span class="module">VTEX</span>
+            <span class="module">Pipedrive</span>
+            <span class="module">RD Station</span>
+            <span class="module">+5 mais</span>
+          </div>
+          <div class="repo-card__tech">
+            <span class="tech">TypeScript</span>
+            <span class="tech">NestJS</span>
+            <span class="tech">Kysely</span>
+            <span class="tech">TypeORM</span>
+            <span class="tech">PostgreSQL</span>
+          </div>
+          <a href="https://github.com/V4-Company/v4-marketing-api" class="repo-card__link" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Ver no GitHub
+          </a>
+        </div>
+
+        <!-- Marketing Data -->
+        <div class="repo-card">
+          <div class="repo-card__header">
+            <div class="repo-card__icon repo-card__icon--data">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+          </div>
+          <h3 class="repo-card__name">v4-marketing-data</h3>
+          <p class="repo-card__desc">
+            Plataforma de dados e ETL serverless. Infra-as-code com SST v3,
+            pipelines em Lambda e ECS, storage em S3 e Aurora.
+          </p>
+          <div class="repo-card__structure">
+            <div class="structure-item">
+              <code>functions/</code>
+              <span>Lambda handlers</span>
+            </div>
+            <div class="structure-item">
+              <code>services/</code>
+              <span>ECS containers</span>
+            </div>
+            <div class="structure-item">
+              <code>infra/</code>
+              <span>IaC modules</span>
+            </div>
+          </div>
+          <div class="repo-card__tech">
+            <span class="tech">Python 3.11</span>
+            <span class="tech">SST v3</span>
+            <span class="tech">AWS Lambda</span>
+            <span class="tech">ECS</span>
+            <span class="tech">S3</span>
+            <span class="tech">Aurora</span>
+          </div>
+          <a href="https://github.com/V4-Company/v4-marketing-data" class="repo-card__link" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Ver no GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DDD SECTION ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Arquitetura Interna</span>
+        <h2 class="section__title">Clean Architecture + DDD</h2>
+        <p class="section__desc">O v4-marketing-backend segue camadas estritas com dependency inversion</p>
+      </div>
+
+      <div class="ddd">
+        <div class="ddd__diagram">
+          <div class="ddd__layer ddd__layer--domain">
+            <div class="ddd__layer-title">Domain</div>
+            <div class="ddd__layer-items">
+              <span>Aggregates</span>
+              <span>Value Objects</span>
+              <span>Repository Interfaces</span>
+              <span>Domain Events</span>
+            </div>
+            <div class="ddd__layer-rule">Zero dependencias externas</div>
+          </div>
+          <div class="ddd__arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+            <span>depende de</span>
+          </div>
+          <div class="ddd__layer ddd__layer--app">
+            <div class="ddd__layer-title">App</div>
+            <div class="ddd__layer-items">
+              <span>Use Cases</span>
+              <span>Services</span>
+              <span>DTOs (Zod)</span>
+              <span>Event Handlers</span>
+            </div>
+            <div class="ddd__layer-rule">Depende apenas do Domain</div>
+          </div>
+          <div class="ddd__arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+            <span>depende de</span>
+          </div>
+          <div class="ddd__layer ddd__layer--infra">
+            <div class="ddd__layer-title">Infra</div>
+            <div class="ddd__layer-items">
+              <span>Controllers (Fastify)</span>
+              <span>Repositories (Kysely)</span>
+              <span>DI Container (Inversify)</span>
+              <span>Providers (Axios, AWS)</span>
+            </div>
+            <div class="ddd__layer-rule">Depende de Domain + App</div>
+          </div>
+        </div>
+        <div class="ddd__note">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>O servico <strong>chat</strong> usa apenas 2 camadas (app + infra) por nao ter entidades de dominio complexas. Regras enforced via <code>eslint-ddd-plugin.mjs</code>.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== QUICK START ========== -->
+  <section id="quickstart" class="section section--dark">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Setup</span>
+        <h2 class="section__title">Quick Start</h2>
+        <p class="section__desc">Do zero ao ambiente rodando em minutos</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step__number">1</div>
+          <div class="step__content">
+            <h3>Clone o onboarding</h3>
+            <div class="code-block">
+              <div class="code-block__header">
+                <span>terminal</span>
+                <button class="code-block__copy" onclick="copyCode(this)">copiar</button>
+              </div>
+              <pre><code>git clone git@github.com:V4-Company/v4mos-team-onboarding.git
+cd v4mos-team-onboarding</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step__number">2</div>
+          <div class="step__content">
+            <h3>Rode o bootstrap</h3>
+            <p>Clona os 3 repos, instala deps e cria os <code>.env</code></p>
+            <div class="code-block">
+              <div class="code-block__header">
+                <span>terminal</span>
+                <button class="code-block__copy" onclick="copyCode(this)">copiar</button>
+              </div>
+              <pre><code>./scripts/bootstrap.sh</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step__number">3</div>
+          <div class="step__content">
+            <h3>Configure o .env</h3>
+            <p>Peca as variaveis sensiveis (DB, AWS, Clerk) para alguem do time via 1Password ou DM.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step__number">4</div>
+          <div class="step__content">
+            <h3>Suba a infra e rode</h3>
+            <div class="code-block">
+              <div class="code-block__header">
+                <span>terminal — v4-marketing-backend</span>
+                <button class="code-block__copy" onclick="copyCode(this)">copiar</button>
+              </div>
+              <pre><code># Sobe Postgres, LocalStack, RabbitMQ + roda migrations
+pnpm dev:prepare
+
+# Roda todos os servicos + frontend
+pnpm dev:all</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step__number">5</div>
+          <div class="step__content">
+            <h3>Abra no VS Code</h3>
+            <div class="code-block">
+              <div class="code-block__header">
+                <span>terminal</span>
+                <button class="code-block__copy" onclick="copyCode(this)">copiar</button>
+              </div>
+              <pre><code>code v4mos.code-workspace</code></pre>
+            </div>
+            <p>Abre os 3 repos como multi-root workspace com extensoes recomendadas.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="prereqs">
+        <h3>Pre-requisitos</h3>
+        <div class="prereqs__grid">
+          <div class="prereq">
+            <code>node</code>
+            <span>v20+</span>
+          </div>
+          <div class="prereq">
+            <code>pnpm</code>
+            <span>v9.15+</span>
+          </div>
+          <div class="prereq">
+            <code>docker</code>
+            <span>v24+</span>
+          </div>
+          <div class="prereq">
+            <code>python3</code>
+            <span>v3.11+</span>
+          </div>
+          <div class="prereq">
+            <code>uv</code>
+            <span>latest</span>
+          </div>
+          <div class="prereq">
+            <code>git</code>
+            <span>v2+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COMMANDS ========== -->
+  <section id="commands" class="section">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Referencia</span>
+        <h2 class="section__title">Comandos Essenciais</h2>
+        <p class="section__desc">Cheat sheet dos comandos que voce vai usar todo dia</p>
+      </div>
+
+      <div class="commands">
+        <div class="cmd-group">
+          <h3 class="cmd-group__title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            v4-marketing-backend
+          </h3>
+          <div class="cmd-table">
+            <div class="cmd-row">
+              <code>pnpm install</code>
+              <span>Instalar dependencias</span>
+            </div>
+            <div class="cmd-row">
+              <code>pnpm build:lib</code>
+              <span>Build da lib compartilhada (rode primeiro!)</span>
+            </div>
+            <div class="cmd-row">
+              <code>pnpm dev:prepare</code>
+              <span>Sync env + sobe infra Docker + migrations</span>
+            </div>
+            <div class="cmd-row">
+              <code>pnpm dev:all</code>
+              <span>Roda todos os servicos + frontend</span>
+            </div>
+            <div class="cmd-row">
+              <code>pnpm dev:backend</code>
+              <span>Roda apenas os servicos backend</span>
+            </div>
+            <div class="cmd-row">
+              <code>pnpm test</code>
+              <span>Rodar testes (Vitest)</span>
+            </div>
+            <div class="cmd-row">
+              <code>pnpm lint</code>
+              <span>ESLint + DDD rules</span>
+            </div>
+            <div class="cmd-row">
+              <code>pnpm typecheck</code>
+              <span>Type checking</span>
+            </div>
+            <div class="cmd-row">
+              <code>cd packages/&lt;svc&gt; && pnpm migrate</code>
+              <span>Rodar migrations Prisma</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cmd-group">
+          <h3 class="cmd-group__title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            v4-marketing-api
+          </h3>
+          <div class="cmd-table">
+            <div class="cmd-row">
+              <code>npm install</code>
+              <span>Instalar dependencias</span>
+            </div>
+            <div class="cmd-row">
+              <code>npm run start:dev</code>
+              <span>Dev server com hot reload</span>
+            </div>
+            <div class="cmd-row">
+              <code>npm test</code>
+              <span>Testes unitarios (Jest)</span>
+            </div>
+            <div class="cmd-row">
+              <code>npm run test:e2e</code>
+              <span>Testes end-to-end</span>
+            </div>
+            <div class="cmd-row">
+              <code>npm run lint</code>
+              <span>ESLint</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cmd-group">
+          <h3 class="cmd-group__title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            v4-marketing-data
+          </h3>
+          <div class="cmd-table">
+            <div class="cmd-row">
+              <code>yarn install</code>
+              <span>Deps Node (SST)</span>
+            </div>
+            <div class="cmd-row">
+              <code>uv sync</code>
+              <span>Deps Python</span>
+            </div>
+            <div class="cmd-row">
+              <code>npx sst dev</code>
+              <span>Dev mode (requer AWS creds)</span>
+            </div>
+            <div class="cmd-row">
+              <code>npx sst deploy</code>
+              <span>Deploy para AWS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TIMELINE ========== -->
+  <section id="timeline" class="section section--dark">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Onboarding</span>
+        <h2 class="section__title">Sua Primeira Semana</h2>
+        <p class="section__desc">Roadmap dia a dia pra voce se sentir em casa</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline__item">
+          <div class="timeline__day">Dia 1</div>
+          <div class="timeline__card">
+            <h3>Setup & Contexto</h3>
+            <ul>
+              <li>Rodar o bootstrap e ter tudo funcionando</li>
+              <li>Ler a doc de arquitetura</li>
+              <li>Acessar o frontend em localhost:3000</li>
+              <li>Pedir acessos: GitHub, Clerk, AWS, Datadog, Slack</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline__item">
+          <div class="timeline__day">Dia 2</div>
+          <div class="timeline__card">
+            <h3>Explorar o Monorepo</h3>
+            <ul>
+              <li>Ler o CLAUDE.md (doc tecnica completa)</li>
+              <li>Navegar domain/app/infra do v4-marketing</li>
+              <li>Entender o fluxo: Controller &rarr; UseCase &rarr; Repository</li>
+              <li>Rodar os testes: <code>pnpm test</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline__item">
+          <div class="timeline__day">Dia 3</div>
+          <div class="timeline__card">
+            <h3>DDD & Convencoes</h3>
+            <ul>
+              <li>Entender a separacao de camadas e as regras DDD</li>
+              <li>Olhar o DI container (Inversify)</li>
+              <li>Entender Prisma (migrations) + Kysely (queries)</li>
+              <li>Criar uma branch e fazer uma mudanca trivial</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline__item">
+          <div class="timeline__day">Dia 4</div>
+          <div class="timeline__card">
+            <h3>Outros Repos</h3>
+            <ul>
+              <li>Explorar v4-marketing-api (modulos de integracoes)</li>
+              <li>Explorar v4-marketing-data (pipelines SST)</li>
+              <li>Entender como os repos se conectam</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline__item">
+          <div class="timeline__day">Dia 5</div>
+          <div class="timeline__card">
+            <h3>Primeiro PR</h3>
+            <ul>
+              <li>Pegar uma task pequena do backlog</li>
+              <li>Abrir PR seguindo as convencoes</li>
+              <li>Code review com alguem do time</li>
+              <li>Pair programming com um senior</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="nav__logo-icon">V4</span>MOS Team
+        </div>
+        <div class="footer__links">
+          <a href="https://github.com/V4-Company" target="_blank">GitHub Org</a>
+          <a href="https://github.com/V4-Company/v4mos-team-onboarding" target="_blank">Este Repo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
