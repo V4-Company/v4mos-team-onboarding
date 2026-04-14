@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V4MOS.AI — Squad Exposicao, Atencao e Interesse</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --surface-2: #1a1a1a;
+  --border: #222222;
+  --border-light: #2a2a2a;
+  --text: #e5e2e1;
+  --text-dim: #888888;
+  --text-muted: #555555;
+  --red: #E92E30;
+  --red-dim: rgba(233, 46, 48, 0.15);
+  --amber: #f59e0b;
+  --amber-dim: rgba(245, 158, 11, 0.12);
+  --green: #22c55e;
+  --green-dim: rgba(34, 197, 94, 0.12);
+  --blue: #3b82f6;
+  --blue-dim: rgba(59, 130, 246, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+}
+nav .inner {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--red);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+nav .logo .back-arrow {
+  font-size: 16px;
+  color: var(--text-dim);
+}
+nav .back-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: all .2s ease;
+}
+nav .back-btn:hover {
+  border-color: var(--red);
+  color: var(--text);
+}
+nav .meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* HERO */
+.hero {
+  padding: 140px 0 80px;
+  border-bottom: 1px solid var(--border);
+}
+.hero .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--text-dim);
+}
+.hero .sub {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 600px;
+  line-height: 1.7;
+}
+.hero .badges {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.badge.red { background: var(--red-dim); border-color: rgba(233,46,48,0.3); color: var(--red); }
+
+/* SECTIONS */
+section {
+  padding: 64px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+section h2 {
+  font-size: clamp(22px, 3.5vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+section p {
+  color: var(--text-dim);
+  font-size: 15px;
+  margin-bottom: 16px;
+  max-width: 640px;
+}
+section p strong { color: var(--text); font-weight: 600; }
+
+/* CARDS */
+.card-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+}
+.card .card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.card h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.card p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* TIMELINE */
+.timeline {
+  margin-top: 32px;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border-light);
+}
+.tl-item {
+  position: relative;
+  padding-left: 52px;
+  padding-bottom: 40px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: 12px;
+  top: 4px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--border-light);
+  background: var(--bg);
+}
+.tl-dot.active { border-color: var(--red); background: var(--red); box-shadow: 0 0 12px rgba(233,46,48,0.4); }
+.tl-dot.next { border-color: var(--amber); }
+.tl-dot.future { border-color: var(--text-muted); }
+.tl-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.tl-item h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.tl-item p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.tl-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.tl-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+/* TRAVAS */
+.trava-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+.trava-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  border-top: 3px solid var(--red);
+}
+.trava-card .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--red);
+  opacity: 0.3;
+  margin-bottom: 8px;
+}
+.trava-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.trava-card .slug {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.trava-card p {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* STATUS TABLE */
+.status-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  font-size: 14px;
+}
+.status-table th {
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.status-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.status-table td:first-child { color: var(--text); font-weight: 500; }
+.status-pill {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+.status-pill.delivery { background: var(--green-dim); color: var(--green); }
+.status-pill.discovery { background: var(--amber-dim); color: var(--amber); }
+.status-pill.backlog { background: var(--surface-2); color: var(--text-muted); }
+.status-pill.deployed { background: var(--blue-dim); color: var(--blue); }
+
+/* CALLOUT */
+.callout {
+  background: var(--red-dim);
+  border: 1px solid rgba(233,46,48,0.2);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-top: 24px;
+}
+.callout p {
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 0;
+}
+.callout .callout-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+
+/* QUOTE */
+blockquote {
+  border-left: 3px solid var(--red);
+  padding: 16px 20px;
+  margin: 24px 0;
+  background: var(--surface);
+  border-radius: 0 8px 8px 0;
+}
+blockquote p {
+  color: var(--text);
+  font-size: 15px;
+  font-style: italic;
+  margin-bottom: 0;
+}
+blockquote cite {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+  margin-top: 8px;
+}
+
+/* DECISIONS */
+.decision-list {
+  margin-top: 24px;
+  display: grid;
+  gap: 12px;
+}
+.decision {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.decision .d-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--red);
+  padding-top: 2px;
+}
+.decision h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.decision p {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 0;
+}
+
+/* FOOTER */
+footer {
+  padding: 40px 0;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="index.html" class="logo">
+      <span class="back-arrow">&larr;</span>
+      V4MOS.AI
+    </a>
+    <a href="index.html" class="back-btn">Voltar ao Onboarding</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="label">Visao de Produto &middot; Q2 2026</div>
+  <h1>O cliente descobre a trava. <em>O produto destrava.</em></h1>
+  <p class="sub">O V4MOS.AI diagnostica qual das 7 etapas do ciclo de receita esta travando o negocio do cliente. Este squad e responsavel pelas tres primeiras: Exposicao, Atencao e Interesse. Nosso trabalho nos proximos 90 dias e fechar o ciclo entre diagnostico e destrave.</p>
+  <div class="badges">
+    <span class="badge red">5 devs</span>
+    <span class="badge">Exposicao</span>
+    <span class="badge">Atencao</span>
+    <span class="badge">Interesse</span>
+    <span class="badge">Abr &ndash; Jul 2026</span>
+  </div>
+</div>
+
+<!-- CONTEXTO -->
+<section>
+  <div class="section-num">01 / Contexto</div>
+  <h2>De onde partimos.</h2>
+  <p>O V4MOS.AI e o sistema operacional de receita da V4 Company. Autopilot com opiniao: metodologia TOC codificada em agentes de IA, supervisionada por humanos, alimentada por dados de 8K+ empresas.</p>
+  <p><strong>O que existe hoje:</strong> diagnostico conversacional com 3 agentes de IA (Deep Researcher, Identificador, Analista), pagina da trava com evidencias, dashboards das 7 travas, chat com 9 agentes TOC, integracoes com Meta Ads, Google Ads, HubSpot, Kommo, Shopify, Tray. Dominio v4mos.ai em migracao, identity e onboarding novos em entrega.</p>
+  <p><strong>O gap central:</strong> o cliente descobre a trava mas nao sabe o que fazer depois. O produto diagnostica mas nao destrava. Nao existe plano de acao, nao existe hub de acompanhamento, e o cliente nao tem motivo para voltar a plataforma.</p>
+
+  <blockquote>
+    <p>"Software que executa o servico. Nao e copilot. E autopilot."</p>
+    <cite>&mdash; Strategic V2, Guilherme Lippert</cite>
+  </blockquote>
+</section>
+
+<!-- ESCOPO DO SQUAD -->
+<section>
+  <div class="section-num">02 / Nosso territorio</div>
+  <h2>As tres primeiras travas.</h2>
+  <p>O ciclo de receita tem 7 etapas. Este squad e dono das tres primeiras &mdash; o topo do funil, onde o cliente precisa ser visto, gerar atencao e converter interesse.</p>
+
+  <div class="trava-grid">
+    <div class="trava-card">
+      <div class="num">T2</div>
+      <h3>Exposicao</h3>
+      <div class="slug">"Ninguem ve."</div>
+      <p>O cliente investe em midia mas nao sabe se esta investindo certo. Nao tem benchmark, nao tem diagnostico de canal, decide no improviso.</p>
+    </div>
+    <div class="trava-card">
+      <div class="num">T3</div>
+      <h3>Atencao</h3>
+      <div class="slug">"Veem mas nao param."</div>
+      <p>O trafego chega mas nao engaja. Criativos cansados, copy generica, sem processo de teste. O operador nao sabe o que esta funcionando.</p>
+    </div>
+    <div class="trava-card">
+      <div class="num">T4</div>
+      <h3>Interesse</h3>
+      <div class="slug">"Param mas nao agem."</div>
+      <p>O clique acontece mas a conversao nao vem. LP ruim, formulario longo, CTA fraco. O lead demonstra interesse e some.</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 24px;">O outro squad cuida de Qualificacao, Compromisso, Decisao e Retencao. O SDR IA (100+ clientes, R$100K/mes GMV) e responsabilidade deles, com lead do Gui.</p>
+</section>
+
+<!-- OBJETIVO -->
+<section>
+  <div class="section-num">03 / Objetivo</div>
+  <h2>Hub diario de destrave.</h2>
+  <p>O objetivo final do V4MOS e que o cliente use a plataforma como hub diario de acompanhamento do destrave da receita. Diagnostica a trava, oferece solucoes de destrave, e o cliente acompanha se esta destravando.</p>
+  <p>Nos proximos 90 dias, o caminho e:</p>
+
+  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="card" style="border-top: 3px solid var(--green);">
+      <div class="card-label">Passo 1</div>
+      <h3>Identifica</h3>
+      <p>"Sua trava e Exposicao porque X, Y, Z."</p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--amber);">
+      <div class="card-label">Passo 2</div>
+      <h3>Recomenda</h3>
+      <p>"Faca X, teste Y, monitore Z. Baseado em 30K+ empresas."</p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--red);">
+      <div class="card-label">Passo 3</div>
+      <h3>Executa</h3>
+      <p>"O agente fez por voce. Resultado: CPM caiu 20%."</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 24px;"><strong>A chave do caminho C:</strong> o produto nao espera o agente de IA ficar pronto para entregar valor. Cada trava recebe plano de acao + acompanhamento desde o H2, mesmo sem automacao. O agente chega depois como upgrade do que ja funciona.</p>
+</section>
+
+<!-- HORIZONTES -->
+<section>
+  <div class="section-num">04 / Horizontes</div>
+  <h2>90 dias, 3 horizontes.</h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot active"></div>
+      <div class="tl-time">H1 &middot; Semanas 1&ndash;3 &middot; Abr 14 &ndash; Mai 02</div>
+      <h3>Identifica a trava + monetizacao</h3>
+      <p>O diagnostico conversacional funciona de ponta a ponta. O cliente entra, em 15 minutos sabe qual trava bloqueia sua receita, ve evidencias reais. Dominio migrado, identity no ar, conectores novos, CRM V4.</p>
+      <p style="margin-top: 8px;">Em paralelo, o FinOps M1 responde "quanto custa 1 execucao" e o modelo de cobranca e definido: creditos, pay per result, ou hibrido. Sem isso, tudo que vem depois escala de graca.</p>
+      <div class="tl-tags">
+        <span class="tl-tag">Diagnostico</span>
+        <span class="tl-tag">Dominio</span>
+        <span class="tl-tag">Identity</span>
+        <span class="tl-tag">FinOps M1</span>
+        <span class="tl-tag">Modelo de cobranca</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot next"></div>
+      <div class="tl-time">H2 &middot; Semanas 4&ndash;8 &middot; Mai 05 &ndash; Jun 06</div>
+      <h3>Discovery + plano de acao + hub diario</h3>
+      <p><strong>Discovery e o centro.</strong> Pesquisadores vao a campo pra entender como o cliente lida com Exposicao, Atencao e Interesse hoje. Quais decisoes toma no escuro, o que faz no improviso, onde a IA pode entrar. Vibecoding testa as hipoteses com clientes reais.</p>
+      <p style="margin-top: 8px;">O plano de acao por trava e construido a partir dos achados. Hub diario com dashboards contextualizados, alertas, tracking de destrave. Billing entra em implementacao.</p>
+      <div class="tl-tags">
+        <span class="tl-tag">Discovery em campo</span>
+        <span class="tl-tag">Vibecoding</span>
+        <span class="tl-tag">Plano de acao</span>
+        <span class="tl-tag">Hub diario</span>
+        <span class="tl-tag">Alertas</span>
+        <span class="tl-tag">Billing impl.</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot future"></div>
+      <div class="tl-time">H3 &middot; Semanas 9&ndash;12 &middot; Jun 08 &ndash; Jul 10</div>
+      <h3>Primeiro agente de execucao</h3>
+      <p>O plano de acao que era "faca voce" vira "o agente fez por voce" em pelo menos uma trava. Qual trava? O discovery e o framework de priorizacao (determinismo, NRR, velocidade, receita) definem. Billing em producao: o agente executa e o cliente paga.</p>
+      <div class="tl-tags">
+        <span class="tl-tag">Agente automatizado</span>
+        <span class="tl-tag">Billing em producao</span>
+        <span class="tl-tag">Operacao AI First</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCOVERY -->
+<section>
+  <div class="section-num">05 / Discovery</div>
+  <h2>O campo define o produto.</h2>
+  <p>O que construir nao esta definido. E exatamente isso que o discovery responde. As PRDs do Gui (Midia Intelligence, Content Engine, LP Builder) e os prototipos do Build Sprint (Exposure Autopilot, Lab de Copy, Destrava Interesse) sao hipoteses e inputs &mdash; nao escopo confirmado.</p>
+
+  <p><strong>O que o pesquisador investiga por trava:</strong></p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Exposicao</div>
+      <h3>Como o cliente gera visibilidade hoje?</h3>
+      <p>Como decide onde investir verba? Como sabe se uma campanha funcionou? Que decisoes toma no escuro? O que faria diferente se tivesse mais dado? Depende de alguem externo pra isso?</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Atencao</div>
+      <h3>Como sabe se o criativo esta funcionando?</h3>
+      <p>Como decide qual copy ou oferta usar? O que faz quando percebe que a taxa de clique caiu? Tem processo de teste de criativos ou e no improviso? Quem decide o que postar?</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Interesse</div>
+      <h3>Como sabe se a LP esta convertendo?</h3>
+      <p>O que acontece com um lead depois que chega? Tem processo de otimizacao de conversao ou e reativo? Como sabe se o formulario esta espantando gente?</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Inputs disponiveis (hipoteses, nao escopo)</div>
+    <p><strong>PRDs do Gui (08/04):</strong> Midia Paga Intelligence (Exposicao + Atencao), Social Media Content Engine (Atencao), Landing Pages Builder (Interesse). Sao rascunhos completos com problemas identificados e decisoes tecnicas mapeadas.</p>
+    <p style="margin-top: 8px;"><strong>Build Sprint (06&ndash;09/04):</strong> Exposure Autopilot (Netto + Samuel), Laboratorio de Copy (Aloysio + Pedro + Leticia), Destrava Interesse (Lucas). Prototipos deployed que provam automacoes com dados reais.</p>
+  </div>
+</section>
+
+<!-- ESTADO -->
+<section>
+  <div class="section-num">06 / Estado atual no Linear</div>
+  <h2>Onde cada peca esta.</h2>
+
+  <table class="status-table">
+    <thead>
+      <tr>
+        <th>Projeto</th>
+        <th>Status</th>
+        <th>Target</th>
+        <th>Horizonte</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Migracao de Dominio</td>
+        <td><span class="status-pill delivery">Em Delivery</span></td>
+        <td>17/04</td>
+        <td>H1</td>
+      </tr>
+      <tr>
+        <td>Migracao (repo + identity + DS Mars)</td>
+        <td><span class="status-pill delivery">Em Delivery</span></td>
+        <td>17/04</td>
+        <td>H1</td>
+      </tr>
+      <tr>
+        <td>Identificacao da Trava</td>
+        <td><span class="status-pill delivery">Em Delivery</span></td>
+        <td>17/04</td>
+        <td>H1</td>
+      </tr>
+      <tr>
+        <td>Dashboards DR 2.0</td>
+        <td><span class="status-pill delivery">Em Delivery</span></td>
+        <td>17/04</td>
+        <td>H1</td>
+      </tr>
+      <tr>
+        <td>Infra de Experimentacao</td>
+        <td><span class="status-pill delivery">Em Delivery</span></td>
+        <td>14/04</td>
+        <td>H1</td>
+      </tr>
+      <tr>
+        <td>FinOps & Cost Control</td>
+        <td><span class="status-pill discovery">Em Discovery</span></td>
+        <td>&mdash;</td>
+        <td>H1</td>
+      </tr>
+      <tr>
+        <td>Billing & Monetizacao</td>
+        <td><span class="status-pill discovery">Em Discovery</span></td>
+        <td>&mdash;</td>
+        <td>H1 (definicao) &rarr; H2 (impl.)</td>
+      </tr>
+      <tr>
+        <td>Discovery &mdash; Operacao AI First</td>
+        <td><span class="status-pill discovery">Em Discovery</span></td>
+        <td>&mdash;</td>
+        <td>H2</td>
+      </tr>
+      <tr>
+        <td>Chat IA &mdash; Evolucao</td>
+        <td><span class="status-pill discovery">Em Discovery</span></td>
+        <td>&mdash;</td>
+        <td>H2</td>
+      </tr>
+      <tr>
+        <td>Integracao CRM V4</td>
+        <td><span class="status-pill discovery">Em Discovery</span></td>
+        <td>28/04</td>
+        <td>H1</td>
+      </tr>
+      <tr>
+        <td>V4MOS Builds</td>
+        <td><span class="status-pill deployed">Deployed</span></td>
+        <td>&mdash;</td>
+        <td>Input H2</td>
+      </tr>
+      <tr>
+        <td>Simplificacao Org</td>
+        <td><span class="status-pill backlog">Backlog</span></td>
+        <td>&mdash;</td>
+        <td>A definir</td>
+      </tr>
+      <tr>
+        <td>Melhorias e Debitos Q2</td>
+        <td><span class="status-pill backlog">Backlog</span></td>
+        <td>&mdash;</td>
+        <td>Continuo</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- MONETIZACAO -->
+<section>
+  <div class="section-num">07 / Monetizacao</div>
+  <h2>Sem modelo, escala de graca.</h2>
+  <p>A tese do V4MOS e usage-based: o cliente paga por execucao, nao por feature. A LP promete pay per result. O doc estrategico descreve wallet pre-pago com creditos. A definicao real ainda nao existe.</p>
+
+  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="card">
+      <div class="card-label">Passo 1 &middot; H1</div>
+      <h3>FinOps M1</h3>
+      <p>Saber quanto custa 1 execucao de IA por tipo (diagnostico, chat, agente). Sem isso, qualquer pricing e chute.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Passo 2 &middot; H1</div>
+      <h3>Definicao do modelo</h3>
+      <p>Creditos, pay per result, ou hibrido. Essa decisao condiciona a arquitetura de tudo que vem depois.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Passo 3 &middot; H2</div>
+      <h3>Implementacao</h3>
+      <p>Metering (contar execucoes), wallet/cobranca, experiencia do cliente (dashboard de consumo, alertas de saldo).</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Bloqueio ativo</div>
+    <p>FinOps e Billing estao ambos em Discovery, 0% de progresso, sem target date. Dependencia circular: Billing espera FinOps, FinOps espera estimativa do TL. Alguem precisa ser dono de "quanto custa 1 execucao" e trazer o numero.</p>
+  </div>
+</section>
+
+<!-- RISCOS -->
+<section>
+  <div class="section-num">08 / Riscos</div>
+  <h2>O que pode dar errado.</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label" style="color: var(--red);">Critico</div>
+      <h3>Discovery atrasado trava o H2</h3>
+      <p>Se pesquisadores nao forem a campo nas semanas 3 e 4, o plano de acao e construido no achismo. Vibecoding ajuda a testar rapido, mas nao substitui ouvir o cliente.</p>
+    </div>
+    <div class="card">
+      <div class="card-label" style="color: var(--red);">Critico</div>
+      <h3>FinOps nao sai no H1</h3>
+      <p>Se ninguem responder "quanto custa 1 execucao" ate a semana 3, o modelo de monetizacao fica no achismo e o billing do H2 nao tem base.</p>
+    </div>
+    <div class="card">
+      <div class="card-label" style="color: var(--amber);">Alto</div>
+      <h3>Gap de expectativa com a LP</h3>
+      <p>A LP promete 7 agentes, cobranca por resultado, 23 profissionais liberados. O produto real vai estar no H2 por pelo menos 2 meses. Se clientes entram pelo que a LP vende, a frustracao e garantida.</p>
+    </div>
+    <div class="card">
+      <div class="card-label" style="color: var(--amber);">Alto</div>
+      <h3>Operacao AI First sem direcao</h3>
+      <p>O projeto esta urgente, e lead da Isa, tem framework mas nunca foi aplicado. Sem ele, a decisao de "o que construir primeiro" e feeling.</p>
+    </div>
+    <div class="card">
+      <div class="card-label" style="color: var(--amber);">Medio</div>
+      <h3>5 devs para discovery + build + billing</h3>
+      <p>O H2 tem discovery, construcao de solucoes, hub diario, alertas e billing. Nao da pra fazer tudo em paralelo. Priorizacao semanal precisa ser disciplinada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DECISOES -->
+<section>
+  <div class="section-num">09 / Decisoes abertas</div>
+  <h2>O que precisa ser decidido agora.</h2>
+
+  <div class="decision-list">
+    <div class="decision">
+      <div class="d-num">01</div>
+      <div>
+        <h4>Quem e dono do FinOps M1?</h4>
+        <p>Precisa de um nome e uma data. "Quanto custa 1 execucao de diagnostico" e a pergunta mais importante do H1 depois do diagnostico.</p>
+      </div>
+    </div>
+    <div class="decision">
+      <div class="d-num">02</div>
+      <div>
+        <h4>Operacao AI First &mdash; aplicar o framework</h4>
+        <p>O discovery vai trazer candidatos de solucao por trava. O framework de 4 criterios (determinismo, NRR, velocidade, receita) existe pra priorizar. Falta aplicar com dados reais de campo.</p>
+      </div>
+    </div>
+    <div class="decision">
+      <div class="d-num">03</div>
+      <div>
+        <h4>A LP precisa ser ajustada?</h4>
+        <p>Se o H3 e 90 dias e nao 30, a LP vende algo que nao existe por pelo menos 2 meses. Decisao pro Gui e o time de growth.</p>
+      </div>
+    </div>
+    <div class="decision">
+      <div class="d-num">04</div>
+      <div>
+        <h4>Modelo de autonomia do agente</h4>
+        <p>Quando o agente existir, executa sozinho ou pede confirmacao? Isso sai do discovery do H2, nao e decidido na hora do build.</p>
+      </div>
+    </div>
+    <div class="decision">
+      <div class="d-num">05</div>
+      <div>
+        <h4>Simplificacao Organizacional</h4>
+        <p>Org + Workspace &rarr; Org. Esta no backlog, prioridade alta, sem lead. Se bloqueia billing ou onboarding, precisa de data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORA -->
+<section style="border-bottom: none;">
+  <div class="section-num">10 / Fora dos 90 dias</div>
+  <h2>O que nao e nosso agora.</h2>
+  <p><strong>Agentes para travas que nao forem priorizadas no H3.</strong> O primeiro agente prova o modelo. Os outros seguem depois.</p>
+  <p><strong>SDR IA Integrado.</strong> Outro squad. Lead do Gui. Start 14/04.</p>
+  <p><strong>A visao completa da LP.</strong> 7 agentes, cobranca por resultado em todas as travas, 23 profissionais liberados. Isso e o horizonte de 12+ meses do V4MOS como um todo.</p>
+  <p><strong>Expansao global.</strong> English-first, operacao nos EUA. Esta no plano de 10 anos, nao nos proximos 90 dias.</p>
+
+  <blockquote>
+    <p>"Dinheiro da pra ganhar de novo. Timing e uma vez na vida."</p>
+    <cite>&mdash; Dener Lippert</cite>
+  </blockquote>
+</section>
+
+</div>
+
+<footer>
+  V4MOS.AI &middot; Squad Exposicao, Atencao e Interesse &middot; Isabela Corsi &middot; 14/04/2026
+</footer>
+
+</body>
+</html>
