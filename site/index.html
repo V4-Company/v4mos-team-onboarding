@@ -219,6 +219,81 @@
           <div class="stat"><span class="stat-num">8</span><span class="stat-label">Services</span></div>
           <div class="stat"><span class="stat-num">130+</span><span class="stat-label">Integracoes</span></div>
         </div>
+
+        <!-- COMMUNICATION BOARD -->
+        <h2 class="subsection-title" style="margin-top:48px;">Mapa de Comunicacao entre Servicos</h2>
+        <p style="color:var(--text-secondary);margin-bottom:24px;">Todas as conexoes entre servicos, protocolos e direcao do fluxo de dados.</p>
+
+        <div class="comm-board">
+          <!-- Legend -->
+          <div class="comm-legend">
+            <span class="comm-legend-item"><span class="comm-dot" style="background:#3B82F6"></span> REST / HTTP</span>
+            <span class="comm-legend-item"><span class="comm-dot" style="background:#F97316"></span> SSE Streaming</span>
+            <span class="comm-legend-item"><span class="comm-dot" style="background:#A855F7"></span> RabbitMQ Events</span>
+            <span class="comm-legend-item"><span class="comm-dot" style="background:#EAB308"></span> SQS Batch</span>
+            <span class="comm-legend-item"><span class="comm-dot" style="background:#22C55E"></span> SQL (Kysely/TypeORM)</span>
+            <span class="comm-legend-item"><span class="comm-dot" style="background:#EC4899"></span> AWS SDK</span>
+          </div>
+
+          <!-- Communication Table -->
+          <div class="table-wrap">
+            <table class="comm-table">
+              <thead>
+                <tr><th>De</th><th>Para</th><th>Protocolo</th><th>O que trafega</th></tr>
+              </thead>
+              <tbody>
+                <tr class="comm-group-header"><td colspan="4">Frontend &rarr; Backend</td></tr>
+                <tr><td><code>web-client</code></td><td><code>v4-marketing</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>CRUD de workspaces, users, orgs, diagnoses, plans, invites, artifacts</td></tr>
+                <tr><td><code>web-client</code></td><td><code>integration-hub</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>CRUD integracoes, OAuth flows (Facebook, Google, Kommo), status</td></tr>
+                <tr><td><code>web-client</code></td><td><code>chat</code></td><td><span class="comm-proto proto-sse">SSE</span></td><td>Envio de mensagens com streaming de tokens AI em tempo real</td></tr>
+                <tr><td><code>web-client</code></td><td><code>chat</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>CRUD chats, skills, historico, feedback, upload presigned URL</td></tr>
+                <tr><td><code>web-client</code></td><td><code>v4-marketing-api</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>Dados de ads, analytics, CRM, e-commerce para dashboards</td></tr>
+
+                <tr class="comm-group-header"><td colspan="4">Backend &rarr; Backend (inter-servico)</td></tr>
+                <tr><td><code>chat</code></td><td><code>v4-marketing</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>AI tools: get-user-profile, get-workspace-diagnosis, invite-member, etc</td></tr>
+                <tr><td><code>chat</code></td><td><code>integration-hub</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>AI tools: list-integrations, disconnect-integration</td></tr>
+                <tr><td><code>chat</code></td><td><code>AWS Bedrock</code></td><td><span class="comm-proto proto-aws">AWS SDK</span></td><td>Sub-agentes especialistas (docs, data, digital-marketing)</td></tr>
+                <tr><td><code>chat</code></td><td><code>LangSmith</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>Prompts do Hub, feedback, tracing de agentes</td></tr>
+                <tr><td><code>chat</code></td><td><code>Algolia</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>FAQ search (tool faq-search para support agents)</td></tr>
+
+                <tr class="comm-group-header"><td colspan="4">Auth Flow</td></tr>
+                <tr><td><code>API Gateway</code></td><td><code>authorizer</code></td><td><span class="comm-proto proto-aws">AWS SDK</span></td><td>Invoca Lambda com request context (headers, path, query)</td></tr>
+                <tr><td><code>authorizer</code></td><td><code>Identity Service</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>Valida JWT token (user) ou service account credentials</td></tr>
+                <tr><td><code>authorizer</code></td><td><code>PostgreSQL</code></td><td><span class="comm-proto proto-db">SQL</span></td><td>Checa workspace_users (user tem acesso ao workspace?)</td></tr>
+                <tr><td><code>web-client</code></td><td><code>Clerk</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>Login, signup, session management, tenant switching</td></tr>
+
+                <tr class="comm-group-header"><td colspan="4">Domain Events (async)</td></tr>
+                <tr><td><code>v4-marketing</code></td><td><code>RabbitMQ</code></td><td><span class="comm-proto proto-rabbit">RabbitMQ</span></td><td>CreateTenantEvent, NotificationEmailEvent, OpportunityClosedEvent, etc (8 eventos single)</td></tr>
+                <tr><td><code>RabbitMQ</code></td><td><code>v4-marketing</code></td><td><span class="comm-proto proto-rabbit">RabbitMQ</span></td><td>Handlers: TenantCreatedEventHandler, ServiceAccountCreatedEventHandler, etc</td></tr>
+                <tr><td><code>v4-marketing</code></td><td><code>SQS</code></td><td><span class="comm-proto proto-sqs">SQS</span></td><td>DiagnosisStepCreatedEvent, WebScrapingRequestedEvent (batch processing)</td></tr>
+                <tr><td><code>SQS</code></td><td><code>v4-marketing</code></td><td><span class="comm-proto proto-sqs">SQS</span></td><td>Batch handlers: AI step processing, web scraping, deep research</td></tr>
+
+                <tr class="comm-group-header"><td colspan="4">Data Pipeline (v4-marketing-data)</td></tr>
+                <tr><td><code>Cron</code></td><td><code>accountsScheduler</code></td><td><span class="comm-proto proto-aws">AWS SDK</span></td><td>Trigger periodico: agenda contas para sync</td></tr>
+                <tr><td><code>accountsScheduler</code></td><td><code>queueInputRequest</code></td><td><span class="comm-proto proto-sqs">SQS</span></td><td>Enfileira requests de extracao por conta/integracao</td></tr>
+                <tr><td><code>queueInputRequest</code></td><td><code>ECS Services</code></td><td><span class="comm-proto proto-sqs">SQS</span></td><td>ECS connector (ex: ecsGoogle) consome e extrai dados da plataforma</td></tr>
+                <tr><td><code>ECS Services</code></td><td><code>S3</code></td><td><span class="comm-proto proto-aws">AWS SDK</span></td><td>Upload de payload raw (JSON) para bucket S3</td></tr>
+                <tr><td><code>ECS Services</code></td><td><code>snsStatus</code></td><td><span class="comm-proto proto-aws">AWS SDK</span></td><td>Publica status update (success/error) no SNS</td></tr>
+                <tr><td><code>snsStatus</code></td><td><code>statusUpdate</code></td><td><span class="comm-proto proto-aws">AWS SDK</span></td><td>Lambda atualiza status da integracao no banco</td></tr>
+                <tr><td><code>dataProcessor</code></td><td><code>queueWrite</code></td><td><span class="comm-proto proto-sqs">SQS</span></td><td>Dados transformados enfileirados para escrita</td></tr>
+                <tr><td><code>queueWrite</code></td><td><code>insertAurora</code></td><td><span class="comm-proto proto-sqs">SQS</span></td><td>Lambda escreve batch no Aurora PostgreSQL</td></tr>
+                <tr><td><code>Cron</code></td><td><code>materializedViews</code></td><td><span class="comm-proto proto-aws">AWS SDK</span></td><td>Refresh periodico de views materializadas</td></tr>
+
+                <tr class="comm-group-header"><td colspan="4">Database Connections</td></tr>
+                <tr><td><code>v4-marketing</code></td><td><code>PostgreSQL</code></td><td><span class="comm-proto proto-db">Kysely</span></td><td>18 repositories — users, workspaces, orgs, diagnoses, plans, subscriptions, etc</td></tr>
+                <tr><td><code>integration-hub</code></td><td><code>PostgreSQL</code></td><td><span class="comm-proto proto-db">Kysely</span></td><td>1 repository — integrations table (CRUD + paginacao + status)</td></tr>
+                <tr><td><code>chat</code></td><td><code>PostgreSQL</code></td><td><span class="comm-proto proto-db">Kysely</span></td><td>3 repos (ChatMetadata, Skill, UserMemory) + LangGraph checkpoints</td></tr>
+                <tr><td><code>v4-marketing-api</code></td><td><code>PostgreSQL</code></td><td><span class="comm-proto proto-db">TypeORM</span></td><td>92 modulos — entities auto-loaded, queries via TypeORM</td></tr>
+                <tr><td><code>v4-marketing-data</code></td><td><code>Aurora</code></td><td><span class="comm-proto proto-db">SQL</span></td><td>insertAurora Lambda — batch inserts + materialized views</td></tr>
+
+                <tr class="comm-group-header"><td colspan="4">Observabilidade</td></tr>
+                <tr><td><code>All backend</code></td><td><code>Datadog</code></td><td><span class="comm-proto proto-aws">dd-trace</span></td><td>APM traces, logs, custom metrics</td></tr>
+                <tr><td><code>web-client</code></td><td><code>Datadog</code></td><td><span class="comm-proto proto-rest">RUM SDK</span></td><td>Browser Real User Monitoring, errors, performance</td></tr>
+                <tr><td><code>web-client</code></td><td><code>Mixpanel</code></td><td><span class="comm-proto proto-rest">REST</span></td><td>Product analytics, eventos de uso, funnel tracking</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
 
       <!-- 04 STACK -->
@@ -526,32 +601,95 @@
 
         <div class="service-card">
           <div class="service-header">
-            <div><h2 class="service-name">v4-marketing-api</h2><p class="service-desc">API de dados de plataformas — dados brutos/processados para o painel analitico.</p></div>
-            <div class="service-meta"><span class="tag backend">NestJS</span><span class="tag infra">TypeORM</span></div>
+            <div><h2 class="service-name">v4-marketing-api</h2><p class="service-desc">API NestJS de dados de marketing — consome e normaliza dados de 15+ plataformas de ads, analytics, CRM e e-commerce. <strong>Repo separado</strong> (<code>npm</code>, nao pnpm).</p></div>
+            <div class="service-meta"><span class="tag backend">NestJS</span><span class="tag infra">TypeORM</span><span class="tag infra">Redis Cache</span><span class="port-badge">:3000</span></div>
           </div>
-          <div class="service-stats"><span>92 modulos</span><span>15+ plataformas</span><span>repo separado (npm)</span></div>
+          <div class="service-stats"><span>92 modulos</span><span>15+ plataformas</span><span>ThrottlerGuard (100 req/60s)</span><span>FeatureAccessInterceptor</span></div>
+
+          <h3 class="subsection-title" style="margin-top:16px;">Ads &amp; Marketing</h3>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Plataforma</th><th>Modulos</th></tr></thead>
+              <thead><tr><th>Plataforma</th><th>Qt</th><th>Modulos</th></tr></thead>
               <tbody>
-                <tr><td>Facebook Ads</td><td>25 (campaigns, adsets, ads, insights, audiences, creatives...)</td></tr>
-                <tr><td>Google Ads</td><td>14 (campaigns, keywords, conversions, smart bidding...)</td></tr>
-                <tr><td>Google Analytics</td><td>6 (sessions, events, conversions, attribution...)</td></tr>
-                <tr><td>Instagram</td><td>7 (posts, stories, reels, insights, audience...)</td></tr>
-                <tr><td>TikTok</td><td>5 (campaigns, ads, insights, creatives, audience)</td></tr>
-                <tr><td>LinkedIn</td><td>3 (campaigns, insights, audience)</td></tr>
-                <tr><td>Shopify</td><td>4 (orders, products, customers, analytics)</td></tr>
-                <tr><td>VTEX</td><td>2 (orders, products)</td></tr>
-                <tr><td>Tray</td><td>2 (orders, products)</td></tr>
-                <tr><td>Nuvem Shop</td><td>3 (orders, products, customers)</td></tr>
-                <tr><td>Loja Integrada</td><td>2 (orders, products)</td></tr>
-                <tr><td>Bitrix</td><td>4 (leads, deals, contacts, activities)</td></tr>
-                <tr><td>Kommo</td><td>4 (leads, contacts, pipeline, activities)</td></tr>
-                <tr><td>Pipedrive</td><td>8 (deals, contacts, orgs, activities, notes, products, goals, stages)</td></tr>
-                <tr><td>RD Station</td><td>3 (leads, conversions, funnel)</td></tr>
-                <tr><td>Unbounce</td><td>1 (leads)</td></tr>
+                <tr><td><strong>Facebook Ads</strong></td><td>25</td><td>campaigns, campaigns_config, adsets, adsets_config, ads, ads_config, actions, creatives, creatives_ad, demographic, platform, region, accounts, ad_config</td></tr>
+                <tr><td><strong>Google Ads</strong></td><td>14</td><td>campaigns, campaigns_criterion, ad_group, ad_group_ads, ad_group_criterion, conversions, conversion_segmented_campaigns, conversion_segmented_ad_group, conversion_segmented_ad_group_ads, keywords, geographic, age_range, gender, accounts</td></tr>
+                <tr><td><strong>TikTok</strong></td><td>5</td><td>budget, demographic, group_budget, info, region</td></tr>
+                <tr><td><strong>LinkedIn</strong></td><td>3</td><td>accounts_campaigns, conversions_tracking, statistics</td></tr>
+                <tr><td><strong>Unbounce</strong></td><td>1</td><td>leads</td></tr>
               </tbody>
             </table>
+          </div>
+
+          <h3 class="subsection-title" style="margin-top:16px;">Analytics</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Plataforma</th><th>Qt</th><th>Modulos</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Google Analytics</strong></td><td>10</td><td>events, transactions, sessions, customers, products, custom_events, events_age, events_gender, events_region, events_utm</td></tr>
+                <tr><td><strong>Instagram Insights</strong></td><td>6</td><td>age_insights, gender_insights, city_insights, media_details, media_insights, profile, profile_insights</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="subsection-title" style="margin-top:16px;">CRM / Sales</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Plataforma</th><th>Qt</th><th>Modulos</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Kommo</strong></td><td>5</td><td>contacts, events, leads, pipelines, users</td></tr>
+                <tr><td><strong>Bitrix</strong></td><td>6</td><td>contacts, deals, won_deals, leads_history, pipelines, users</td></tr>
+                <tr><td><strong>Pipedrive</strong></td><td>8</td><td>deals, leads, lead_sources, people, pipelines, pipeline_stages, products, users</td></tr>
+                <tr><td><strong>RD Station</strong></td><td>3</td><td>deals, deal_stages, products</td></tr>
+                <tr><td><strong>Piperun</strong></td><td>5</td><td>deals, origins, pipelines, stages, persons</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="subsection-title" style="margin-top:16px;">E-Commerce</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Plataforma</th><th>Qt</th><th>Modulos</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Shopify</strong></td><td>6</td><td>products, orders, customers, order_items, carts, checkouts</td></tr>
+                <tr><td><strong>VTEX</strong></td><td>3</td><td>products, orders, customers</td></tr>
+                <tr><td><strong>Tray</strong></td><td>4</td><td>customers, orders, products, carts</td></tr>
+                <tr><td><strong>Nuvem Shop</strong></td><td>3</td><td>customers, orders, products</td></tr>
+                <tr><td><strong>Loja Integrada</strong></td><td>3</td><td>customers, orders, products</td></tr>
+                <tr><td><strong>Wake</strong></td><td>4</td><td>orders, orders_status, payment_methods, products</td></tr>
+                <tr><td><strong>WooCommerce</strong></td><td>3</td><td>customers, orders, products</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="subsection-title" style="margin-top:16px;">Outros</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Plataforma</th><th>Qt</th><th>Modulos</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Zendesk</strong></td><td>6</td><td>tickets, users, ticket_metrics, ticket_fields, groups, brands</td></tr>
+                <tr><td><strong>Meetime</strong></td><td>4</td><td>leads, prospections, prospections_activities, users</td></tr>
+                <tr><td><strong>Inhire</strong></td><td>4</td><td>jobs, talents, job_talents, job_talent_forms_response</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="subsection-title" style="margin-top:16px;">Core Modules</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Modulo</th><th>Proposito</th></tr></thead>
+              <tbody>
+                <tr><td><code>actionTypes</code></td><td>Definicoes de tipos de acao</td></tr>
+                <tr><td><code>conversionMetric</code></td><td>Funis e metricas de conversao</td></tr>
+                <tr><td><code>mediaAnalysisCharts</code></td><td>Dashboards de analise de midia</td></tr>
+                <tr><td><code>featureAccess</code></td><td>Interceptor de feature flags</td></tr>
+                <tr><td><code>viewInvestment</code></td><td>Views de investimento</td></tr>
+                <tr><td><code>viewCategoryMonthlyMetrics</code></td><td>Metricas mensais por categoria</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="info-box" style="margin-top:16px">
+            <p><strong>Patterns NestJS:</strong> Module-per-integration (cada plataforma = modulo isolado). Repository pattern (interface + TypeORM impl). ThrottlerGuard global (100 req/60s). FeatureAccessInterceptor para feature flags. Redis cache via <code>cache-manager-redis-yet</code>. Entities auto-loaded via glob (<code>**/*.entity.ts</code>). Controllers auto-scanned (<code>**/*.controller.ts</code>).</p>
           </div>
         </div>
 
@@ -563,6 +701,89 @@
           <div class="service-stats"><span>1 handler</span><span>1 use case</span><span>JWT + service account validation</span></div>
           <div class="info-box">
             <p>Valida <code>Authorization: Bearer &lt;token&gt;</code> via Identity Service para usuarios regulares. Service accounts usam <code>x-client-id</code> + <code>x-client-secret</code>. Extrai <code>workspace_id</code> de 3 lugares: header <code>x-workspace-id</code>, path param <code>/:workspaceId</code> e query string <code>?workspaceId=</code>. Retorna IAM Policy Allow/Deny para o API Gateway.</p>
+          </div>
+        </div>
+
+        <!-- v4-marketing-data deep dive -->
+        <div class="service-card">
+          <div class="service-header">
+            <div><h2 class="service-name">v4-marketing-data</h2><p class="service-desc">Plataforma de dados serverless. IaC com SST v3, pipelines em Lambda (Python) e ECS (Python), storage em S3 + Aurora. <strong>Repo separado</strong> (<code>yarn</code> + <code>uv</code>).</p></div>
+            <div class="service-meta"><span class="tag infra">SST v3</span><span class="tag backend">Python 3.11</span><span class="tag infra">AWS</span></div>
+          </div>
+          <div class="service-stats"><span>13 Lambdas</span><span>20 ECS Services</span><span>7 SQS Queues</span><span>1 SNS Topic</span><span>2 Crons</span></div>
+
+          <h3 class="subsection-title" style="margin-top:16px;">Lambda Functions (13)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Function</th><th>Trigger</th><th>O que faz</th></tr></thead>
+              <tbody>
+                <tr><td><code>accountsScheduler</code></td><td>Cron</td><td>Agenda contas para sync periodico</td></tr>
+                <tr><td><code>requestEvent</code></td><td>API Gateway</td><td>Recebe requests da API e enfileira no SQS</td></tr>
+                <tr><td><code>firstExtraction</code></td><td>SQS (queueFirstExtraction)</td><td>Dispara primeira extracao de dados de uma integracao</td></tr>
+                <tr><td><code>dataProcessor</code></td><td>SQS</td><td>Processa e transforma dados extraidos (Python/pandas)</td></tr>
+                <tr><td><code>insertAurora</code></td><td>SQS (queueWrite)</td><td>Escreve dados processados no Aurora PostgreSQL</td></tr>
+                <tr><td><code>insertDocument</code></td><td>SQS (queueInsertDocument)</td><td>Persiste documentos raw no S3</td></tr>
+                <tr><td><code>statusUpdate</code></td><td>SNS (snsStatus)</td><td>Atualiza status da integracao (active/error/warning)</td></tr>
+                <tr><td><code>errorProcessor</code></td><td>SQS (queueErrorTask)</td><td>Processa e classifica erros de pipeline</td></tr>
+                <tr><td><code>errorNotification</code></td><td>SQS (queueErrorNotification)</td><td>Envia notificacao de erro para o usuario</td></tr>
+                <tr><td><code>materializedViews</code></td><td>Cron</td><td>Refresh periodico de materialized views no Aurora</td></tr>
+                <tr><td><code>workerPipeline</code></td><td>Step Function</td><td>Gerencia workers do pipeline de escrita</td></tr>
+                <tr><td><code>writePipeline</code></td><td>Step Function</td><td>Coordena escrita batch no Aurora</td></tr>
+                <tr><td><code>interface</code></td><td>API Gateway</td><td>Endpoint da API de dados (interface publica)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="subsection-title" style="margin-top:16px;">ECS Services — Connectors (20)</h3>
+          <p style="color:var(--text-secondary);margin-bottom:12px;font-size:14px;">Cada ECS service e um container Python que extrai dados de uma plataforma especifica via API. Recebe tarefas do SQS, faz requests paginados, salva raw no S3 e notifica status via SNS.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Categoria</th><th>ECS Services</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Ads</strong></td><td><code>ecsGoogle</code> (Google Ads), <code>ecsTiktok</code>, <code>ecsLinkedin</code></td></tr>
+                <tr><td><strong>Analytics</strong></td><td><code>ecsGoogleAnalytics</code> (GA4 via google-analytics-data SDK), <code>ecsInstagram</code></td></tr>
+                <tr><td><strong>CRM</strong></td><td><code>ecsKommo</code>, <code>ecsPipedrive</code>, <code>ecsPiperun</code>, <code>ecsRdStation</code>, <code>ecsMeetime</code></td></tr>
+                <tr><td><strong>E-Commerce</strong></td><td><code>ecsShopify</code>, <code>ecsVtex</code>, <code>ecsTray</code>, <code>ecsNuvemShop</code>, <code>ecsWoocommerce</code>, <code>ecsWake</code></td></tr>
+                <tr><td><strong>Outros</strong></td><td><code>ecsUnbounce</code>, <code>ecsZendesk</code>, <code>ecsInhire</code></td></tr>
+                <tr><td><strong>Default</strong></td><td><code>ecsDefaultRequest</code> (fallback generico para plataformas sem connector dedicado)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="subsection-title" style="margin-top:16px;">Messaging (SQS Queues + SNS)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Queue / Topic</th><th>Tipo</th><th>Proposito</th></tr></thead>
+              <tbody>
+                <tr><td><code>queueInputRequest</code></td><td>SQS</td><td>Fila de entrada — requests da API</td></tr>
+                <tr><td><code>queueFirstExtraction</code></td><td>SQS</td><td>Fila de primeira extracao</td></tr>
+                <tr><td><code>queueInsertDocument</code></td><td>SQS</td><td>Fila de insercao de docs no S3</td></tr>
+                <tr><td><code>queueWrite</code></td><td>SQS</td><td>Fila de escrita no Aurora</td></tr>
+                <tr><td><code>queueErrorTask</code></td><td>SQS</td><td>Fila de erros de pipeline</td></tr>
+                <tr><td><code>queueErrorNotification</code></td><td>SQS</td><td>Fila de notificacao de erros</td></tr>
+                <tr><td><code>queueDeadLetter</code></td><td>SQS</td><td>Dead-letter queue (DLQ)</td></tr>
+                <tr><td><code>snsStatus</code></td><td>SNS</td><td>Topic de atualizacao de status</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="subsection-title" style="margin-top:16px;">Storage &amp; Infra</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Recurso</th><th>Tipo</th><th>Proposito</th></tr></thead>
+              <tbody>
+                <tr><td><code>Aurora PostgreSQL</code></td><td>RDS</td><td>Data lake — dados processados e materialized views</td></tr>
+                <tr><td><code>S3 Buckets</code></td><td>Storage</td><td>Raw data (lifecycle rules) + refined data</td></tr>
+                <tr><td><code>VPC + Subnets</code></td><td>Network</td><td>Isolamento de rede para Aurora e ECS</td></tr>
+                <tr><td><code>Secrets Manager</code></td><td>Secrets</td><td>Credenciais de banco e APIs</td></tr>
+                <tr><td><code>SSM Parameters</code></td><td>Config</td><td>Parametros de configuracao</td></tr>
+                <tr><td><code>Step Functions</code></td><td>Orchestration</td><td>Pipeline de escrita (workerPipeline + writePipeline)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="info-box" style="margin-top:16px">
+            <p><strong>Deploy:</strong> <code>npx sst deploy</code> (dev) ou <code>npx sst deploy --stage production</code>. Auto-deploy via Git: <code>main</code> &rarr; production, <code>develop</code> &rarr; dev. Cada ECS service tem seu proprio Dockerfile em <code>services/ecs*/</code>. Python deps via <code>requirements.txt</code> por service + <code>pyproject.toml</code> para Lambdas.</p>
           </div>
         </div>
       </section>
