@@ -19,6 +19,7 @@
       <div class="nav__links">
         <a href="#architecture">Arquitetura</a>
         <a href="#repos">Repos</a>
+        <a href="#services">Servicos</a>
         <a href="#quickstart">Quick Start</a>
         <a href="#commands">Comandos</a>
         <a href="#timeline">1a Semana</a>
@@ -343,8 +344,811 @@
     </div>
   </section>
 
+  <!-- ========== SERVICES DEEP DIVE ========== -->
+  <section id="services" class="section section--dark">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Deep Dive</span>
+        <h2 class="section__title">Servicos em Detalhe</h2>
+        <p class="section__desc">Tudo sobre cada package e repositorio — use cases, rotas, tabelas, stack</p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="tabs">
+        <div class="tabs__nav">
+          <button class="tabs__btn tabs__btn--active" data-tab="tab-core">
+            <span class="tabs__btn-icon" style="color:var(--green)">&#9679;</span> v4-marketing
+          </button>
+          <button class="tabs__btn" data-tab="tab-hub">
+            <span class="tabs__btn-icon" style="color:var(--purple)">&#9679;</span> integration-hub
+          </button>
+          <button class="tabs__btn" data-tab="tab-chat">
+            <span class="tabs__btn-icon" style="color:var(--orange)">&#9679;</span> chat (AI)
+          </button>
+          <button class="tabs__btn" data-tab="tab-lib">
+            <span class="tabs__btn-icon" style="color:var(--blue)">&#9679;</span> lib
+          </button>
+          <button class="tabs__btn" data-tab="tab-web">
+            <span class="tabs__btn-icon" style="color:var(--cyan)">&#9679;</span> web-client
+          </button>
+          <button class="tabs__btn" data-tab="tab-auth">
+            <span class="tabs__btn-icon" style="color:var(--red)">&#9679;</span> authorizer
+          </button>
+          <button class="tabs__btn" data-tab="tab-api">
+            <span class="tabs__btn-icon" style="color:var(--blue)">&#9679;</span> v4-marketing-api
+          </button>
+          <button class="tabs__btn" data-tab="tab-data">
+            <span class="tabs__btn-icon" style="color:var(--pink)">&#9679;</span> v4-marketing-data
+          </button>
+        </div>
+
+        <!-- ===== TAB: v4-marketing (core) ===== -->
+        <div class="tabs__panel tabs__panel--active" id="tab-core">
+          <div class="svc-header">
+            <div class="svc-header__info">
+              <h3>v4-marketing</h3>
+              <p>Core service: usuarios, organizacoes, workspaces, diagnosticos, planos, pagamentos, convites. Clean Architecture / DDD.</p>
+              <div class="svc-header__meta">
+                <span class="svc-meta">Porta <strong>3012</strong></span>
+                <span class="svc-meta">Fastify 5</span>
+                <span class="svc-meta">Inversify DI</span>
+                <span class="svc-meta">Kysely + Prisma</span>
+              </div>
+            </div>
+            <div class="svc-header__stats">
+              <div class="svc-stat"><span>47</span>Use Cases</div>
+              <div class="svc-stat"><span>10</span>Controllers</div>
+              <div class="svc-stat"><span>19</span>Tabelas</div>
+              <div class="svc-stat"><span>18</span>Eventos</div>
+            </div>
+          </div>
+
+          <div class="svc-grid">
+            <!-- Folder Structure -->
+            <div class="svc-card">
+              <h4>Estrutura de Pastas</h4>
+              <pre class="svc-tree"><code>v4-marketing/
+├── domain/
+│   ├── aggregates/      <span class="tree-note"># 22 entidades</span>
+│   ├── repositories/    <span class="tree-note"># 17 interfaces</span>
+│   ├── events/          <span class="tree-note"># 18 domain events</span>
+│   ├── vo/              <span class="tree-note"># 10 value objects</span>
+│   └── Enums/
+├── app/
+│   ├── usecases/        <span class="tree-note"># 47 use cases</span>
+│   ├── services/        <span class="tree-note"># 19 services</span>
+│   ├── dtos/input/      <span class="tree-note"># 50 input DTOs</span>
+│   ├── dtos/output/     <span class="tree-note"># 43 output DTOs</span>
+│   ├── events/          <span class="tree-note"># 8 event handlers</span>
+│   ├── exceptions/      <span class="tree-note"># 38 exceptions</span>
+│   └── mappers/         <span class="tree-note"># 20+ mappers</span>
+└── infra/
+    ├── controller/      <span class="tree-note"># 10 controllers</span>
+    ├── database/kysely/  <span class="tree-note"># 18 repo impl</span>
+    ├── database/prisma/  <span class="tree-note"># 70+ migrations</span>
+    ├── di/              <span class="tree-note"># containers.ts</span>
+    └── events/          <span class="tree-note"># event bus setup</span></code></pre>
+            </div>
+
+            <!-- Key Entities -->
+            <div class="svc-card">
+              <h4>Aggregates Principais</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>User</code> <span>Conta multi-tenant (email, name, phone, jobTitle)</span></div>
+                <div class="svc-list-item"><code>Organization</code> <span>Container de tenant (name, domain, tenantId)</span></div>
+                <div class="svc-list-item"><code>Workspace</code> <span>Espaco de trabalho (companyName, siteUrl, businessModel)</span></div>
+                <div class="svc-list-item"><code>Subscription</code> <span>Assinatura SaaS (status, plan, period)</span></div>
+                <div class="svc-list-item"><code>Plan</code> <span>Planos de assinatura (price, interval, features)</span></div>
+                <div class="svc-list-item"><code>Diagnosis</code> <span>Diagnostico AI de marketing (steps, profile)</span></div>
+                <div class="svc-list-item"><code>DeepResearch</code> <span>Pesquisa profunda (CNPJ, evidencias)</span></div>
+                <div class="svc-list-item"><code>Artifact</code> <span>Artefatos gerados (content, type)</span></div>
+                <div class="svc-list-item"><code>Payment</code> <span>Pagamentos Eduzz (orderId, amount)</span></div>
+                <div class="svc-list-item"><code>InviteUser</code> <span>Convites de workspace (role, origin)</span></div>
+              </div>
+            </div>
+
+            <!-- Routes -->
+            <div class="svc-card svc-card--wide">
+              <h4>Rotas Principais</h4>
+              <div class="svc-routes">
+                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces</code><span>Criar workspace</span></div>
+                <div class="svc-route"><span class="method method--get">GET</span><code>/workspaces/:id</code><span>Buscar workspace</span></div>
+                <div class="svc-route"><span class="method method--get">GET</span><code>/workspaces/:id/diagnoses</code><span>Listar diagnosticos</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces/:id/invite</code><span>Convidar usuario</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces/:id/marketing-profile</code><span>Processar perfil</span></div>
+                <div class="svc-route"><span class="method method--get">GET</span><code>/users/:id</code><span>Buscar usuario</span></div>
+                <div class="svc-route"><span class="method method--get">GET</span><code>/users/:id/workspaces</code><span>Workspaces do usuario</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/diagnoses</code><span>Criar diagnostico</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/plans</code><span>CRUD de planos</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/webhook/eduzz</code><span>Webhook pagamento</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/webhook/linear</code><span>Webhook Linear</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/feature-access/check</code><span>Checar feature flag</span></div>
+              </div>
+            </div>
+
+            <!-- Events -->
+            <div class="svc-card">
+              <h4>Eventos (SQS + RabbitMQ)</h4>
+              <div class="svc-tags">
+                <span class="svc-tag svc-tag--rabbit">CreateTenantEvent</span>
+                <span class="svc-tag svc-tag--rabbit">AttachUserToTenantEvent</span>
+                <span class="svc-tag svc-tag--rabbit">DefaultUserOperatorCreatedEvent</span>
+                <span class="svc-tag svc-tag--rabbit">NotificationEmailEvent</span>
+                <span class="svc-tag svc-tag--rabbit">NotificationWhatsappEvent</span>
+                <span class="svc-tag svc-tag--rabbit">OpportunityClosedEvent</span>
+                <span class="svc-tag svc-tag--sqs">DiagnosisStepCreatedEvent</span>
+                <span class="svc-tag svc-tag--sqs">WebScrapingRequestedEvent</span>
+                <span class="svc-tag svc-tag--sqs">DeepResearchRequestedEvent</span>
+              </div>
+              <div class="svc-legend">
+                <span class="svc-tag svc-tag--rabbit">RabbitMQ</span> single event
+                <span class="svc-tag svc-tag--sqs">SQS</span> batch processing
+              </div>
+            </div>
+
+            <!-- Database Tables -->
+            <div class="svc-card">
+              <h4>Tabelas (19)</h4>
+              <div class="svc-tags">
+                <span class="svc-tag">Users</span>
+                <span class="svc-tag">Organizations</span>
+                <span class="svc-tag">Workspaces</span>
+                <span class="svc-tag">Subscriptions</span>
+                <span class="svc-tag">Plans</span>
+                <span class="svc-tag">Payments</span>
+                <span class="svc-tag">WorkspaceUsers</span>
+                <span class="svc-tag">OrganizationUsers</span>
+                <span class="svc-tag">InviteUsers</span>
+                <span class="svc-tag">MarketingProfiles</span>
+                <span class="svc-tag">Diagnosis</span>
+                <span class="svc-tag">DiagnosisStep</span>
+                <span class="svc-tag">Artifacts</span>
+                <span class="svc-tag">DeepResearches</span>
+                <span class="svc-tag">WebsiteCollectedData</span>
+                <span class="svc-tag">DefaultUserOperator</span>
+                <span class="svc-tag">Integrations</span>
+                <span class="svc-tag">AnomalyEvents</span>
+                <span class="svc-tag">ErrorsHistory</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: integration-hub ===== -->
+        <div class="tabs__panel" id="tab-hub">
+          <div class="svc-header">
+            <div class="svc-header__info">
+              <h3>integration-hub</h3>
+              <p>Gerencia conexoes com plataformas externas: OAuth flows, CRUD de integracoes, listagem de contas. Clean Architecture / DDD.</p>
+              <div class="svc-header__meta">
+                <span class="svc-meta">Porta <strong>3001</strong></span>
+                <span class="svc-meta">Fastify 5</span>
+                <span class="svc-meta">OAuth2</span>
+                <span class="svc-meta">AWS SigV4</span>
+              </div>
+            </div>
+            <div class="svc-header__stats">
+              <div class="svc-stat"><span>14</span>Use Cases</div>
+              <div class="svc-stat"><span>14</span>Rotas</div>
+              <div class="svc-stat"><span>130+</span>Tipos Integ.</div>
+              <div class="svc-stat"><span>1</span>Tabela</div>
+            </div>
+          </div>
+
+          <div class="svc-grid">
+            <div class="svc-card">
+              <h4>OAuth Flows</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>FacebookAuthUseCase</code> <span>OAuth code exchange + ad accounts</span></div>
+                <div class="svc-list-item"><code>GoogleAuthUseCase</code> <span>OAuth + Ads API + GA4 API</span></div>
+                <div class="svc-list-item"><code>KommoAuthUseCase</code> <span>Kommo CRM OAuth flow</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>CRUD de Integracoes</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>CreateIntegrationUseCase</code> <span>Criar conexao com plataforma</span></div>
+                <div class="svc-list-item"><code>UpdateIntegrationUseCase</code> <span>Atualizar nome, email, frequencia</span></div>
+                <div class="svc-list-item"><code>DeleteIntegrationUseCase</code> <span>Soft delete (status = 4)</span></div>
+                <div class="svc-list-item"><code>ReconnectIntegrationUseCase</code> <span>Reconectar com novos tokens</span></div>
+                <div class="svc-list-item"><code>GetWorkspaceIntegrationsUseCase</code> <span>Listar com paginacao</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card svc-card--wide">
+              <h4>Plataformas Suportadas (130+ tipos)</h4>
+              <div class="svc-platforms">
+                <div class="svc-platform-group">
+                  <h5>Ads</h5>
+                  <span>Facebook Ads (14 tipos)</span>
+                  <span>Google Ads (14 tipos)</span>
+                  <span>TikTok (5 tipos)</span>
+                  <span>LinkedIn (3 tipos)</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Analytics</h5>
+                  <span>Google Analytics (10 tipos)</span>
+                  <span>Instagram Insights (6 tipos)</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>CRM</h5>
+                  <span>Kommo</span>
+                  <span>Bitrix</span>
+                  <span>Pipedrive</span>
+                  <span>RD Station</span>
+                  <span>Piperun</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>E-Commerce</h5>
+                  <span>Shopify</span>
+                  <span>VTEX</span>
+                  <span>Tray</span>
+                  <span>Nuvem Shop</span>
+                  <span>Loja Integrada</span>
+                  <span>Wake</span>
+                  <span>WooCommerce</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Outros</h5>
+                  <span>Zendesk</span>
+                  <span>Meetime</span>
+                  <span>Inhire</span>
+                  <span>Unbounce</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="svc-card svc-card--wide">
+              <h4>Rotas</h4>
+              <div class="svc-routes">
+                <div class="svc-route"><span class="method method--post">POST</span><code>/integrations</code><span>Criar integracao</span></div>
+                <div class="svc-route"><span class="method method--get">GET</span><code>/workspaces/:id/integrations</code><span>Listar integracoes</span></div>
+                <div class="svc-route"><span class="method method--get">GET</span><code>/workspaces/:id/integrations/status</code><span>Status agregado</span></div>
+                <div class="svc-route"><span class="method method--put">PUT</span><code>/integrations</code><span>Atualizar integracao</span></div>
+                <div class="svc-route"><span class="method method--delete">DEL</span><code>/integrations</code><span>Deletar integracoes</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/integrations/reconnect</code><span>Reconectar</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/facebook/auth</code><span>Facebook OAuth</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/facebook/ad-accounts</code><span>Listar Ad Accounts</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/google/auth</code><span>Google OAuth</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/google/ad-accounts</code><span>Listar Google Ads</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/google/analytics-accounts</code><span>Listar GA4</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/kommo/auth</code><span>Kommo OAuth</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: chat (AI) ===== -->
+        <div class="tabs__panel" id="tab-chat">
+          <div class="svc-header">
+            <div class="svc-header__info">
+              <h3>chat (AI)</h3>
+              <p>Assistente AI com 10 agentes especializados, 40+ tools, multi-model (OpenAI, Anthropic, Gemini), streaming SSE, e sub-agentes Bedrock.</p>
+              <div class="svc-header__meta">
+                <span class="svc-meta">Porta <strong>3013</strong></span>
+                <span class="svc-meta">LangGraph</span>
+                <span class="svc-meta">SSE Streaming</span>
+                <span class="svc-meta">Sem Domain Layer</span>
+              </div>
+            </div>
+            <div class="svc-header__stats">
+              <div class="svc-stat"><span>13</span>Use Cases</div>
+              <div class="svc-stat"><span>10</span>Agentes AI</div>
+              <div class="svc-stat"><span>40+</span>Tools</div>
+              <div class="svc-stat"><span>3</span>Tabelas</div>
+            </div>
+          </div>
+
+          <div class="svc-grid">
+            <div class="svc-card">
+              <h4>Agentes</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>default</code> <span>Marketing AI geral — 32 tools</span></div>
+                <div class="svc-list-item"><code>support</code> <span>Suporte interno — 19 tools</span></div>
+                <div class="svc-list-item"><code>support-public</code> <span>FAQ publico — 1 tool (Algolia)</span></div>
+                <div class="svc-list-item"><code>goal-tree</code> <span>Arvore de metas — 3 tools</span></div>
+                <div class="svc-list-item"><code>crt-agent</code> <span>Current Reality Tree</span></div>
+                <div class="svc-list-item"><code>frt-agent</code> <span>Future Reality Tree</span></div>
+                <div class="svc-list-item"><code>prt-agent</code> <span>Prerequisite Tree</span></div>
+                <div class="svc-list-item"><code>transition-agent</code> <span>Transition planning</span></div>
+                <div class="svc-list-item"><code>evaporating-cloud</code> <span>Conflict resolution</span></div>
+                <div class="svc-list-item"><code>questionnaire-agent</code> <span>Questionario guiado</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Modelos Suportados</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>OpenAI</code> <span>GPT-5.4, GPT-4o, GPT-4o-mini</span></div>
+                <div class="svc-list-item"><code>Anthropic</code> <span>Claude Opus 4.6, Sonnet 4.6, Haiku 4.5</span></div>
+                <div class="svc-list-item"><code>Google</code> <span>Gemini 2.5 Pro, Gemini 2.5 Flash</span></div>
+                <div class="svc-list-item"><code>Bedrock</code> <span>Sub-agentes especialistas (docs, data, mkt)</span></div>
+              </div>
+              <h4 style="margin-top:16px">Tabelas</h4>
+              <div class="svc-tags">
+                <span class="svc-tag">ChatMetadata</span>
+                <span class="svc-tag">Skill</span>
+                <span class="svc-tag">UserMemory</span>
+                <span class="svc-tag">checkpoints (LangGraph)</span>
+              </div>
+            </div>
+
+            <div class="svc-card svc-card--wide">
+              <h4>AI Tools (13 dominios)</h4>
+              <div class="svc-platforms">
+                <div class="svc-platform-group">
+                  <h5>Diagnostico</h5>
+                  <span>get-workspace-diagnosis</span>
+                  <span>get-workspace-questionnaires</span>
+                  <span>save-markdown</span>
+                  <span>get-markdown</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Usuario</h5>
+                  <span>get-user-profile</span>
+                  <span>get-user-workspaces</span>
+                  <span>get-user-organizations</span>
+                  <span>get-user-payments</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Workspace</h5>
+                  <span>invite-workspace-member</span>
+                  <span>accept-workspace-invite</span>
+                  <span>update-member-role</span>
+                  <span>remove-member</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Especialistas</h5>
+                  <span>documentation-agent-v4</span>
+                  <span>data-agent-v4</span>
+                  <span>digital-marketing-agent-v4</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Outros</h5>
+                  <span>faq-search (Algolia)</span>
+                  <span>list/load/create skills</span>
+                  <span>save-user-memory</span>
+                  <span>deep-research</span>
+                  <span>integrations (list/disconnect)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="svc-card svc-card--wide">
+              <h4>Rotas</h4>
+              <div class="svc-routes">
+                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces/:id/chats</code><span>Criar chat</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces/:id/chats/:chatId/messages</code><span>Enviar mensagem (SSE)</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/public/chats/:sessionId/messages</code><span>Chat publico (SSE)</span></div>
+                <div class="svc-route"><span class="method method--get">GET</span><code>/users/:id/chats</code><span>Listar chats do usuario</span></div>
+                <div class="svc-route"><span class="method method--get">GET</span><code>/workspaces/:id/chats/:chatId/history</code><span>Historico</span></div>
+                <div class="svc-route"><span class="method method--delete">DEL</span><code>/workspaces/:id/chats/:chatId</code><span>Deletar chat</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/chats/feedback</code><span>Feedback LangSmith</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces/:id/skills</code><span>CRUD skills</span></div>
+                <div class="svc-route"><span class="method method--post">POST</span><code>/upload-presigned-url</code><span>Upload S3</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: lib ===== -->
+        <div class="tabs__panel" id="tab-lib">
+          <div class="svc-header">
+            <div class="svc-header__info">
+              <h3>@v4-company/lib</h3>
+              <p>Biblioteca compartilhada: base classes, decorators, event bus, server builder, auth, value objects. Todos os servicos dependem dela.</p>
+              <div class="svc-header__meta">
+                <span class="svc-meta"><code>pnpm build:lib</code> primeiro!</span>
+                <span class="svc-meta">17 modulos</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="svc-grid">
+            <div class="svc-card">
+              <h4>Base Classes</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>Entity&lt;T&gt;</code> <span>Base de todas entidades (ID, props, events)</span></div>
+                <div class="svc-list-item"><code>AggregateRoot&lt;T&gt;</code> <span>Aggregate root com raiseEvent()</span></div>
+                <div class="svc-list-item"><code>UseCase&lt;I,O&gt;</code> <span>Interface para use cases</span></div>
+                <div class="svc-list-item"><code>Service&lt;I,O&gt;</code> <span>Base para services multi-step</span></div>
+                <div class="svc-list-item"><code>FastifyController</code> <span>Controller HTTP com decorators</span></div>
+                <div class="svc-list-item"><code>ValueObject&lt;T&gt;</code> <span>Base para value objects</span></div>
+                <div class="svc-list-item"><code>BaseRepository</code> <span>Repository com transacao</span></div>
+                <div class="svc-list-item"><code>BaseUnitOfWork</code> <span>Unit of Work pattern</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Decorators</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>@Route(method, path)</code> <span>Define rota HTTP</span></div>
+                <div class="svc-list-item"><code>@Auth()</code> <span>Exige autenticacao</span></div>
+                <div class="svc-list-item"><code>@Auth(resource, action)</code> <span>Auth + permissao especifica</span></div>
+                <div class="svc-list-item"><code>@RequireFeature(name)</code> <span>Exige feature flag</span></div>
+                <div class="svc-list-item"><code>@ApiTag(tag)</code> <span>Swagger tag grouping</span></div>
+                <div class="svc-list-item"><code>@ApiBodySchema(Zod)</code> <span>Documenta request body</span></div>
+                <div class="svc-list-item"><code>@ApiResponseSchema({})</code> <span>Documenta responses</span></div>
+                <div class="svc-list-item"><code>@Logging()</code> <span>Auto-logging em metodos</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Event Bus</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>RabbitMQEventBus</code> <span>Topic exchange + DLQ + dedup Redis</span></div>
+                <div class="svc-list-item"><code>SQSEventBus</code> <span>Batch processing + long polling</span></div>
+                <div class="svc-list-item"><code>Event&lt;T&gt;</code> <span>Base: id, type, payload, occurredOn</span></div>
+                <div class="svc-list-item"><code>EventHandler&lt;T&gt;</code> <span>Handler single event</span></div>
+                <div class="svc-list-item"><code>BatchEventHandler&lt;T&gt;</code> <span>Handler batch SQS</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Server Builder</h4>
+              <pre class="svc-tree"><code>FastifyServerBuilder.create()
+  .withConfig({ port, host })
+  .withCors({ origin: '*' })
+  .withSwagger({ enabled: true })
+  .withContainer(diContainer)
+  .withControllers(...)
+  .withTracing(ddTracer)
+  .buildAndListen()</code></pre>
+            </div>
+
+            <div class="svc-card">
+              <h4>Value Objects</h4>
+              <div class="svc-tags">
+                <span class="svc-tag">EntityIdVO</span>
+                <span class="svc-tag">EmailVO</span>
+                <span class="svc-tag">StringVO</span>
+                <span class="svc-tag">RequiredStringVO</span>
+                <span class="svc-tag">NumberVO</span>
+                <span class="svc-tag">IntegerVO</span>
+                <span class="svc-tag">DateVO</span>
+                <span class="svc-tag">BooleanVO</span>
+                <span class="svc-tag">ObjectVO</span>
+                <span class="svc-tag">EnumVO</span>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Outros Modulos</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>StringCipher</code> <span>AES-256-CBC encryption</span></div>
+                <div class="svc-list-item"><code>GenericErrorHandler</code> <span>Mapeia exceptions p/ HTTP</span></div>
+                <div class="svc-list-item"><code>ApiAdapter / Axios</code> <span>HTTP client abstraction</span></div>
+                <div class="svc-list-item"><code>KyselyUnitOfWork</code> <span>UoW com transacao Kysely</span></div>
+                <div class="svc-list-item"><code>PersistenceMapper</code> <span>Domain -> DB mapping</span></div>
+                <div class="svc-list-item"><code>ResponseMapper</code> <span>Domain -> API response</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: web-client ===== -->
+        <div class="tabs__panel" id="tab-web">
+          <div class="svc-header">
+            <div class="svc-header__info">
+              <h3>web-client</h3>
+              <p>Frontend Next.js 15 (App Router) com React 19, Clerk auth, Tailwind + Radix UI, Datadog RUM, Mixpanel.</p>
+              <div class="svc-header__meta">
+                <span class="svc-meta">Porta <strong>3000</strong></span>
+                <span class="svc-meta">Next.js 15</span>
+                <span class="svc-meta">React 19</span>
+                <span class="svc-meta">Tailwind + Radix</span>
+              </div>
+            </div>
+            <div class="svc-header__stats">
+              <div class="svc-stat"><span>20+</span>Paginas</div>
+              <div class="svc-stat"><span>50+</span>UI Comps</div>
+              <div class="svc-stat"><span>48</span>AI Comps</div>
+              <div class="svc-stat"><span>20+</span>Hooks</div>
+            </div>
+          </div>
+
+          <div class="svc-grid">
+            <div class="svc-card">
+              <h4>Rotas (App Router)</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>/signin, /signup</code> <span>Auth (publico)</span></div>
+                <div class="svc-list-item"><code>/panel</code> <span>Dashboard principal</span></div>
+                <div class="svc-list-item"><code>/chat, /chat/[uuid]</code> <span>Chat AI</span></div>
+                <div class="svc-list-item"><code>/chat/agents</code> <span>Selecao de agentes</span></div>
+                <div class="svc-list-item"><code>/diagnosis</code> <span>Diagnostico de marketing</span></div>
+                <div class="svc-list-item"><code>/settings</code> <span>Configuracoes</span></div>
+                <div class="svc-list-item"><code>/admin</code> <span>Painel admin</span></div>
+                <div class="svc-list-item"><code>/onboarding</code> <span>Fluxo de onboarding</span></div>
+                <div class="svc-list-item"><code>/workspace-selection</code> <span>Selecao de workspace</span></div>
+                <div class="svc-list-item"><code>/track</code> <span>Tracking</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Commons Packages</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>@workspace/core</code> <span>Auth (Clerk), API client, hooks, user context</span></div>
+                <div class="svc-list-item"><code>@workspace/ui</code> <span>50+ componentes Radix + Tailwind + CVA</span></div>
+                <div class="svc-list-item"><code>@workspace/eslint-config</code> <span>ESLint compartilhado</span></div>
+                <div class="svc-list-item"><code>@workspace/typescript-config</code> <span>tsconfig compartilhado</span></div>
+              </div>
+              <h4 style="margin-top:16px">Hooks por dominio</h4>
+              <div class="svc-tags">
+                <span class="svc-tag">workspaces</span>
+                <span class="svc-tag">organizations</span>
+                <span class="svc-tag">chat</span>
+                <span class="svc-tag">diagnosis</span>
+                <span class="svc-tag">commitment</span>
+                <span class="svc-tag">facebookads</span>
+                <span class="svc-tag">funnel</span>
+                <span class="svc-tag">retention</span>
+                <span class="svc-tag">exposure</span>
+              </div>
+            </div>
+
+            <div class="svc-card svc-card--wide">
+              <h4>AI Components (48+)</h4>
+              <div class="svc-platforms">
+                <div class="svc-platform-group">
+                  <h5>Chat UI</h5>
+                  <span>message.tsx</span>
+                  <span>prompt-input.tsx</span>
+                  <span>chain-of-thought.tsx</span>
+                  <span>reasoning.tsx</span>
+                  <span>model-selector.tsx</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Content</h5>
+                  <span>artifact.tsx</span>
+                  <span>code-block.tsx</span>
+                  <span>web-preview.tsx</span>
+                  <span>file-tree.tsx</span>
+                  <span>canvas.tsx</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Dev Tools</h5>
+                  <span>terminal.tsx</span>
+                  <span>test-results.tsx</span>
+                  <span>stack-trace.tsx</span>
+                  <span>sandbox.tsx</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Audio/Input</h5>
+                  <span>speech-input.tsx</span>
+                  <span>voice-selector.tsx</span>
+                  <span>audio-player.tsx</span>
+                  <span>attachments.tsx</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: authorizer ===== -->
+        <div class="tabs__panel" id="tab-auth">
+          <div class="svc-header">
+            <div class="svc-header__info">
+              <h3>authorizer</h3>
+              <p>Lambda AWS que valida tokens JWT e acesso a workspaces no API Gateway. Suporta user tokens e service accounts.</p>
+              <div class="svc-header__meta">
+                <span class="svc-meta">AWS Lambda</span>
+                <span class="svc-meta">Inversify</span>
+                <span class="svc-meta">Kysely</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="svc-grid">
+            <div class="svc-card">
+              <h4>Fluxo de Validacao</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>1.</code> <span>Recebe request do API Gateway</span></div>
+                <div class="svc-list-item"><code>2.</code> <span>Detecta metodo: Authorization header ou x-client-id</span></div>
+                <div class="svc-list-item"><code>3a.</code> <span>User token: valida via Identity service + checa workspace membership</span></div>
+                <div class="svc-list-item"><code>3b.</code> <span>Service account: valida x-client-id + x-client-secret</span></div>
+                <div class="svc-list-item"><code>4.</code> <span>Retorna IAM policy (Allow/Deny)</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Estrutura</h4>
+              <pre class="svc-tree"><code>src/
+├── handlers/
+│   └── authorizer.ts        <span class="tree-note"># Lambda entry</span>
+├── app/usecases/
+│   └── ValidateWorkspaceAccessUseCase.ts
+├── domain/
+│   ├── repositories/
+│   │   └── WorkspaceUserRepository.ts
+│   └── schemas/
+│       └── AuthResponseSchema.ts
+└── infra/
+    ├── di/container.ts      <span class="tree-note"># Inversify DI</span>
+    ├── database/kysely/     <span class="tree-note"># workspace_users</span>
+    └── providers/
+        └── AxiosIdentityProvider.ts</code></pre>
+            </div>
+
+            <div class="svc-card">
+              <h4>Workspace ID Extraction</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>Headers</code> <span>x-workspace-id, workspace-id, workspaceid</span></div>
+                <div class="svc-list-item"><code>Path</code> <span>/workspaces/{id}/...</span></div>
+                <div class="svc-list-item"><code>Query</code> <span>?workspaceId=...</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: v4-marketing-api ===== -->
+        <div class="tabs__panel" id="tab-api">
+          <div class="svc-header">
+            <div class="svc-header__info">
+              <h3>v4-marketing-api</h3>
+              <p>API NestJS de dados de marketing. 92 modulos consumindo dados de 15+ plataformas. Repo separado.</p>
+              <div class="svc-header__meta">
+                <span class="svc-meta">Repo separado</span>
+                <span class="svc-meta">NestJS</span>
+                <span class="svc-meta">TypeORM</span>
+                <span class="svc-meta">PostgreSQL (Redshift)</span>
+              </div>
+            </div>
+            <div class="svc-header__stats">
+              <div class="svc-stat"><span>92</span>Modulos</div>
+              <div class="svc-stat"><span>15+</span>Plataformas</div>
+              <div class="svc-stat"><span>npm</span>Pkg Manager</div>
+            </div>
+          </div>
+
+          <div class="svc-grid">
+            <div class="svc-card svc-card--wide">
+              <h4>Modulos por Plataforma</h4>
+              <div class="svc-platforms">
+                <div class="svc-platform-group">
+                  <h5>Facebook Ads (25 modulos)</h5>
+                  <span>Campaigns, Ads, AdSets, Creatives, Demographics, Regions, Platforms, Actions, Accounts</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Google Ads (14 modulos)</h5>
+                  <span>Campaigns, Ad Groups, Keywords, Conversions, Geographic, Age Range, Gender, Accounts</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Google Analytics (6)</h5>
+                  <span>Events, Transactions, Sessions, Customers, Products, Custom Events</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Instagram (7)</h5>
+                  <span>Profile, Media, Age/Gender/City Insights</span>
+                </div>
+                <div class="svc-platform-group">
+                  <h5>Outros</h5>
+                  <span>TikTok (5), LinkedIn (3), Shopify (4), VTEX (2), Tray (2), Nuvem Shop (3), Loja Integrada (2), Bitrix (4), Kommo (4), Pipedrive (8), RD Station (3), Unbounce (1)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Patterns NestJS</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>Module-per-integration</code> <span>Cada plataforma = modulo isolado</span></div>
+                <div class="svc-list-item"><code>Repository pattern</code> <span>Interface + TypeORM impl</span></div>
+                <div class="svc-list-item"><code>ThrottlerGuard</code> <span>Rate limit: 100 req/60s</span></div>
+                <div class="svc-list-item"><code>FeatureAccessInterceptor</code> <span>Feature flags global</span></div>
+                <div class="svc-list-item"><code>Redis cache</code> <span>cache-manager-redis-yet</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Comandos</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>npm run start:dev</code> <span>Dev com hot reload</span></div>
+                <div class="svc-list-item"><code>npm test</code> <span>Jest unit tests</span></div>
+                <div class="svc-list-item"><code>npm run test:e2e</code> <span>E2E tests</span></div>
+                <div class="svc-list-item"><code>npm run migration:run</code> <span>TypeORM migrations</span></div>
+                <div class="svc-list-item"><code>npm run lint</code> <span>ESLint</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TAB: v4-marketing-data ===== -->
+        <div class="tabs__panel" id="tab-data">
+          <div class="svc-header">
+            <div class="svc-header__info">
+              <h3>v4-marketing-data</h3>
+              <p>Plataforma de dados serverless. IaC com SST v3, pipelines em Lambda (Python) e ECS (Python), storage em S3 + Aurora. Repo separado.</p>
+              <div class="svc-header__meta">
+                <span class="svc-meta">Repo separado</span>
+                <span class="svc-meta">Python + SST v3</span>
+                <span class="svc-meta">AWS (Lambda, ECS, S3, Aurora, SQS, SNS)</span>
+              </div>
+            </div>
+            <div class="svc-header__stats">
+              <div class="svc-stat"><span>13</span>Lambdas</div>
+              <div class="svc-stat"><span>20</span>ECS Services</div>
+              <div class="svc-stat"><span>7</span>SQS Queues</div>
+              <div class="svc-stat"><span>2</span>Crons</div>
+            </div>
+          </div>
+
+          <div class="svc-grid">
+            <div class="svc-card">
+              <h4>Lambda Functions</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>accountsScheduler</code> <span>Agenda tarefas de sync</span></div>
+                <div class="svc-list-item"><code>requestEvent</code> <span>Enfileira requests da API</span></div>
+                <div class="svc-list-item"><code>firstExtraction</code> <span>Primeira extracao de dados</span></div>
+                <div class="svc-list-item"><code>dataProcessor</code> <span>Processa dados extraidos</span></div>
+                <div class="svc-list-item"><code>insertAurora</code> <span>Escreve no Aurora</span></div>
+                <div class="svc-list-item"><code>insertDocument</code> <span>Escreve docs no S3</span></div>
+                <div class="svc-list-item"><code>statusUpdate</code> <span>Atualiza status via SNS</span></div>
+                <div class="svc-list-item"><code>errorProcessor</code> <span>Trata erros</span></div>
+                <div class="svc-list-item"><code>errorNotification</code> <span>Notifica erros</span></div>
+                <div class="svc-list-item"><code>materializedViews</code> <span>Refresh materialized views</span></div>
+                <div class="svc-list-item"><code>workerPipeline</code> <span>Workers do pipeline</span></div>
+                <div class="svc-list-item"><code>writePipeline</code> <span>Escrita do pipeline</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>ECS Services (20 connectors)</h4>
+              <div class="svc-tags">
+                <span class="svc-tag">Google Ads</span>
+                <span class="svc-tag">Google Analytics</span>
+                <span class="svc-tag">Instagram</span>
+                <span class="svc-tag">TikTok</span>
+                <span class="svc-tag">LinkedIn</span>
+                <span class="svc-tag">Kommo</span>
+                <span class="svc-tag">Pipedrive</span>
+                <span class="svc-tag">Piperun</span>
+                <span class="svc-tag">RD Station</span>
+                <span class="svc-tag">Shopify</span>
+                <span class="svc-tag">VTEX</span>
+                <span class="svc-tag">Tray</span>
+                <span class="svc-tag">Nuvem Shop</span>
+                <span class="svc-tag">WooCommerce</span>
+                <span class="svc-tag">Wake</span>
+                <span class="svc-tag">Unbounce</span>
+                <span class="svc-tag">Zendesk</span>
+                <span class="svc-tag">Meetime</span>
+                <span class="svc-tag">Inhire</span>
+                <span class="svc-tag">Default</span>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Infra (SQS + Cron)</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>queueInputRequest</code> <span>Fila de entrada</span></div>
+                <div class="svc-list-item"><code>queueFirstExtraction</code> <span>Fila de 1a extracao</span></div>
+                <div class="svc-list-item"><code>queueInsertDocument</code> <span>Fila de insercao S3</span></div>
+                <div class="svc-list-item"><code>queueWrite</code> <span>Fila de escrita Aurora</span></div>
+                <div class="svc-list-item"><code>queueErrorTask</code> <span>Fila de erros</span></div>
+                <div class="svc-list-item"><code>queueDeadLetter</code> <span>DLQ</span></div>
+                <div class="svc-list-item"><code>cronEnqueueAccounts</code> <span>Sync periodico</span></div>
+                <div class="svc-list-item"><code>cronMaterializedViews</code> <span>Refresh de views</span></div>
+              </div>
+            </div>
+
+            <div class="svc-card">
+              <h4>Comandos</h4>
+              <div class="svc-list">
+                <div class="svc-list-item"><code>yarn install</code> <span>Deps Node (SST)</span></div>
+                <div class="svc-list-item"><code>uv sync</code> <span>Deps Python</span></div>
+                <div class="svc-list-item"><code>npx sst dev</code> <span>Dev mode (AWS creds)</span></div>
+                <div class="svc-list-item"><code>npx sst deploy</code> <span>Deploy para AWS</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tabs -->
+    </div>
+  </section>
+
   <!-- ========== QUICK START ========== -->
-  <section id="quickstart" class="section section--dark">
+  <section id="quickstart" class="section">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">Setup</span>

@@ -63,3 +63,19 @@ document.querySelectorAll('.section').forEach(section => {
     item.style.transitionDelay = `${i * 0.08}s`;
   });
 });
+
+// Tab switching
+document.querySelectorAll('.tabs__btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tabId = btn.dataset.tab;
+    const tabsContainer = btn.closest('.tabs');
+
+    // Deactivate all buttons and panels in this tab group
+    tabsContainer.querySelectorAll('.tabs__btn').forEach(b => b.classList.remove('tabs__btn--active'));
+    tabsContainer.querySelectorAll('.tabs__panel').forEach(p => p.classList.remove('tabs__panel--active'));
+
+    // Activate clicked button and matching panel
+    btn.classList.add('tabs__btn--active');
+    document.getElementById(tabId).classList.add('tabs__panel--active');
+  });
+});
