@@ -6,1750 +6,1286 @@
   <title>V4MOS — Developer Onboarding</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- ========== NAV ========== -->
-  <nav class="nav">
-    <div class="nav__inner">
-      <a href="#" class="nav__logo">
-        <span class="nav__logo-icon">V4</span>MOS
-      </a>
-      <div class="nav__links">
-        <a href="#architecture">Arquitetura</a>
-        <a href="#repos">Repos</a>
-        <a href="#services">Servicos</a>
-        <a href="#quickstart">Quick Start</a>
-        <a href="#commands">Comandos</a>
-        <a href="#timeline">1a Semana</a>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <span class="logo-v4">V4</span><span class="logo-mos">MOS</span>
+        <span class="logo-sub">Dev Onboarding</span>
       </div>
-    </div>
-  </nav>
+      <nav class="sidebar-nav">
+        <a href="#section-01" class="nav-item active"><span class="nav-num">01</span><span class="nav-label">O Produto</span></a>
+        <a href="#section-02" class="nav-item"><span class="nav-num">02</span><span class="nav-label">Features</span></a>
+        <a href="#section-03" class="nav-item"><span class="nav-num">03</span><span class="nav-label">Arquitetura</span></a>
+        <a href="#section-04" class="nav-item"><span class="nav-num">04</span><span class="nav-label">Stack</span></a>
+        <a href="#section-05" class="nav-item"><span class="nav-num">05</span><span class="nav-label">Pastas</span></a>
+        <a href="#section-06" class="nav-item"><span class="nav-num">06</span><span class="nav-label">Fluxo de Dados</span></a>
+        <a href="#section-07" class="nav-item"><span class="nav-num">07</span><span class="nav-label">Servicos</span></a>
+        <a href="#section-08" class="nav-item"><span class="nav-num">08</span><span class="nav-label">Banco de Dados</span></a>
+        <a href="#section-09" class="nav-item"><span class="nav-num">09</span><span class="nav-label">Eventos</span></a>
+        <a href="#section-10" class="nav-item"><span class="nav-num">10</span><span class="nav-label">AI &amp; Chat</span></a>
+        <a href="#section-11" class="nav-item"><span class="nav-num">11</span><span class="nav-label">Auth</span></a>
+        <a href="#section-12" class="nav-item"><span class="nav-num">12</span><span class="nav-label">Convencoes</span></a>
+        <a href="#section-13" class="nav-item"><span class="nav-num">13</span><span class="nav-label">Gotchas</span></a>
+        <a href="#section-14" class="nav-item"><span class="nav-num">14</span><span class="nav-label">Setup Local</span></a>
+      </nav>
+      <div class="sidebar-footer">V4MOS &copy; 2026</div>
+    </aside>
 
-  <!-- ========== HERO ========== -->
-  <section class="hero">
-    <div class="hero__bg">
-      <div class="hero__grid"></div>
-      <div class="hero__glow hero__glow--1"></div>
-      <div class="hero__glow hero__glow--2"></div>
-    </div>
-    <div class="hero__content">
-      <div class="hero__badge">Developer Onboarding</div>
-      <h1 class="hero__title">
-        Bem-vindo ao<br />
-        <span class="hero__highlight">V4MOS</span>
-      </h1>
-      <p class="hero__subtitle">
-        V4 Marketing Operating System — a plataforma de marketing digital da V4 Company.
-        <br />Tudo que voce precisa pra comecar a contribuir.
-      </p>
-      <div class="hero__stats">
-        <div class="stat">
-          <span class="stat__number">3</span>
-          <span class="stat__label">Repositorios</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">6</span>
-          <span class="stat__label">Servicos</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">3</span>
-          <span class="stat__label">Linguagens</span>
-        </div>
-      </div>
-      <div class="hero__actions">
-        <a href="#quickstart" class="btn btn--primary">Comecar Setup</a>
-        <a href="#architecture" class="btn btn--ghost">Ver Arquitetura</a>
-      </div>
-    </div>
-  </section>
+    <!-- MAIN -->
+    <main class="main" id="main">
 
-  <!-- ========== ARCHITECTURE ========== -->
-  <section id="architecture" class="section">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Overview</span>
-        <h2 class="section__title">Arquitetura</h2>
-        <p class="section__desc">Como os servicos se conectam no ecossistema V4MOS</p>
-      </div>
-
-      <div class="arch">
-        <!-- Frontend Layer -->
-        <div class="arch__layer arch__layer--frontend">
-          <div class="arch__layer-label">Frontend</div>
-          <div class="arch__node arch__node--frontend" data-tip="Next.js 15 + React 19 + Tailwind">
-            <div class="arch__node-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      <!-- 01 O PRODUTO -->
+      <section class="section" id="section-01">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h1 class="section-title">O Produto</h1>
+        </div>
+        <p class="section-lead"><strong>V4 Marketing Operating System (V4MOS)</strong> — SaaS para diagnostico de marketing digital, gestao de workspaces, integracoes com plataformas de anuncios e assistente de IA. Feito para agencias e times de marketing digital.</p>
+        <div class="card-grid cols-3">
+          <div class="card">
+            <div class="card-icon icon-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
-            <div class="arch__node-name">web-client</div>
-            <div class="arch__node-port">:3000</div>
+            <h3 class="card-title">Target</h3>
+            <p class="card-body">Agencias e times de marketing digital que precisam de diagnosticos, gestao centralizada e inteligencia de dados para suas campanhas.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon icon-red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <h3 class="card-title">Problema</h3>
+            <p class="card-body">Diagnosticos manuais, dados fragmentados em dezenas de plataformas, sem IA para escalar analises. Decisoes baseadas em instinto, nao em dados.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon icon-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <h3 class="card-title">Estrutura</h3>
+            <p class="card-body">Arquitetura multi-tenant em tres niveis: <strong>Organization</strong> (empresa) &rarr; <strong>Workspace</strong> (cliente/projeto) &rarr; <strong>Users</strong> (membros com roles).</p>
           </div>
         </div>
-
-        <!-- Connection Lines -->
-        <div class="arch__connections">
-          <div class="arch__line arch__line--animated"></div>
-          <div class="arch__line-label">REST / SSE</div>
+        <div class="stats-row">
+          <div class="stat"><span class="stat-num">3</span><span class="stat-label">Repositorios</span></div>
+          <div class="stat"><span class="stat-num">6</span><span class="stat-label">Packages</span></div>
+          <div class="stat"><span class="stat-num">8+</span><span class="stat-label">Servicos</span></div>
+          <div class="stat"><span class="stat-num">130+</span><span class="stat-label">Integracoes</span></div>
         </div>
+      </section>
 
-        <!-- Backend Layer -->
-        <div class="arch__layer arch__layer--backend">
-          <div class="arch__layer-label">Backend</div>
-          <div class="arch__nodes-row">
-            <div class="arch__node arch__node--core" data-tip="Users, orgs, workspaces, diagnostics, payments">
-              <div class="arch__node-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-              </div>
-              <div class="arch__node-name">v4-marketing</div>
-              <div class="arch__node-port">:3012</div>
-            </div>
-            <div class="arch__node arch__node--integrations" data-tip="Facebook Ads, Google Ads, 100+ conectores">
-              <div class="arch__node-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              </div>
-              <div class="arch__node-name">integration-hub</div>
-              <div class="arch__node-port">:3001</div>
-            </div>
-            <div class="arch__node arch__node--chat" data-tip="LangChain + OpenAI + Bedrock + Gemini">
-              <div class="arch__node-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              </div>
-              <div class="arch__node-name">chat (AI)</div>
-              <div class="arch__node-port">:3013</div>
-            </div>
-            <div class="arch__node arch__node--api" data-tip="NestJS — Facebook Ads, Google Ads, TikTok, LinkedIn, analytics">
-              <div class="arch__node-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              </div>
-              <div class="arch__node-name">v4-marketing-api</div>
-              <div class="arch__node-port">NestJS</div>
-            </div>
-          </div>
+      <!-- 02 FEATURES -->
+      <section class="section" id="section-02">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h1 class="section-title">Features</h1>
         </div>
-
-        <!-- Connection Lines -->
-        <div class="arch__connections">
-          <div class="arch__line arch__line--animated"></div>
-          <div class="arch__line-label">SQS / RabbitMQ / Kysely</div>
-        </div>
-
-        <!-- Data Layer -->
-        <div class="arch__layer arch__layer--data">
-          <div class="arch__layer-label">Data</div>
-          <div class="arch__nodes-row">
-            <div class="arch__node arch__node--db">
-              <div class="arch__node-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-              </div>
-              <div class="arch__node-name">PostgreSQL</div>
-              <div class="arch__node-port">Prisma + Kysely</div>
-            </div>
-            <div class="arch__node arch__node--pipeline" data-tip="SST v3 — Lambda + ECS + S3 + Aurora">
-              <div class="arch__node-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <div class="arch__node-name">v4-marketing-data</div>
-              <div class="arch__node-port">Python + SST</div>
-            </div>
+        <p class="section-lead">12 modulos principais que compõem a plataforma V4MOS.</p>
+        <div class="card-grid cols-3">
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><span class="tag backend">backend</span></div>
+            <h3 class="card-title">Diagnostico Digital</h3>
+            <p class="card-body">Diagnostico de marketing com IA: steps guiados, perfil de marketing, questionarios adaptativos e geracao de artefatos.</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== ANIMATED FLOW ========== -->
-  <section id="flow" class="section section--dark">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Comunicacao</span>
-        <h2 class="section__title">Como os servicos se comunicam</h2>
-        <p class="section__desc">Fluxo real de dados entre os componentes do V4MOS</p>
-      </div>
-
-      <div class="flow">
-        <svg class="flow__svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <!-- Animated dot markers -->
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="3" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="glow-strong" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="6" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-
-          <!-- ===== CONNECTION PATHS ===== -->
-          <!-- web-client → v4-marketing (REST) -->
-          <path id="path-web-core" class="flow__path flow__path--rest" d="M 500 105 L 240 215" />
-          <!-- web-client → integration-hub (REST) -->
-          <path id="path-web-hub" class="flow__path flow__path--rest" d="M 500 105 L 430 215" />
-          <!-- web-client → chat (SSE) -->
-          <path id="path-web-chat" class="flow__path flow__path--sse" d="M 500 105 L 610 215" />
-          <!-- web-client → v4-marketing-api (REST) -->
-          <path id="path-web-api" class="flow__path flow__path--rest" d="M 500 105 L 790 215" />
-
-          <!-- chat → v4-marketing (HTTP tools) -->
-          <path id="path-chat-core" class="flow__path flow__path--rest" d="M 580 260 C 450 260 350 240 270 260" />
-          <!-- chat → integration-hub (HTTP tools) -->
-          <path id="path-chat-hub" class="flow__path flow__path--rest" d="M 580 260 L 470 260" />
-          <!-- chat → Bedrock -->
-          <path id="path-chat-bedrock" class="flow__path flow__path--aws" d="M 640 280 L 640 375" />
-
-          <!-- v4-marketing → RabbitMQ -->
-          <path id="path-core-rabbit" class="flow__path flow__path--rabbit" d="M 210 280 L 130 375" />
-          <!-- v4-marketing → SQS -->
-          <path id="path-core-sqs" class="flow__path flow__path--sqs" d="M 260 280 L 310 375" />
-
-          <!-- v4-marketing → PostgreSQL -->
-          <path id="path-core-db" class="flow__path flow__path--db" d="M 240 280 L 430 520" />
-          <!-- integration-hub → PostgreSQL -->
-          <path id="path-hub-db" class="flow__path flow__path--db" d="M 430 280 L 440 520" />
-          <!-- chat → PostgreSQL -->
-          <path id="path-chat-db" class="flow__path flow__path--db" d="M 610 280 L 460 520" />
-          <!-- v4-marketing-api → PostgreSQL -->
-          <path id="path-api-db" class="flow__path flow__path--db" d="M 790 280 L 480 520" />
-
-          <!-- API Gateway → Authorizer -->
-          <path id="path-gw-auth" class="flow__path flow__path--aws" d="M 910 130 L 910 215" />
-          <!-- Authorizer → Identity -->
-          <path id="path-auth-identity" class="flow__path flow__path--rest" d="M 940 265 L 940 375" />
-
-          <!-- v4-marketing-data pipeline -->
-          <path id="path-sqs-data" class="flow__path flow__path--sqs" d="M 330 420 L 500 420" />
-          <path id="path-data-lambda" class="flow__path flow__path--aws" d="M 540 420 L 650 420" />
-          <path id="path-lambda-s3" class="flow__path flow__path--aws" d="M 700 410 L 790 520" />
-          <path id="path-lambda-aurora" class="flow__path flow__path--db" d="M 680 440 L 600 520" />
-
-          <!-- ===== ANIMATED PARTICLES ===== -->
-          <!-- REST particles (blue) -->
-          <circle r="4" fill="#0984e3" filter="url(#glow)">
-            <animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#path-web-core"/></animateMotion>
-          </circle>
-          <circle r="4" fill="#0984e3" filter="url(#glow)">
-            <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.8s"><mpath href="#path-web-hub"/></animateMotion>
-          </circle>
-          <circle r="4" fill="#0984e3" filter="url(#glow)">
-            <animateMotion dur="3s" repeatCount="indefinite" begin="0.3s"><mpath href="#path-web-api"/></animateMotion>
-          </circle>
-
-          <!-- SSE particles (orange, faster) -->
-          <circle r="3" fill="#e17055" filter="url(#glow)">
-            <animateMotion dur="1.2s" repeatCount="indefinite"><mpath href="#path-web-chat"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#e17055" filter="url(#glow)">
-            <animateMotion dur="1.2s" repeatCount="indefinite" begin="0.4s"><mpath href="#path-web-chat"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#e17055" filter="url(#glow)">
-            <animateMotion dur="1.2s" repeatCount="indefinite" begin="0.8s"><mpath href="#path-web-chat"/></animateMotion>
-          </circle>
-
-          <!-- Chat → backend tools (blue) -->
-          <circle r="3" fill="#0984e3" filter="url(#glow)">
-            <animateMotion dur="2s" repeatCount="indefinite" begin="1s"><mpath href="#path-chat-core"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#0984e3" filter="url(#glow)">
-            <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.5s"><mpath href="#path-chat-hub"/></animateMotion>
-          </circle>
-
-          <!-- Chat → Bedrock (yellow) -->
-          <circle r="3" fill="#fdcb6e" filter="url(#glow)">
-            <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#path-chat-bedrock"/></animateMotion>
-          </circle>
-
-          <!-- RabbitMQ particles (purple) -->
-          <circle r="3" fill="#6c5ce7" filter="url(#glow)">
-            <animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#path-core-rabbit"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#6c5ce7" filter="url(#glow)">
-            <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s"><mpath href="#path-core-rabbit"/></animateMotion>
-          </circle>
-
-          <!-- SQS particles (orange) -->
-          <circle r="3" fill="#e17055" filter="url(#glow)">
-            <animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#path-core-sqs"/></animateMotion>
-          </circle>
-
-          <!-- DB particles (cyan) -->
-          <circle r="3" fill="#00cec9" filter="url(#glow)">
-            <animateMotion dur="2s" repeatCount="indefinite" begin="0.2s"><mpath href="#path-core-db"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#00cec9" filter="url(#glow)">
-            <animateMotion dur="2.3s" repeatCount="indefinite" begin="0.7s"><mpath href="#path-hub-db"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#00cec9" filter="url(#glow)">
-            <animateMotion dur="1.9s" repeatCount="indefinite" begin="1.2s"><mpath href="#path-chat-db"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#00cec9" filter="url(#glow)">
-            <animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#path-api-db"/></animateMotion>
-          </circle>
-
-          <!-- Gateway → Auth (yellow) -->
-          <circle r="3" fill="#fdcb6e" filter="url(#glow)">
-            <animateMotion dur="1.5s" repeatCount="indefinite"><mpath href="#path-gw-auth"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#0984e3" filter="url(#glow)">
-            <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.5s"><mpath href="#path-auth-identity"/></animateMotion>
-          </circle>
-
-          <!-- Data pipeline particles -->
-          <circle r="3" fill="#e17055" filter="url(#glow)">
-            <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#path-sqs-data"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#fdcb6e" filter="url(#glow)">
-            <animateMotion dur="1.5s" repeatCount="indefinite" begin="0.5s"><mpath href="#path-data-lambda"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#fdcb6e" filter="url(#glow)">
-            <animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#path-lambda-s3"/></animateMotion>
-          </circle>
-          <circle r="3" fill="#00cec9" filter="url(#glow)">
-            <animateMotion dur="2s" repeatCount="indefinite" begin="0.3s"><mpath href="#path-lambda-aurora"/></animateMotion>
-          </circle>
-
-          <!-- ===== SERVICE NODES ===== -->
-          <!-- web-client -->
-          <g class="flow__node" data-service="web-client">
-            <rect x="430" y="55" width="140" height="50" rx="10" class="flow__node-bg flow__node-bg--cyan"/>
-            <text x="500" y="77" class="flow__node-label">web-client</text>
-            <text x="500" y="95" class="flow__node-sub">Next.js 15 :3000</text>
-          </g>
-
-          <!-- v4-marketing -->
-          <g class="flow__node" data-service="v4-marketing">
-            <rect x="155" y="215" width="170" height="65" rx="10" class="flow__node-bg flow__node-bg--green"/>
-            <text x="240" y="240" class="flow__node-label">v4-marketing</text>
-            <text x="240" y="258" class="flow__node-sub">Fastify :3012</text>
-            <text x="240" y="272" class="flow__node-sub">Core / DDD</text>
-          </g>
-
-          <!-- integration-hub -->
-          <g class="flow__node" data-service="integration-hub">
-            <rect x="358" y="215" width="150" height="65" rx="10" class="flow__node-bg flow__node-bg--purple"/>
-            <text x="433" y="240" class="flow__node-label">integration-hub</text>
-            <text x="433" y="258" class="flow__node-sub">Fastify :3001</text>
-            <text x="433" y="272" class="flow__node-sub">OAuth / 130+ tipos</text>
-          </g>
-
-          <!-- chat -->
-          <g class="flow__node" data-service="chat">
-            <rect x="540" y="215" width="140" height="65" rx="10" class="flow__node-bg flow__node-bg--orange"/>
-            <text x="610" y="240" class="flow__node-label">chat (AI)</text>
-            <text x="610" y="258" class="flow__node-sub">LangGraph :3013</text>
-            <text x="610" y="272" class="flow__node-sub">10 agentes / 40+ tools</text>
-          </g>
-
-          <!-- v4-marketing-api -->
-          <g class="flow__node" data-service="v4-marketing-api">
-            <rect x="710" y="215" width="160" height="65" rx="10" class="flow__node-bg flow__node-bg--blue"/>
-            <text x="790" y="240" class="flow__node-label">v4-marketing-api</text>
-            <text x="790" y="258" class="flow__node-sub">NestJS</text>
-            <text x="790" y="272" class="flow__node-sub">92 modulos / 15+ plats</text>
-          </g>
-
-          <!-- RabbitMQ -->
-          <g class="flow__node">
-            <rect x="65" y="375" width="130" height="50" rx="10" class="flow__node-bg flow__node-bg--accent"/>
-            <text x="130" y="397" class="flow__node-label">RabbitMQ</text>
-            <text x="130" y="415" class="flow__node-sub">Single events</text>
-          </g>
-
-          <!-- SQS -->
-          <g class="flow__node">
-            <rect x="230" y="375" width="130" height="50" rx="10" class="flow__node-bg flow__node-bg--orange"/>
-            <text x="295" y="397" class="flow__node-label">SQS</text>
-            <text x="295" y="415" class="flow__node-sub">Batch events</text>
-          </g>
-
-          <!-- v4-marketing-data -->
-          <g class="flow__node" data-service="v4-marketing-data">
-            <rect x="440" y="375" width="170" height="50" rx="10" class="flow__node-bg flow__node-bg--pink"/>
-            <text x="525" y="397" class="flow__node-label">v4-marketing-data</text>
-            <text x="525" y="415" class="flow__node-sub">SST / Lambda / ECS</text>
-          </g>
-
-          <!-- Bedrock -->
-          <g class="flow__node">
-            <rect x="575" y="375" width="130" height="50" rx="10" class="flow__node-bg flow__node-bg--yellow" transform="translate(0,30)"/>
-            <text x="640" y="427" class="flow__node-label">AWS Bedrock</text>
-            <text x="640" y="445" class="flow__node-sub">Sub-agentes AI</text>
-          </g>
-
-          <!-- API Gateway -->
-          <g class="flow__node">
-            <rect x="850" y="85" width="120" height="50" rx="10" class="flow__node-bg flow__node-bg--yellow"/>
-            <text x="910" y="107" class="flow__node-label">API Gateway</text>
-            <text x="910" y="125" class="flow__node-sub">AWS</text>
-          </g>
-
-          <!-- Authorizer -->
-          <g class="flow__node" data-service="authorizer">
-            <rect x="845" y="215" width="130" height="50" rx="10" class="flow__node-bg flow__node-bg--red"/>
-            <text x="910" y="237" class="flow__node-label">authorizer</text>
-            <text x="910" y="255" class="flow__node-sub">Lambda / JWT</text>
-          </g>
-
-          <!-- Identity -->
-          <g class="flow__node">
-            <rect x="870" y="375" width="140" height="50" rx="10" class="flow__node-bg flow__node-bg--accent"/>
-            <text x="940" y="397" class="flow__node-label">Identity Service</text>
-            <text x="940" y="415" class="flow__node-sub">Clerk + custom</text>
-          </g>
-
-          <!-- PostgreSQL -->
-          <g class="flow__node">
-            <rect x="370" y="500" width="180" height="55" rx="10" class="flow__node-bg flow__node-bg--cyan"/>
-            <text x="460" y="524" class="flow__node-label">PostgreSQL</text>
-            <text x="460" y="544" class="flow__node-sub">Prisma + Kysely + TypeORM</text>
-          </g>
-
-          <!-- S3 / Aurora -->
-          <g class="flow__node">
-            <rect x="600" y="500" width="100" height="55" rx="10" class="flow__node-bg flow__node-bg--cyan"/>
-            <text x="650" y="524" class="flow__node-label">Aurora</text>
-            <text x="650" y="544" class="flow__node-sub">Data Lake</text>
-          </g>
-          <g class="flow__node">
-            <rect x="730" y="500" width="100" height="55" rx="10" class="flow__node-bg flow__node-bg--yellow"/>
-            <text x="780" y="524" class="flow__node-label">S3</text>
-            <text x="780" y="544" class="flow__node-sub">Raw + Refined</text>
-          </g>
-        </svg>
-
-        <!-- Legend -->
-        <div class="flow__legend">
-          <div class="flow__legend-item">
-            <span class="flow__legend-dot" style="background:#0984e3"></span>
-            <span>REST / HTTP</span>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span class="tag ai">ai</span></div>
+            <h3 class="card-title">Chat IA</h3>
+            <p class="card-body">10 agentes especializados, 40+ ferramentas, suporte a GPT/Claude/Gemini, streaming via SSE, historico e contexto de workspace.</p>
           </div>
-          <div class="flow__legend-item">
-            <span class="flow__legend-dot" style="background:#e17055"></span>
-            <span>SSE Streaming / SQS</span>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><span class="tag backend">backend</span></div>
+            <h3 class="card-title">Integracoes</h3>
+            <p class="card-body">130+ tipos: Facebook Ads, Google Ads, TikTok, LinkedIn, Instagram, Shopify, VTEX, Kommo, Bitrix, Pipedrive, RD Station e mais.</p>
           </div>
-          <div class="flow__legend-item">
-            <span class="flow__legend-dot" style="background:#6c5ce7"></span>
-            <span>RabbitMQ Events</span>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><span class="tag frontend">frontend</span></div>
+            <h3 class="card-title">Painel Analitico</h3>
+            <p class="card-body">Dashboard com metricas de performance, graficos, funil de marketing, commitment tracking e visualizacoes por plataforma.</p>
           </div>
-          <div class="flow__legend-item">
-            <span class="flow__legend-dot" style="background:#00cec9"></span>
-            <span>Database (SQL)</span>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span class="tag backend">backend</span></div>
+            <h3 class="card-title">Gestao de Membros</h3>
+            <p class="card-body">Convites por email e link, roles admin/editor/viewer, service accounts para integracao M2M, gestao de organizacoes.</p>
           </div>
-          <div class="flow__legend-item">
-            <span class="flow__legend-dot" style="background:#fdcb6e"></span>
-            <span>AWS Services</span>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><span class="tag backend">backend</span></div>
+            <h3 class="card-title">Planos e Assinaturas</h3>
+            <p class="card-body">Gestao de planos, assinaturas, pagamentos via Eduzz. Webhooks para eventos de cobranca, trial, upgrade e cancelamento.</p>
+          </div>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><span class="tag ai">ai</span></div>
+            <h3 class="card-title">Deep Research</h3>
+            <p class="card-body">Pesquisa profunda por CNPJ com IA: analisa dados publicos, competidores, presenca digital e gera relatorio completo da empresa.</p>
+          </div>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><span class="tag ai">ai</span></div>
+            <h3 class="card-title">Artefatos</h3>
+            <p class="card-body">Artefatos de marketing gerados por IA: planos de acao, copys, estrategias, briefings e documentos prontos para uso.</p>
+          </div>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><span class="tag ai">ai</span></div>
+            <h3 class="card-title">Skills</h3>
+            <p class="card-body">Templates de prompts reutilizaveis para o chat. Crie, gerencie e use skills via slash commands (/skill-name) no chat IA.</p>
+          </div>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><span class="tag frontend">frontend</span></div>
+            <h3 class="card-title">Onboarding Flow</h3>
+            <p class="card-body">Fluxo guiado de configuracao do workspace: web scraping do site do cliente, preenchimento automatico de perfil de marketing.</p>
+          </div>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="tag frontend">frontend</span></div>
+            <h3 class="card-title">Admin Panel</h3>
+            <p class="card-body">Painel administrativo com feature flags, gestao de usuarios, monitoramento de plataforma e configuracoes avancadas de sistema.</p>
+          </div>
+          <div class="card">
+            <div class="card-top"><div class="card-icon icon-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><span class="tag backend">backend</span></div>
+            <h3 class="card-title">Anomaly Detection</h3>
+            <p class="card-body">Deteccao de anomalias em metricas de campanhas: eventos com severidade, limiares configurados e alertas automaticos.</p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- ========== REPOS ========== -->
-  <section id="repos" class="section section--dark">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Repositorios</span>
-        <h2 class="section__title">Os 3 repos do V4MOS</h2>
-        <p class="section__desc">Cada repo tem seu papel no ecossistema</p>
-      </div>
-
-      <div class="repos">
-        <!-- Backend Monorepo -->
-        <div class="repo-card repo-card--featured">
-          <div class="repo-card__header">
-            <div class="repo-card__icon repo-card__icon--backend">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </div>
-            <span class="repo-card__badge">Monorepo Principal</span>
-          </div>
-          <h3 class="repo-card__name">v4-marketing-backend</h3>
-          <p class="repo-card__desc">
-            Core da plataforma: usuarios, workspaces, diagnosticos, integracoes, chat AI, autorizador e frontend.
-            Arquitetura Clean/DDD com 6 packages.
-          </p>
-          <div class="repo-card__packages">
-            <span class="pkg" data-color="blue">lib</span>
-            <span class="pkg" data-color="green">v4-marketing</span>
-            <span class="pkg" data-color="purple">integration-hub</span>
-            <span class="pkg" data-color="orange">chat</span>
-            <span class="pkg" data-color="red">authorizer</span>
-            <span class="pkg" data-color="cyan">web-client</span>
-          </div>
-          <div class="repo-card__tech">
-            <span class="tech">TypeScript</span>
-            <span class="tech">Fastify 5</span>
-            <span class="tech">Inversify</span>
-            <span class="tech">Kysely</span>
-            <span class="tech">Prisma</span>
-            <span class="tech">LangChain</span>
-            <span class="tech">Next.js 15</span>
-            <span class="tech">React 19</span>
-          </div>
-          <a href="https://github.com/V4-Company/v4-marketing-backend" class="repo-card__link" target="_blank">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            Ver no GitHub
-          </a>
+      <!-- 03 ARQUITETURA -->
+      <section class="section" id="section-03">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h1 class="section-title">Arquitetura</h1>
         </div>
-
-        <!-- Marketing API -->
-        <div class="repo-card">
-          <div class="repo-card__header">
-            <div class="repo-card__icon repo-card__icon--api">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <p class="section-lead">Visao geral da arquitetura: servicos, infra e padroes de comunicacao.</p>
+        <div class="arch-diagram">
+          <div class="arch-layer">
+            <div class="arch-layer-label">Frontend</div>
+            <div class="arch-nodes">
+              <div class="arch-node node-blue"><strong>web-client</strong><span>Next.js 15 / React 19</span><span class="port">:3000</span></div>
             </div>
           </div>
-          <h3 class="repo-card__name">v4-marketing-api</h3>
-          <p class="repo-card__desc">
-            API de dados de marketing. Consome dados de 15+ plataformas de ads e analytics
-            (Facebook, Google, TikTok, LinkedIn, Shopify, VTEX, Pipedrive, etc).
-          </p>
-          <div class="repo-card__modules">
-            <span class="module">Facebook Ads</span>
-            <span class="module">Google Ads</span>
-            <span class="module">Google Analytics</span>
-            <span class="module">TikTok</span>
-            <span class="module">LinkedIn</span>
-            <span class="module">Instagram</span>
-            <span class="module">Shopify</span>
-            <span class="module">VTEX</span>
-            <span class="module">Pipedrive</span>
-            <span class="module">RD Station</span>
-            <span class="module">+5 mais</span>
-          </div>
-          <div class="repo-card__tech">
-            <span class="tech">TypeScript</span>
-            <span class="tech">NestJS</span>
-            <span class="tech">Kysely</span>
-            <span class="tech">TypeORM</span>
-            <span class="tech">PostgreSQL</span>
-          </div>
-          <a href="https://github.com/V4-Company/v4-marketing-api" class="repo-card__link" target="_blank">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            Ver no GitHub
-          </a>
-        </div>
-
-        <!-- Marketing Data -->
-        <div class="repo-card">
-          <div class="repo-card__header">
-            <div class="repo-card__icon repo-card__icon--data">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <div class="arch-arrow-row"><div class="arch-comm">REST / SSE</div></div>
+          <div class="arch-layer">
+            <div class="arch-layer-label">API Gateway + Auth</div>
+            <div class="arch-nodes">
+              <div class="arch-node node-orange"><strong>API Gateway</strong><span>AWS</span></div>
+              <div class="arch-arrow-h">&rarr;</div>
+              <div class="arch-node node-orange"><strong>Authorizer Lambda</strong><span>JWT + workspace check</span></div>
+              <div class="arch-arrow-h">&rarr;</div>
+              <div class="arch-node node-orange"><strong>Identity Service</strong><span>Clerk token validation</span></div>
             </div>
           </div>
-          <h3 class="repo-card__name">v4-marketing-data</h3>
-          <p class="repo-card__desc">
-            Plataforma de dados e ETL serverless. Infra-as-code com SST v3,
-            pipelines em Lambda e ECS, storage em S3 e Aurora.
-          </p>
-          <div class="repo-card__structure">
-            <div class="structure-item">
-              <code>functions/</code>
-              <span>Lambda handlers</span>
-            </div>
-            <div class="structure-item">
-              <code>services/</code>
-              <span>ECS containers</span>
-            </div>
-            <div class="structure-item">
-              <code>infra/</code>
-              <span>IaC modules</span>
+          <div class="arch-arrow-row"><div class="arch-comm">routes request</div></div>
+          <div class="arch-layer">
+            <div class="arch-layer-label">Backend Services</div>
+            <div class="arch-nodes">
+              <div class="arch-node node-red"><strong>v4-marketing</strong><span>Fastify 5</span><span class="port">:3012</span></div>
+              <div class="arch-node node-red"><strong>integration-hub</strong><span>Fastify 5</span><span class="port">:3001</span></div>
+              <div class="arch-node node-purple"><strong>chat</strong><span>LangGraph + Fastify</span><span class="port">:3013</span></div>
+              <div class="arch-node node-red"><strong>v4-marketing-api</strong><span>NestJS</span></div>
             </div>
           </div>
-          <div class="repo-card__tech">
-            <span class="tech">Python 3.11</span>
-            <span class="tech">SST v3</span>
-            <span class="tech">AWS Lambda</span>
-            <span class="tech">ECS</span>
-            <span class="tech">S3</span>
-            <span class="tech">Aurora</span>
-          </div>
-          <a href="https://github.com/V4-Company/v4-marketing-data" class="repo-card__link" target="_blank">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            Ver no GitHub
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== DDD SECTION ========== -->
-  <section class="section">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Arquitetura Interna</span>
-        <h2 class="section__title">Clean Architecture + DDD</h2>
-        <p class="section__desc">O v4-marketing-backend segue camadas estritas com dependency inversion</p>
-      </div>
-
-      <div class="ddd">
-        <div class="ddd__diagram">
-          <div class="ddd__layer ddd__layer--domain">
-            <div class="ddd__layer-title">Domain</div>
-            <div class="ddd__layer-items">
-              <span>Aggregates</span>
-              <span>Value Objects</span>
-              <span>Repository Interfaces</span>
-              <span>Domain Events</span>
+          <div class="arch-arrow-row"><div class="arch-comm">DB queries / domain events</div></div>
+          <div class="arch-layer">
+            <div class="arch-layer-label">Infra</div>
+            <div class="arch-nodes">
+              <div class="arch-node node-green"><strong>PostgreSQL</strong><span>4 databases</span></div>
+              <div class="arch-node node-green"><strong>RabbitMQ</strong><span>Domain events</span></div>
+              <div class="arch-node node-green"><strong>AWS SQS</strong><span>Batch events</span></div>
+              <div class="arch-node node-green"><strong>AWS S3</strong><span>File storage</span></div>
             </div>
-            <div class="ddd__layer-rule">Zero dependencias externas</div>
           </div>
-          <div class="ddd__arrow">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
-            <span>depende de</span>
-          </div>
-          <div class="ddd__layer ddd__layer--app">
-            <div class="ddd__layer-title">App</div>
-            <div class="ddd__layer-items">
-              <span>Use Cases</span>
-              <span>Services</span>
-              <span>DTOs (Zod)</span>
-              <span>Event Handlers</span>
+          <div class="arch-arrow-row"><div class="arch-comm">LLM calls / tracing</div></div>
+          <div class="arch-layer">
+            <div class="arch-layer-label">AI &amp; External</div>
+            <div class="arch-nodes">
+              <div class="arch-node node-purple"><strong>AWS Bedrock</strong><span>Sub-agents</span></div>
+              <div class="arch-node node-purple"><strong>LangSmith</strong><span>Prompts + tracing</span></div>
+              <div class="arch-node node-blue"><strong>Clerk</strong><span>Auth provider</span></div>
+              <div class="arch-node node-blue"><strong>Datadog</strong><span>APM + RUM</span></div>
+              <div class="arch-node node-blue"><strong>Algolia</strong><span>Search (FAQ)</span></div>
+              <div class="arch-node node-yellow"><strong>Eduzz</strong><span>Payments</span></div>
             </div>
-            <div class="ddd__layer-rule">Depende apenas do Domain</div>
-          </div>
-          <div class="ddd__arrow">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
-            <span>depende de</span>
-          </div>
-          <div class="ddd__layer ddd__layer--infra">
-            <div class="ddd__layer-title">Infra</div>
-            <div class="ddd__layer-items">
-              <span>Controllers (Fastify)</span>
-              <span>Repositories (Kysely)</span>
-              <span>DI Container (Inversify)</span>
-              <span>Providers (Axios, AWS)</span>
-            </div>
-            <div class="ddd__layer-rule">Depende de Domain + App</div>
           </div>
         </div>
-        <div class="ddd__note">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          <span>O servico <strong>chat</strong> usa apenas 2 camadas (app + infra) por nao ter entidades de dominio complexas. Regras enforced via <code>eslint-ddd-plugin.mjs</code>.</span>
+        <div class="stats-row">
+          <div class="stat"><span class="stat-num">3</span><span class="stat-label">Repos</span></div>
+          <div class="stat"><span class="stat-num">6</span><span class="stat-label">Packages</span></div>
+          <div class="stat"><span class="stat-num">8</span><span class="stat-label">Services</span></div>
+          <div class="stat"><span class="stat-num">130+</span><span class="stat-label">Integracoes</span></div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- ========== SERVICES DEEP DIVE ========== -->
-  <section id="services" class="section section--dark">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Deep Dive</span>
-        <h2 class="section__title">Servicos em Detalhe</h2>
-        <p class="section__desc">Tudo sobre cada package e repositorio — use cases, rotas, tabelas, stack</p>
-      </div>
+      <!-- 04 STACK -->
+      <section class="section" id="section-04">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h1 class="section-title">Stack</h1>
+        </div>
+        <p class="section-lead">Todas as tecnologias, versoes e onde cada uma e usada.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tech</th><th>Versao</th><th>Proposito</th><th>Onde</th></tr></thead>
+            <tbody>
+              <tr><td><strong>TypeScript</strong></td><td>5.x</td><td>Language</td><td>All backend + frontend</td></tr>
+              <tr><td><strong>Node.js</strong></td><td>20</td><td>Runtime</td><td>All services</td></tr>
+              <tr><td><strong>pnpm</strong></td><td>9.15</td><td>Package manager</td><td>v4-marketing-backend</td></tr>
+              <tr><td><strong>Fastify</strong></td><td>5</td><td>HTTP framework</td><td>v4-marketing, integration-hub, chat</td></tr>
+              <tr><td><strong>Inversify</strong></td><td>6</td><td>DI container</td><td>All backend services</td></tr>
+              <tr><td><strong>Kysely</strong></td><td>0.27+</td><td>Query builder</td><td>All backend services</td></tr>
+              <tr><td><strong>Prisma</strong></td><td>6.3</td><td>Migrations + schema</td><td>All backend services</td></tr>
+              <tr><td><strong>PostgreSQL</strong></td><td>—</td><td>Database</td><td>All services</td></tr>
+              <tr><td><strong>AWS SQS</strong></td><td>—</td><td>Batch events</td><td>v4-marketing</td></tr>
+              <tr><td><strong>RabbitMQ</strong></td><td>—</td><td>Single events</td><td>v4-marketing</td></tr>
+              <tr><td><strong>Next.js</strong></td><td>15.1</td><td>Frontend framework</td><td>web-client</td></tr>
+              <tr><td><strong>React</strong></td><td>19</td><td>UI library</td><td>web-client</td></tr>
+              <tr><td><strong>Tailwind CSS</strong></td><td>3.4</td><td>Styling</td><td>web-client</td></tr>
+              <tr><td><strong>Radix UI</strong></td><td>—</td><td>Component primitives</td><td>web-client</td></tr>
+              <tr><td><strong>Clerk</strong></td><td>—</td><td>Auth (frontend)</td><td>web-client</td></tr>
+              <tr><td><strong>Zod</strong></td><td>4 (via 3.25)</td><td>Validation</td><td>All services</td></tr>
+              <tr><td><strong>LangChain</strong></td><td>1.x</td><td>LLM orchestration</td><td>chat</td></tr>
+              <tr><td><strong>LangGraph</strong></td><td>1.x</td><td>Agent framework</td><td>chat</td></tr>
+              <tr><td><strong>OpenAI</strong></td><td>GPT-5.4 / 4o</td><td>LLM provider</td><td>chat</td></tr>
+              <tr><td><strong>Anthropic</strong></td><td>Claude 4.6</td><td>LLM provider</td><td>chat</td></tr>
+              <tr><td><strong>Google</strong></td><td>Gemini 2.5</td><td>LLM provider</td><td>chat</td></tr>
+              <tr><td><strong>AWS Bedrock</strong></td><td>—</td><td>Sub-agents</td><td>chat</td></tr>
+              <tr><td><strong>Datadog</strong></td><td>—</td><td>APM + RUM</td><td>All services + frontend</td></tr>
+              <tr><td><strong>Vitest</strong></td><td>3</td><td>Testing (backend)</td><td>backend</td></tr>
+              <tr><td><strong>Jest</strong></td><td>29</td><td>Testing (frontend)</td><td>web-client</td></tr>
+              <tr><td><strong>NestJS</strong></td><td>—</td><td>HTTP framework</td><td>v4-marketing-api</td></tr>
+              <tr><td><strong>TypeORM</strong></td><td>—</td><td>ORM</td><td>v4-marketing-api</td></tr>
+              <tr><td><strong>SST</strong></td><td>v3</td><td>IaC</td><td>v4-marketing-data</td></tr>
+              <tr><td><strong>Python</strong></td><td>3.11+</td><td>Language</td><td>v4-marketing-data</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-      <!-- Tab Navigation -->
-      <div class="tabs">
-        <div class="tabs__nav">
-          <button class="tabs__btn tabs__btn--active" data-tab="tab-core">
-            <span class="tabs__btn-icon" style="color:var(--green)">&#9679;</span> v4-marketing
+      <!-- 05 PASTAS -->
+      <section class="section" id="section-05">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h1 class="section-title">Pastas</h1>
+        </div>
+        <p class="section-lead">Estrutura de pastas do monorepo e dos repositorios auxiliares.</p>
+
+        <div class="folder-tree-wrap">
+          <div class="folder-tree-label">v4-marketing-backend/</div>
+          <pre class="folder-tree"><code>v4-marketing-backend/
+├── packages/
+│   ├── <span class="ft-dir">lib/</span>                    <span class="ft-comment">@v4-company/lib — shared library</span>
+│   │   ├── <span class="ft-dir">auth/</span>               <span class="ft-comment">Auth middleware &amp; decorators</span>
+│   │   ├── <span class="ft-dir">controllers/</span>        <span class="ft-comment">FastifyController, Route decorator</span>
+│   │   ├── <span class="ft-dir">domain/</span>             <span class="ft-comment">Entity, AggregateRoot base classes</span>
+│   │   ├── <span class="ft-dir">events/</span>             <span class="ft-comment">EventBus, RabbitMQ, SQS implementations</span>
+│   │   ├── <span class="ft-dir">exceptions/</span>         <span class="ft-comment">DomainException, HttpException hierarchy</span>
+│   │   ├── <span class="ft-dir">server/</span>             <span class="ft-comment">FastifyServerBuilder (builder pattern)</span>
+│   │   ├── <span class="ft-dir">unit-of-work/</span>       <span class="ft-comment">UnitOfWork, KyselyUnitOfWork</span>
+│   │   ├── <span class="ft-dir">value-objects/</span>      <span class="ft-comment">EntityIdVO, EmailVO, DateVO, BooleanVO...</span>
+│   │   └── <span class="ft-dir">usecases/</span>           <span class="ft-comment">UseCase&lt;I,O&gt; interface</span>
+│   │
+│   ├── <span class="ft-dir">v4-marketing/</span>           <span class="ft-comment">Core service :3012</span>
+│   │   ├── <span class="ft-dir">domain/</span>
+│   │   │   ├── <span class="ft-dir">aggregates/</span>     <span class="ft-comment">22 entities (User, Org, Workspace, Diagnosis...)</span>
+│   │   │   ├── <span class="ft-dir">repositories/</span>   <span class="ft-comment">17 interfaces</span>
+│   │   │   ├── <span class="ft-dir">events/</span>         <span class="ft-comment">18 domain events</span>
+│   │   │   └── <span class="ft-dir">vo/</span>             <span class="ft-comment">10 value objects</span>
+│   │   ├── <span class="ft-dir">app/</span>
+│   │   │   ├── <span class="ft-dir">usecases/</span>       <span class="ft-comment">47 use cases</span>
+│   │   │   ├── <span class="ft-dir">services/</span>       <span class="ft-comment">19 services</span>
+│   │   │   ├── <span class="ft-dir">dtos/</span>           <span class="ft-comment">50 input + 43 output DTOs</span>
+│   │   │   └── <span class="ft-dir">events/</span>         <span class="ft-comment">8 event handlers</span>
+│   │   └── <span class="ft-dir">infra/</span>
+│   │       ├── <span class="ft-dir">controller/</span>     <span class="ft-comment">10 controllers</span>
+│   │       ├── <span class="ft-dir">database/</span>       <span class="ft-comment">Kysely repos + Prisma migrations</span>
+│   │       └── <span class="ft-dir">di/</span>             <span class="ft-comment">Inversify container</span>
+│   │
+│   ├── <span class="ft-dir">integration-hub/</span>        <span class="ft-comment">:3001</span>
+│   │   ├── <span class="ft-dir">domain/</span>             <span class="ft-comment">Integration aggregate</span>
+│   │   ├── <span class="ft-dir">app/</span>                <span class="ft-comment">14 use cases, OAuth providers</span>
+│   │   └── <span class="ft-dir">infra/</span>              <span class="ft-comment">1 controller (14 routes)</span>
+│   │
+│   ├── <span class="ft-dir">chat/</span>                   <span class="ft-comment">:3013 — NO domain layer</span>
+│   │   ├── <span class="ft-dir">app/</span>                <span class="ft-comment">13 use cases, provider interfaces</span>
+│   │   └── <span class="ft-dir">infra/</span>
+│   │       ├── <span class="ft-dir">tools/</span>          <span class="ft-comment">40+ LangChain tools</span>
+│   │       ├── <span class="ft-dir">agents/</span>         <span class="ft-comment">10 agent configurations</span>
+│   │       └── <span class="ft-dir">providers/</span>      <span class="ft-comment">LangChain, LangGraph providers</span>
+│   │
+│   ├── <span class="ft-dir">authorizer/</span>             <span class="ft-comment">Lambda authorizer</span>
+│   │   └── <span class="ft-dir">src/</span>
+│   │       ├── <span class="ft-dir">handlers/</span>       <span class="ft-comment">Lambda handler entry point</span>
+│   │       ├── <span class="ft-dir">app/</span>            <span class="ft-comment">Use case, provider interfaces</span>
+│   │       ├── <span class="ft-dir">domain/</span>         <span class="ft-comment">Repository interfaces, schemas</span>
+│   │       └── <span class="ft-dir">infra/</span>          <span class="ft-comment">Kysely repo, DI, Axios provider</span>
+│   │
+│   └── <span class="ft-dir">web-client/</span>             <span class="ft-comment">:3000</span>
+│       ├── <span class="ft-dir">app/</span>                <span class="ft-comment">20+ pages (App Router)</span>
+│       ├── <span class="ft-dir">components/</span>         <span class="ft-comment">48 AI components + workspace + auth</span>
+│       ├── <span class="ft-dir">commons/</span>
+│       │   ├── <span class="ft-dir">core/</span>           <span class="ft-comment">@workspace/core — API client, auth, hooks</span>
+│       │   └── <span class="ft-dir">ui/</span>             <span class="ft-comment">@workspace/ui — Radix components, Tailwind</span>
+│       └── <span class="ft-dir">lib/</span>                <span class="ft-comment">hooks, providers, api clients</span>
+│
+├── .github/workflows/          <span class="ft-comment">ci.yml, deploy-hml.yml, deploy-prod.yml</span>
+├── eslint-ddd-plugin.mjs       <span class="ft-comment">Custom ESLint DDD layer rules</span>
+├── packages-manifest.yml       <span class="ft-comment">Deployment manifest (hml/prod flags)</span>
+└── pnpm-workspace.yaml</code></pre>
+        </div>
+
+        <div class="folder-tree-wrap" style="margin-top:24px">
+          <div class="folder-tree-label">v4-marketing-api/ <span class="tag backend" style="font-size:11px;vertical-align:middle;">NestJS — npm</span></div>
+          <pre class="folder-tree"><code>v4-marketing-api/
+└── src/
+    ├── <span class="ft-dir">facebook-ads/</span>       <span class="ft-comment">25 modules: campaigns, adsets, ads, insights, audiences...</span>
+    ├── <span class="ft-dir">google-ads/</span>         <span class="ft-comment">14 modules: campaigns, keywords, conversions...</span>
+    ├── <span class="ft-dir">google-analytics/</span>   <span class="ft-comment">6 modules</span>
+    ├── <span class="ft-dir">instagram/</span>          <span class="ft-comment">7 modules</span>
+    ├── <span class="ft-dir">tiktok/</span>             <span class="ft-comment">5 modules</span>
+    ├── <span class="ft-dir">linkedin/</span>           <span class="ft-comment">3 modules</span>
+    ├── <span class="ft-dir">shopify/</span>            <span class="ft-comment">4 modules</span>
+    ├── <span class="ft-dir">vtex/</span>               <span class="ft-comment">2 modules</span>
+    ├── <span class="ft-dir">tray/</span>               <span class="ft-comment">2 modules</span>
+    ├── <span class="ft-dir">nuvem-shop/</span>         <span class="ft-comment">3 modules</span>
+    ├── <span class="ft-dir">loja-integrada/</span>     <span class="ft-comment">2 modules</span>
+    ├── <span class="ft-dir">bitrix/</span>             <span class="ft-comment">4 modules</span>
+    ├── <span class="ft-dir">kommo/</span>              <span class="ft-comment">4 modules</span>
+    ├── <span class="ft-dir">pipedrive/</span>          <span class="ft-comment">8 modules</span>
+    ├── <span class="ft-dir">rd-station/</span>         <span class="ft-comment">3 modules</span>
+    └── <span class="ft-dir">unbounce/</span>           <span class="ft-comment">1 module — 92 modules total</span></code></pre>
+        </div>
+
+        <div class="folder-tree-wrap" style="margin-top:24px">
+          <div class="folder-tree-label">v4-marketing-data/ <span class="tag infra" style="font-size:11px;vertical-align:middle;">SST v3 + Python — yarn + uv</span></div>
+          <pre class="folder-tree"><code>v4-marketing-data/
+├── <span class="ft-dir">lambdas/</span>            <span class="ft-comment">13 Lambda functions</span>
+│   ├── accountsScheduler
+│   ├── dataProcessor
+│   └── ... (11 more)
+├── <span class="ft-dir">ecs/</span>                <span class="ft-comment">20 ECS services (connectors per platform)</span>
+│   ├── facebook-connector
+│   ├── google-ads-connector
+│   ├── google-analytics-connector
+│   ├── tiktok-connector
+│   ├── linkedin-connector
+│   └── ... (15 more)
+├── <span class="ft-dir">stacks/</span>             <span class="ft-comment">SST v3 stack definitions</span>
+└── sst.config.ts</code></pre>
+        </div>
+      </section>
+
+      <!-- 06 FLUXO DE DADOS -->
+      <section class="section" id="section-06">
+        <div class="section-header">
+          <span class="section-number">06</span>
+          <h1 class="section-title">Fluxo de Dados</h1>
+        </div>
+        <p class="section-lead">Ciclo de vida de uma requisicao HTTP e pipeline de dados.</p>
+
+        <h2 class="subsection-title">HTTP Request Lifecycle</h2>
+        <div class="flow">
+          <div class="flow-step"><div class="flow-num">1</div><div class="flow-label">Request hits<br/>API Gateway</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num">2</div><div class="flow-label">Authorizer Lambda<br/>validates JWT</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num">3</div><div class="flow-label">Extracts workspace ID<br/>(headers/path/query)</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num">4</div><div class="flow-label">Checks user-workspace<br/>membership in PG</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num">5</div><div class="flow-label">Returns IAM Policy<br/>Allow / Deny</div></div>
+        </div>
+        <div class="flow flow-mt">
+          <div class="flow-step"><div class="flow-num">6</div><div class="flow-label">Request reaches<br/>Fastify controller</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num">7</div><div class="flow-label">Controller validates<br/>DTO (Zod)</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num">8</div><div class="flow-label">UseCase/Service<br/>orchestrates logic</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num">9</div><div class="flow-label">Repository executes<br/>SQL via Kysely</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num">10</div><div class="flow-label">Response mapped<br/>and returned</div></div>
+        </div>
+
+        <h2 class="subsection-title" style="margin-top:48px">Data Pipeline (v4-marketing-data)</h2>
+        <div class="flow flow-wrap">
+          <div class="flow-step"><div class="flow-num flow-cyan">C</div><div class="flow-label">Cron<br/>trigger</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num flow-blue">Q</div><div class="flow-label">SQS<br/>queue</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num flow-orange">L</div><div class="flow-label">Lambda<br/>accountsScheduler</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num flow-red">E</div><div class="flow-label">ECS Service<br/>(connector)</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num flow-green">S</div><div class="flow-label">S3<br/>(raw data)</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num flow-orange">L</div><div class="flow-label">Lambda<br/>dataProcessor</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num flow-purple">A</div><div class="flow-label">Aurora<br/>(refined)</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step"><div class="flow-num flow-cyan">M</div><div class="flow-label">Materialized<br/>Views</div></div>
+        </div>
+      </section>
+
+      <!-- 07 SERVICOS -->
+      <section class="section" id="section-07">
+        <div class="section-header">
+          <span class="section-number">07</span>
+          <h1 class="section-title">Servicos</h1>
+        </div>
+        <p class="section-lead">Detalhes de cada servico: controllers, rotas e estatisticas.</p>
+
+        <div class="service-card">
+          <div class="service-header">
+            <div><h2 class="service-name">v4-marketing</h2><p class="service-desc">Core marketing service — usuarios, orgs, workspaces, diagnosticos, planos, pagamentos, convites.</p></div>
+            <div class="service-meta"><span class="tag backend">Fastify 5</span><span class="port-badge">:3012</span></div>
+          </div>
+          <div class="service-stats"><span>10 controllers</span><span>47 use cases</span><span>22 aggregates</span><span>19 tables</span></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Controller</th><th>Method</th><th>Route</th><th>Proposito</th></tr></thead>
+              <tbody>
+                <tr><td rowspan="5"><strong>WorkspaceController</strong></td><td>POST</td><td>/workspaces</td><td>Criar workspace</td></tr>
+                <tr><td>GET/PUT</td><td>/workspaces/:id</td><td>Ler/atualizar workspace</td></tr>
+                <tr><td>POST</td><td>/workspaces/:id/invites</td><td>Convidar membro</td></tr>
+                <tr><td>POST</td><td>/workspaces/:id/service-accounts</td><td>Criar service account</td></tr>
+                <tr><td>GET/PUT</td><td>/workspaces/:id/marketing-profile</td><td>Perfil de marketing</td></tr>
+                <tr><td rowspan="2"><strong>DiagnosisController</strong></td><td>GET/POST</td><td>/diagnoses</td><td>Listar/criar diagnosticos</td></tr>
+                <tr><td>GET/PUT/DELETE</td><td>/diagnoses/:id</td><td>CRUD diagnostico</td></tr>
+                <tr><td rowspan="3"><strong>UserController</strong></td><td>GET</td><td>/users/:id</td><td>Buscar usuario</td></tr>
+                <tr><td>GET</td><td>/users/:id/workspaces</td><td>Workspaces do usuario</td></tr>
+                <tr><td>GET</td><td>/users/:id/payments</td><td>Pagamentos do usuario</td></tr>
+                <tr><td rowspan="2"><strong>PlanController</strong></td><td>GET/POST</td><td>/plans</td><td>Listar/criar planos</td></tr>
+                <tr><td>GET/PUT/DELETE</td><td>/plans/:id</td><td>CRUD plano</td></tr>
+                <tr><td rowspan="3"><strong>WebhookController</strong></td><td>POST</td><td>/webhook/eduzz</td><td>Webhook pagamentos Eduzz</td></tr>
+                <tr><td>POST</td><td>/webhook/linear</td><td>Webhook Linear</td></tr>
+                <tr><td>POST</td><td>/webhook/crm</td><td>Webhook CRM</td></tr>
+                <tr><td><strong>FeatureAccessController</strong></td><td>POST</td><td>/feature-access/check</td><td>Verificar acesso a feature</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-header">
+            <div><h2 class="service-name">integration-hub</h2><p class="service-desc">Integracoes com plataformas de terceiros: Facebook, Google, TikTok, LinkedIn, CRM e e-commerce.</p></div>
+            <div class="service-meta"><span class="tag backend">Fastify 5</span><span class="port-badge">:3001</span></div>
+          </div>
+          <div class="service-stats"><span>1 controller</span><span>14 rotas</span><span>130+ tipos</span></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Method</th><th>Route</th><th>Proposito</th></tr></thead>
+              <tbody>
+                <tr><td>GET</td><td>/integrations</td><td>Listar integracoes</td></tr>
+                <tr><td>POST</td><td>/integrations</td><td>Criar integracao</td></tr>
+                <tr><td>GET/PUT/DELETE</td><td>/integrations/:id</td><td>CRUD integracao</td></tr>
+                <tr><td>POST</td><td>/integrations/:id/reconnect</td><td>Reconectar integracao</td></tr>
+                <tr><td>GET</td><td>/integrations/facebook/oauth</td><td>Iniciar OAuth Facebook</td></tr>
+                <tr><td>GET</td><td>/integrations/facebook/callback</td><td>Callback OAuth Facebook</td></tr>
+                <tr><td>GET</td><td>/integrations/facebook/ad-accounts</td><td>Listar ad accounts Facebook</td></tr>
+                <tr><td>GET</td><td>/integrations/google/oauth</td><td>Iniciar OAuth Google</td></tr>
+                <tr><td>GET</td><td>/integrations/google/callback</td><td>Callback OAuth Google</td></tr>
+                <tr><td>GET</td><td>/integrations/google/ads-accounts</td><td>Listar Google Ads accounts</td></tr>
+                <tr><td>GET</td><td>/integrations/google/analytics-accounts</td><td>Listar Analytics accounts</td></tr>
+                <tr><td>GET</td><td>/integrations/kommo/oauth</td><td>Iniciar OAuth Kommo</td></tr>
+                <tr><td>GET</td><td>/integrations/kommo/callback</td><td>Callback OAuth Kommo</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-header">
+            <div><h2 class="service-name">chat</h2><p class="service-desc">AI chat service com LangGraph — agentes, tools, skills, historico e streaming SSE.</p></div>
+            <div class="service-meta"><span class="tag ai">LangGraph</span><span class="port-badge">:3013</span></div>
+          </div>
+          <div class="service-stats"><span>13 use cases</span><span>10 agentes</span><span>40+ tools</span><span>sem domain layer</span></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Method</th><th>Route</th><th>Proposito</th></tr></thead>
+              <tbody>
+                <tr><td>GET</td><td>/chats</td><td>Listar chats</td></tr>
+                <tr><td>POST</td><td>/chats</td><td>Criar novo chat</td></tr>
+                <tr><td>GET</td><td>/chats/:id</td><td>Buscar chat</td></tr>
+                <tr><td>DELETE</td><td>/chats/:id</td><td>Deletar chat</td></tr>
+                <tr><td>POST</td><td>/chats/:id/messages</td><td>Enviar mensagem (SSE stream)</td></tr>
+                <tr><td>GET</td><td>/chats/:id/history</td><td>Historico de mensagens</td></tr>
+                <tr><td>GET</td><td>/skills</td><td>Listar skills</td></tr>
+                <tr><td>POST</td><td>/skills</td><td>Criar skill</td></tr>
+                <tr><td>PUT/DELETE</td><td>/skills/:id</td><td>Atualizar/deletar skill</td></tr>
+                <tr><td>POST</td><td>/feedback</td><td>Feedback LangSmith</td></tr>
+                <tr><td>POST</td><td>/upload/presigned-url</td><td>URL para upload S3</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-header">
+            <div><h2 class="service-name">v4-marketing-api</h2><p class="service-desc">API de dados de plataformas — dados brutos/processados para o painel analitico.</p></div>
+            <div class="service-meta"><span class="tag backend">NestJS</span><span class="tag infra">TypeORM</span></div>
+          </div>
+          <div class="service-stats"><span>92 modulos</span><span>15+ plataformas</span><span>repo separado (npm)</span></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Plataforma</th><th>Modulos</th></tr></thead>
+              <tbody>
+                <tr><td>Facebook Ads</td><td>25 (campaigns, adsets, ads, insights, audiences, creatives...)</td></tr>
+                <tr><td>Google Ads</td><td>14 (campaigns, keywords, conversions, smart bidding...)</td></tr>
+                <tr><td>Google Analytics</td><td>6 (sessions, events, conversions, attribution...)</td></tr>
+                <tr><td>Instagram</td><td>7 (posts, stories, reels, insights, audience...)</td></tr>
+                <tr><td>TikTok</td><td>5 (campaigns, ads, insights, creatives, audience)</td></tr>
+                <tr><td>LinkedIn</td><td>3 (campaigns, insights, audience)</td></tr>
+                <tr><td>Shopify</td><td>4 (orders, products, customers, analytics)</td></tr>
+                <tr><td>VTEX</td><td>2 (orders, products)</td></tr>
+                <tr><td>Tray</td><td>2 (orders, products)</td></tr>
+                <tr><td>Nuvem Shop</td><td>3 (orders, products, customers)</td></tr>
+                <tr><td>Loja Integrada</td><td>2 (orders, products)</td></tr>
+                <tr><td>Bitrix</td><td>4 (leads, deals, contacts, activities)</td></tr>
+                <tr><td>Kommo</td><td>4 (leads, contacts, pipeline, activities)</td></tr>
+                <tr><td>Pipedrive</td><td>8 (deals, contacts, orgs, activities, notes, products, goals, stages)</td></tr>
+                <tr><td>RD Station</td><td>3 (leads, conversions, funnel)</td></tr>
+                <tr><td>Unbounce</td><td>1 (leads)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-header">
+            <div><h2 class="service-name">authorizer</h2><p class="service-desc">AWS Lambda authorizer — valida JWT via Identity Service e verifica membership no workspace.</p></div>
+            <div class="service-meta"><span class="tag infra">Lambda</span></div>
+          </div>
+          <div class="service-stats"><span>1 handler</span><span>1 use case</span><span>JWT + service account validation</span></div>
+          <div class="info-box">
+            <p>Valida <code>Authorization: Bearer &lt;token&gt;</code> via Identity Service para usuarios regulares. Service accounts usam <code>x-client-id</code> + <code>x-client-secret</code>. Extrai <code>workspace_id</code> de 3 lugares: header <code>x-workspace-id</code>, path param <code>/:workspaceId</code> e query string <code>?workspaceId=</code>. Retorna IAM Policy Allow/Deny para o API Gateway.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08 BANCO DE DADOS -->
+      <section class="section" id="section-08">
+        <div class="section-header">
+          <span class="section-number">08</span>
+          <h1 class="section-title">Banco de Dados</h1>
+        </div>
+        <p class="section-lead">Tabelas por servico. Pattern: Prisma (migrations) &rarr; prisma-kysely (type gen) &rarr; Kysely (runtime queries).</p>
+
+        <div class="db-pattern">
+          <div class="db-pattern-step"><span class="db-tech">Prisma</span><span class="db-role">Schema + Migrations</span></div>
+          <div class="db-arrow">&rarr;</div>
+          <div class="db-pattern-step"><span class="db-tech">prisma-kysely</span><span class="db-role">Type generation</span></div>
+          <div class="db-arrow">&rarr;</div>
+          <div class="db-pattern-step"><span class="db-tech">Kysely</span><span class="db-role">Runtime queries</span></div>
+          <div class="db-arrow">&rarr;</div>
+          <div class="db-pattern-step"><span class="db-tech">PostgreSQL</span><span class="db-role">Storage</span></div>
+        </div>
+
+        <h2 class="subsection-title">v4-marketing <span class="badge-count">19 tabelas</span></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tabela</th><th>Proposito</th></tr></thead>
+            <tbody>
+              <tr><td><code>Users</code></td><td>Dados do usuario (auth_id, email, name, role)</td></tr>
+              <tr><td><code>Organizations</code></td><td>Organizacoes (empresas)</td></tr>
+              <tr><td><code>Workspaces</code></td><td>Workspaces por organizacao</td></tr>
+              <tr><td><code>Subscriptions</code></td><td>Assinaturas ativas por workspace</td></tr>
+              <tr><td><code>Plans</code></td><td>Planos disponiveis (nome, preco, features)</td></tr>
+              <tr><td><code>Payments</code></td><td>Historico de pagamentos</td></tr>
+              <tr><td><code>WorkspaceUsers</code></td><td>Membros do workspace (user_id, workspace_id, role)</td></tr>
+              <tr><td><code>OrganizationUsers</code></td><td>Membros da organizacao</td></tr>
+              <tr><td><code>InviteUsers</code></td><td>Convites pendentes por email</td></tr>
+              <tr><td><code>InviteLinkAcceptances</code></td><td>Aceites de convite por link</td></tr>
+              <tr><td><code>MarketingProfiles</code></td><td>Perfil de marketing do workspace</td></tr>
+              <tr><td><code>Diagnosis</code></td><td>Diagnosticos criados</td></tr>
+              <tr><td><code>DiagnosisStep</code></td><td>Steps individuais do diagnostico</td></tr>
+              <tr><td><code>WebsiteCollectedData</code></td><td>Dados coletados via web scraping</td></tr>
+              <tr><td><code>Artifacts</code></td><td>Artefatos gerados por IA</td></tr>
+              <tr><td><code>DeepResearches</code></td><td>Pesquisas deep research por CNPJ</td></tr>
+              <tr><td><code>DefaultUserOperator</code></td><td>Operadores padrao do usuario</td></tr>
+              <tr><td><code>AnomalyEvents</code></td><td>Eventos de anomalia detectados</td></tr>
+              <tr><td><code>ErrorsHistory</code></td><td>Historico de erros de integracao</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 class="subsection-title" style="margin-top:32px">integration-hub <span class="badge-count">1 tabela</span></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Coluna</th><th>Tipo</th><th>Descricao</th></tr></thead>
+            <tbody>
+              <tr><td><code>id</code></td><td>UUID</td><td>Identificador unico</td></tr>
+              <tr><td><code>user_id</code></td><td>VARCHAR</td><td>Usuario dono da integracao</td></tr>
+              <tr><td><code>workspace_id</code></td><td>VARCHAR</td><td>Workspace associado</td></tr>
+              <tr><td><code>integration_id</code></td><td>VARCHAR</td><td>ID externo na plataforma</td></tr>
+              <tr><td><code>type</code></td><td>ENUM</td><td>Tipo (facebook_ads, google_ads, etc.)</td></tr>
+              <tr><td><code>status</code></td><td>ENUM</td><td>active / inactive / error</td></tr>
+              <tr><td><code>access_token</code></td><td>TEXT</td><td>Token de acesso (criptografado)</td></tr>
+              <tr><td><code>refresh_token</code></td><td>TEXT</td><td>Refresh token (criptografado)</td></tr>
+              <tr><td><code>update_frequency</code></td><td>VARCHAR</td><td>Frequencia de atualizacao</td></tr>
+              <tr><td><code>created_at / updated_at</code></td><td>TIMESTAMP</td><td>Timestamps</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 class="subsection-title" style="margin-top:32px">chat <span class="badge-count">3 tabelas + LangGraph checkpoints</span></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tabela</th><th>Proposito</th></tr></thead>
+            <tbody>
+              <tr><td><code>ChatMetadata</code></td><td>Titulo, workspace_id, user_id, agent_type, modelo selecionado</td></tr>
+              <tr><td><code>Skill</code></td><td>Templates de prompt: nome, descricao, prompt, workspace_id</td></tr>
+              <tr><td><code>UserMemory</code></td><td>Memorias persistentes do usuario para contexto de IA</td></tr>
+              <tr><td><code>checkpoints*</code></td><td>Tabelas auto-gerenciadas pelo LangGraph para estado dos agentes</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 09 EVENTOS -->
+      <section class="section" id="section-09">
+        <div class="section-header">
+          <span class="section-number">09</span>
+          <h1 class="section-title">Eventos</h1>
+        </div>
+        <p class="section-lead">Domain events publicados via SQS (batch) e RabbitMQ (single).</p>
+
+        <div class="event-flow">
+          <div class="event-flow-step"><div class="event-flow-icon icon-red">A</div><div class="event-flow-label">Aggregate<br/>raises event</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="event-flow-step"><div class="event-flow-icon icon-blue">B</div><div class="event-flow-label">EventBus<br/>publishes</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="event-flow-step"><div class="event-flow-icon icon-green">H</div><div class="event-flow-label">Handler<br/>processes</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="event-flow-step"><div class="event-flow-icon icon-purple">S</div><div class="event-flow-label">Side effect<br/>(AI, email, etc.)</div></div>
+        </div>
+
+        <div class="events-grid">
+          <div class="events-col">
+            <h2 class="events-col-title"><span class="tag backend">AWS SQS</span> Batch Events</h2>
+            <div class="event-item">
+              <div class="event-name">DiagnosisStepCreatedEvent</div>
+              <div class="event-desc">Disparado quando um step de diagnostico e criado &rarr; processamento com IA para gerar analises e recomendacoes.</div>
+            </div>
+            <div class="event-item">
+              <div class="event-name">WebScrapingRequestedEvent</div>
+              <div class="event-desc">Solicitacao de scraping do site do cliente &rarr; Lambda extrai dados do website para preencher perfil de marketing.</div>
+            </div>
+            <div class="event-item">
+              <div class="event-name">DeepResearchRequestedEvent</div>
+              <div class="event-desc">Pesquisa profunda por CNPJ solicitada &rarr; Lambda executa analise com multiplas fontes de dados publicos.</div>
+            </div>
+          </div>
+
+          <div class="events-col">
+            <h2 class="events-col-title"><span class="tag infra">RabbitMQ</span> Single Events</h2>
+            <div class="event-item">
+              <div class="event-name">CreateTenantEvent</div>
+              <div class="event-desc">Criacao de organizacao &rarr; setup do tenant em todos os servicos dependentes.</div>
+            </div>
+            <div class="event-item">
+              <div class="event-name">AttachUserToTenantEvent</div>
+              <div class="event-desc">Usuario adicionado a organizacao &rarr; sincronizacao de permissoes entre servicos.</div>
+            </div>
+            <div class="event-item">
+              <div class="event-name">DefaultUserOperatorCreatedEvent</div>
+              <div class="event-desc">Operador padrao criado &rarr; configuracao inicial do ambiente do usuario.</div>
+            </div>
+            <div class="event-item">
+              <div class="event-name">NotificationEmailEvent</div>
+              <div class="event-desc">Envio de email transacional: convites, confirmacoes e alertas de sistema.</div>
+            </div>
+            <div class="event-item">
+              <div class="event-name">NotificationWhatsappEvent</div>
+              <div class="event-desc">Notificacao via WhatsApp para alertas criticos e resumos periodicos.</div>
+            </div>
+            <div class="event-item">
+              <div class="event-name">OpportunityClosedEvent</div>
+              <div class="event-desc">Venda fechada no CRM &rarr; provisionamento automatico de workspace e plano.</div>
+            </div>
+            <div class="event-item">
+              <div class="event-name">ServiceAccountCreatedEvent</div>
+              <div class="event-desc">Service account criado &rarr; setup de credenciais M2M para integracao.</div>
+            </div>
+            <div class="event-item">
+              <div class="event-name">ResetPasswordRequestedEvent</div>
+              <div class="event-desc">Solicitacao de reset de senha &rarr; envio de email com link seguro temporario.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10 AI & CHAT -->
+      <section class="section" id="section-10">
+        <div class="section-header">
+          <span class="section-number">10</span>
+          <h1 class="section-title">AI &amp; Chat</h1>
+        </div>
+        <p class="section-lead">LangGraph ReactAgent, 10 agentes especializados, 40+ tools e modelos GPT/Claude/Gemini.</p>
+
+        <div class="ai-arch-banner">
+          <div class="ai-arch-step"><strong>LangGraph</strong><span>ReactAgent</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="ai-arch-step"><strong>streamEvents()</strong><span>token streaming</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="ai-arch-step"><strong>SSE</strong><span>to client</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="ai-arch-step"><strong>PostgreSQL</strong><span>checkpoints</span></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="ai-arch-step"><strong>LangSmith Hub</strong><span>prompts at runtime</span></div>
+        </div>
+
+        <h2 class="subsection-title">Agentes</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Agente</th><th>Descricao</th><th>Tools</th></tr></thead>
+            <tbody>
+              <tr><td><code>default</code></td><td>Marketing AI geral — workspace, diagnostico, integracoes</td><td>32 tools</td></tr>
+              <tr><td><code>support</code></td><td>Suporte interno V4 — documentacao tecnica e dados internos</td><td>19 tools</td></tr>
+              <tr><td><code>support-public</code></td><td>FAQ publico para usuarios finais</td><td>1 tool (Algolia)</td></tr>
+              <tr><td><code>goal-tree</code></td><td>Arvore de metas — metodologia TOC para objetivos</td><td>3 tools</td></tr>
+              <tr><td><code>crt-agent</code></td><td>Current Reality Tree — analise da realidade atual</td><td>3 tools</td></tr>
+              <tr><td><code>frt-agent</code></td><td>Future Reality Tree — planejamento da realidade futura</td><td>4 tools</td></tr>
+              <tr><td><code>prt-agent</code></td><td>Prerequisite Tree — arvore de pre-requisitos</td><td>4 tools</td></tr>
+              <tr><td><code>transition-agent</code></td><td>Transition Tree — planejamento de transicao</td><td>3 tools</td></tr>
+              <tr><td><code>evaporating-cloud</code></td><td>Nuvem de Conflito — resolucao de conflitos (TOC)</td><td>3 tools</td></tr>
+              <tr><td><code>questionnaire-agent</code></td><td>Questionario guiado para coleta de dados do workspace</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 class="subsection-title" style="margin-top:32px">Tools por Grupo</h2>
+        <div class="card-grid cols-3">
+          <div class="card card-compact">
+            <h3 class="card-title-sm">Diagnosis (6)</h3>
+            <ul class="tool-list"><li>get-workspace-diagnosis</li><li>get-workspace-questionnaires</li><li>save-markdown</li><li>get-markdown</li><li>get-diagnosis-steps</li><li>create-diagnosis-step</li></ul>
+          </div>
+          <div class="card card-compact">
+            <h3 class="card-title-sm">User Management (6)</h3>
+            <ul class="tool-list"><li>get-user-profile</li><li>get-user-workspaces</li><li>get-user-organizations</li><li>get-user-payments</li><li>get-workspace-info</li><li>get-marketing-profile</li></ul>
+          </div>
+          <div class="card card-compact">
+            <h3 class="card-title-sm">Workspace Membership (4)</h3>
+            <ul class="tool-list"><li>invite-member</li><li>accept-invite</li><li>update-member-role</li><li>remove-member</li></ul>
+          </div>
+          <div class="card card-compact">
+            <h3 class="card-title-sm">Integration (3)</h3>
+            <ul class="tool-list"><li>list-integrations</li><li>disconnect-integration</li><li>add-subscription</li></ul>
+          </div>
+          <div class="card card-compact">
+            <h3 class="card-title-sm">Specialists (3)</h3>
+            <ul class="tool-list"><li>documentation-agent-v4</li><li>data-agent-v4</li><li>digital-marketing-agent-v4</li></ul>
+          </div>
+          <div class="card card-compact">
+            <h3 class="card-title-sm">Skills, Memory &amp; Research</h3>
+            <ul class="tool-list"><li>list-skills</li><li>load-skill</li><li>create-skill</li><li>save-user-memory</li><li>deep-research</li><li>faq-search (Algolia)</li></ul>
+          </div>
+        </div>
+
+        <h2 class="subsection-title" style="margin-top:32px">Modelos Suportados</h2>
+        <div class="card-grid cols-4">
+          <div class="card card-compact">
+            <h3 class="card-title-sm" style="color:var(--color-green)">OpenAI</h3>
+            <ul class="tool-list"><li>GPT-5.4 <span class="badge-default">default</span></li><li>GPT-4o</li><li>GPT-4o-mini</li></ul>
+          </div>
+          <div class="card card-compact">
+            <h3 class="card-title-sm" style="color:var(--color-orange)">Anthropic</h3>
+            <ul class="tool-list"><li>Claude Opus 4.6</li><li>Claude Sonnet 4.6</li><li>Claude Haiku 4.5</li></ul>
+          </div>
+          <div class="card card-compact">
+            <h3 class="card-title-sm" style="color:var(--color-blue)">Google</h3>
+            <ul class="tool-list"><li>Gemini 2.5 Pro</li><li>Gemini 2.5 Flash</li></ul>
+          </div>
+          <div class="card card-compact">
+            <h3 class="card-title-sm" style="color:var(--color-purple)">AWS Bedrock</h3>
+            <ul class="tool-list"><li>Specialist sub-agents</li><li>documentation-agent</li><li>data-agent</li></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11 AUTH -->
+      <section class="section" id="section-11">
+        <div class="section-header">
+          <span class="section-number">11</span>
+          <h1 class="section-title">Auth</h1>
+        </div>
+        <p class="section-lead">Tres camadas de autenticacao protegem a plataforma de ponta a ponta.</p>
+
+        <div class="auth-layers">
+          <div class="auth-layer">
+            <div class="auth-layer-num">1</div>
+            <div class="auth-layer-content">
+              <h3 class="auth-layer-title">Clerk (Frontend)</h3>
+              <p class="auth-layer-desc">Login, signup, sessao e troca de tenant. Emite JWT com claims do usuario. Gerencia MFA, social login e organizacoes no lado client.</p>
+              <div class="auth-layer-tags"><span class="tag frontend">Next.js</span><span class="tag frontend">React</span></div>
+            </div>
+          </div>
+          <div class="auth-layer-arrow">&#8595;</div>
+          <div class="auth-layer">
+            <div class="auth-layer-num">2</div>
+            <div class="auth-layer-content">
+              <h3 class="auth-layer-title">Identity Service (Backend)</h3>
+              <p class="auth-layer-desc">Valida tokens Clerk, gerencia permissoes internas. Mapeia o external_id do Clerk para user_id interno. Consultado pelo Authorizer Lambda em cada request.</p>
+              <div class="auth-layer-tags"><span class="tag backend">JWT validation</span><span class="tag backend">Permissions</span></div>
+            </div>
+          </div>
+          <div class="auth-layer-arrow">&#8595;</div>
+          <div class="auth-layer">
+            <div class="auth-layer-num">3</div>
+            <div class="auth-layer-content">
+              <h3 class="auth-layer-title">Lambda Authorizer (API Gateway)</h3>
+              <p class="auth-layer-desc">Valida cada request na borda. Verifica membership no workspace via PostgreSQL. Extrai workspace_id de 3 fontes: header, path param, query string. Retorna IAM Policy Allow/Deny.</p>
+              <div class="auth-layer-tags"><span class="tag infra">Lambda</span><span class="tag infra">IAM Policy</span></div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="subsection-title" style="margin-top:40px">Fluxo de Auth</h2>
+        <div class="flow flow-wrap">
+          <div class="flow-step flow-step-sm"><div class="flow-label">Request</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step flow-step-sm"><div class="flow-label">API Gateway</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step flow-step-sm"><div class="flow-label">Authorizer Lambda</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step flow-step-sm"><div class="flow-label">Authorization header<br/>&rarr; Identity Service<br/>&rarr; workspace_users</div></div>
+          <div class="flow-note">ou</div>
+          <div class="flow-step flow-step-sm"><div class="flow-label">x-client-id +<br/>x-client-secret<br/>&rarr; service account</div></div>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-step flow-step-sm"><div class="flow-label">IAM Policy<br/>Allow / Deny</div></div>
+        </div>
+
+        <h2 class="subsection-title" style="margin-top:40px">Roles</h2>
+        <div class="card-grid cols-3">
+          <div class="card">
+            <div class="card-icon icon-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3 class="card-title">admin</h3>
+            <p class="card-body">Acesso total: convidar/remover membros, configurar integracoes, gerenciar planos e service accounts.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>
+            <h3 class="card-title">editor</h3>
+            <p class="card-body">Leitura e escrita: criar diagnosticos, editar perfil, usar chat IA, gerenciar integracoes. Nao pode gerenciar membros.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <h3 class="card-title">viewer</h3>
+            <p class="card-body">Somente leitura: visualizar diagnosticos, metricas e relatorios. Sem permissao para criar ou modificar dados.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12 CONVENCOES -->
+      <section class="section" id="section-12">
+        <div class="section-header">
+          <span class="section-number">12</span>
+          <h1 class="section-title">Convencoes</h1>
+        </div>
+        <p class="section-lead">Padroes e convencoes adotados no codebase. Seguir sempre.</p>
+
+        <div class="conventions-grid">
+          <div class="convention-item">
+            <div class="convention-num">1</div>
+            <div class="convention-content">
+              <h3 class="convention-title">Clean Architecture + DDD</h3>
+              <p class="convention-desc">Fluxo de dependencia: <code>domain</code> &rarr; <code>app</code> &rarr; <code>infra</code>. Domain nao importa app nem infra. App nao importa infra. Plugin ESLint (<code>eslint-ddd-plugin.mjs</code>) enforces em lint time.</p>
+            </div>
+          </div>
+          <div class="convention-item">
+            <div class="convention-num">2</div>
+            <div class="convention-content">
+              <h3 class="convention-title">Inversify DI</h3>
+              <p class="convention-desc">Todas as dependencias injetadas via container Inversify. Wiring em <code>infra/di/containers.ts</code>. Tokens em <code>infra/di/types.ts</code>. Usar constructor injection com <code>@inject(TYPES.Foo)</code>.</p>
+            </div>
+          </div>
+          <div class="convention-item">
+            <div class="convention-num">3</div>
+            <div class="convention-content">
+              <h3 class="convention-title">Zod Validation</h3>
+              <p class="convention-desc">Input DTOs validam com Zod schemas. Usar Zod v4 via <code>import &#123; z &#125; from 'zod/v4'</code>. Nao instalar <code>zod@4</code> separadamente — usar o override <code>zod@3.25.67</code> com <code>zod/v4</code> subpath.</p>
+            </div>
+          </div>
+          <div class="convention-item">
+            <div class="convention-num">4</div>
+            <div class="convention-content">
+              <h3 class="convention-title">Decorators</h3>
+              <p class="convention-desc">Controllers usam: <code>@Route('method', '/path')</code>, <code>@Auth()</code>, <code>@RequireFeature('name')</code>, <code>@ApiTag('Tag')</code>. OpenAPI via <code>@ApiBodySchema</code>, <code>@ApiResponseSchema</code>, <code>@ApiQueryParamsSchema</code>.</p>
+            </div>
+          </div>
+          <div class="convention-item">
+            <div class="convention-num">5</div>
+            <div class="convention-content">
+              <h3 class="convention-title">Co-located Tests</h3>
+              <p class="convention-desc">Testes ao lado do codigo: <code>*.spec.ts</code> para backend (Vitest), <code>*.test.ts</code> para frontend (Jest). Mock factories em <code>domain/test/mocks/</code>.</p>
+            </div>
+          </div>
+          <div class="convention-item">
+            <div class="convention-num">6</div>
+            <div class="convention-content">
+              <h3 class="convention-title">Prisma + Kysely</h3>
+              <p class="convention-desc">Prisma somente para migrations (<code>pnpm migrate</code>). Kysely para queries em runtime. <code>prisma-kysely</code> gera types. Nunca usar Prisma Client para queries de producao.</p>
+            </div>
+          </div>
+          <div class="convention-item">
+            <div class="convention-num">7</div>
+            <div class="convention-content">
+              <h3 class="convention-title">Events</h3>
+              <p class="convention-desc">Domain events raised em aggregates via <code>this.raiseEvent()</code>. Publicados via SQS (batch, alta volume) ou RabbitMQ (single, tempo real). Handlers processam efeitos colaterais.</p>
+            </div>
+          </div>
+          <div class="convention-item">
+            <div class="convention-num">8</div>
+            <div class="convention-content">
+              <h3 class="convention-title">Commit Messages</h3>
+              <p class="convention-desc">Prefixo: <code>feat:</code> / <code>fix:</code> / <code>chore:</code> / <code>refactor:</code> / <code>docs:</code>. Em ingles. Descritivo. Exemplo: <code>feat: add workspace invite flow with role assignment</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="expandable" id="conv-more">
+          <button class="expandable-toggle" onclick="toggleExpand('conv-more')">
+            <span class="exp-icon">+</span> Mais convencoes
           </button>
-          <button class="tabs__btn" data-tab="tab-hub">
-            <span class="tabs__btn-icon" style="color:var(--purple)">&#9679;</span> integration-hub
+          <div class="expandable-content">
+            <div class="conventions-grid">
+              <div class="convention-item">
+                <div class="convention-num">9</div>
+                <div class="convention-content">
+                  <h3 class="convention-title">Build lib first</h3>
+                  <p class="convention-desc">Sempre rodar <code>pnpm build:lib</code> antes de qualquer servico. O <code>@v4-company/lib</code> precisa estar compilado para o TypeScript resolver os imports.</p>
+                </div>
+              </div>
+              <div class="convention-item">
+                <div class="convention-num">10</div>
+                <div class="convention-content">
+                  <h3 class="convention-title">Repository Pattern</h3>
+                  <p class="convention-desc">Interfaces de repository em <code>domain/repositories/</code>. Implementacoes Kysely em <code>infra/database/kysely/</code>. Nunca acessar DB direto de controllers ou use cases.</p>
+                </div>
+              </div>
+              <div class="convention-item">
+                <div class="convention-num">11</div>
+                <div class="convention-content">
+                  <h3 class="convention-title">Mappers</h3>
+                  <p class="convention-desc"><code>PersistenceMapper</code> para entity &harr; DB row. <code>ResponseMapper</code> para entity &harr; DTO de resposta. Toda transformacao passa por mapper — nunca inline.</p>
+                </div>
+              </div>
+              <div class="convention-item">
+                <div class="convention-num">12</div>
+                <div class="convention-content">
+                  <h3 class="convention-title">Feature Flags</h3>
+                  <p class="convention-desc">Feature flags via <code>@RequireFeature('flag-name')</code> no controller. Flags gerenciadas no Admin Panel. Middleware bloqueia acesso se feature desabilitada para o workspace.</p>
+                </div>
+              </div>
+              <div class="convention-item">
+                <div class="convention-num">13</div>
+                <div class="convention-content">
+                  <h3 class="convention-title">UnitOfWork Pattern</h3>
+                  <p class="convention-desc">Para operacoes transacionais, usar <code>KyselyUnitOfWork</code> do lib. Garante atomicidade: todos os repos dentro do UoW compartilham a mesma transacao Postgres.</p>
+                </div>
+              </div>
+              <div class="convention-item">
+                <div class="convention-num">14</div>
+                <div class="convention-content">
+                  <h3 class="convention-title">chat sem domain layer</h3>
+                  <p class="convention-desc">O servico <code>chat</code> usa arquitetura simplificada de 2 camadas: <code>app</code> e <code>infra</code>. Nao criar domain layer no chat — nao ha entidades de dominio complexas nesse servico.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13 GOTCHAS -->
+      <section class="section" id="section-13">
+        <div class="section-header">
+          <span class="section-number">13</span>
+          <h1 class="section-title">Gotchas</h1>
+        </div>
+        <p class="section-lead">Armadilhas comuns. Leia antes de comecar.</p>
+
+        <div class="callout warning">
+          <div class="callout-icon">!</div>
+          <div class="callout-content">
+            <h3 class="callout-title">pnpm build:lib ANTES de tudo</h3>
+            <p>Se voce ver <code>Module not found: @v4-company/lib</code> — e porque nao rodou <code>pnpm build:lib</code>. Rode sempre apos dar pull ou instalar deps.</p>
+            <div class="code-block"><code>pnpm build:lib   # SEMPRE primeiro</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <div class="callout-icon">!</div>
+          <div class="callout-content">
+            <h3 class="callout-title">chat NAO tem domain layer</h3>
+            <p>O servico <code>packages/chat</code> usa arquitetura simplificada: apenas <code>app/</code> e <code>infra/</code>. Nao crie pasta <code>domain/</code> no chat. Nao ha aggregates, value objects nem domain events nesse servico.</p>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <div class="callout-icon">!</div>
+          <div class="callout-content">
+            <h3 class="callout-title">Zod v4 via zod@3.25 com subpath import</h3>
+            <p>Em novo codigo, importe Zod assim:</p>
+            <div class="code-block"><code>import &#123; z &#125; from 'zod/v4'  <span class="code-comment">// correto — Zod v4</span>
+import &#123; z &#125; from 'zod'     <span class="code-comment">// antigo — e v3</span></code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+            <p>Nao instale <code>zod@4</code> separadamente — causara conflito. O monorepo usa override <code>zod@3.25.67</code> com o subpath <code>zod/v4</code>.</p>
+          </div>
+        </div>
+
+        <div class="callout warning">
+          <div class="callout-icon">!</div>
+          <div class="callout-content">
+            <h3 class="callout-title">Docker obrigatorio para dev:prepare</h3>
+            <p>O comando <code>pnpm dev:prepare</code> precisa do Docker rodando para subir PostgreSQL, LocalStack (S3/SQS) e RabbitMQ. Sem Docker, as migrations vao falhar e os servicos nao sobem.</p>
+          </div>
+        </div>
+
+        <div class="expandable" id="gotchas-more">
+          <button class="expandable-toggle" onclick="toggleExpand('gotchas-more')">
+            <span class="exp-icon">+</span> Mais gotchas
           </button>
-          <button class="tabs__btn" data-tab="tab-chat">
-            <span class="tabs__btn-icon" style="color:var(--orange)">&#9679;</span> chat (AI)
-          </button>
-          <button class="tabs__btn" data-tab="tab-lib">
-            <span class="tabs__btn-icon" style="color:var(--blue)">&#9679;</span> lib
-          </button>
-          <button class="tabs__btn" data-tab="tab-web">
-            <span class="tabs__btn-icon" style="color:var(--cyan)">&#9679;</span> web-client
-          </button>
-          <button class="tabs__btn" data-tab="tab-auth">
-            <span class="tabs__btn-icon" style="color:var(--red)">&#9679;</span> authorizer
-          </button>
-          <button class="tabs__btn" data-tab="tab-api">
-            <span class="tabs__btn-icon" style="color:var(--blue)">&#9679;</span> v4-marketing-api
-          </button>
-          <button class="tabs__btn" data-tab="tab-data">
-            <span class="tabs__btn-icon" style="color:var(--pink)">&#9679;</span> v4-marketing-data
-          </button>
-        </div>
-
-        <!-- ===== TAB: v4-marketing (core) ===== -->
-        <div class="tabs__panel tabs__panel--active" id="tab-core">
-          <div class="svc-header">
-            <div class="svc-header__info">
-              <h3>v4-marketing</h3>
-              <p>Core service: usuarios, organizacoes, workspaces, diagnosticos, planos, pagamentos, convites. Clean Architecture / DDD.</p>
-              <div class="svc-header__meta">
-                <span class="svc-meta">Porta <strong>3012</strong></span>
-                <span class="svc-meta">Fastify 5</span>
-                <span class="svc-meta">Inversify DI</span>
-                <span class="svc-meta">Kysely + Prisma</span>
+          <div class="expandable-content">
+            <div class="callout warning">
+              <div class="callout-icon">!</div>
+              <div class="callout-content">
+                <h3 class="callout-title">ESLint DDD enforces layer imports</h3>
+                <p>Nunca importe infra a partir de domain ou app — o ESLint vai bloquear o build. Regras em <code>eslint-ddd-plugin.mjs</code>. Se o lint falhar por import incorreto, mova o codigo para a camada correta.</p>
               </div>
             </div>
-            <div class="svc-header__stats">
-              <div class="svc-stat"><span>47</span>Use Cases</div>
-              <div class="svc-stat"><span>10</span>Controllers</div>
-              <div class="svc-stat"><span>19</span>Tabelas</div>
-              <div class="svc-stat"><span>18</span>Eventos</div>
-            </div>
-          </div>
-
-          <div class="svc-grid">
-            <!-- Folder Structure -->
-            <div class="svc-card">
-              <h4>Estrutura de Pastas</h4>
-              <pre class="svc-tree"><code>v4-marketing/
-├── domain/
-│   ├── aggregates/      <span class="tree-note"># 22 entidades</span>
-│   ├── repositories/    <span class="tree-note"># 17 interfaces</span>
-│   ├── events/          <span class="tree-note"># 18 domain events</span>
-│   ├── vo/              <span class="tree-note"># 10 value objects</span>
-│   └── Enums/
-├── app/
-│   ├── usecases/        <span class="tree-note"># 47 use cases</span>
-│   ├── services/        <span class="tree-note"># 19 services</span>
-│   ├── dtos/input/      <span class="tree-note"># 50 input DTOs</span>
-│   ├── dtos/output/     <span class="tree-note"># 43 output DTOs</span>
-│   ├── events/          <span class="tree-note"># 8 event handlers</span>
-│   ├── exceptions/      <span class="tree-note"># 38 exceptions</span>
-│   └── mappers/         <span class="tree-note"># 20+ mappers</span>
-└── infra/
-    ├── controller/      <span class="tree-note"># 10 controllers</span>
-    ├── database/kysely/  <span class="tree-note"># 18 repo impl</span>
-    ├── database/prisma/  <span class="tree-note"># 70+ migrations</span>
-    ├── di/              <span class="tree-note"># containers.ts</span>
-    └── events/          <span class="tree-note"># event bus setup</span></code></pre>
-            </div>
-
-            <!-- Key Entities -->
-            <div class="svc-card">
-              <h4>Aggregates Principais</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>User</code> <span>Conta multi-tenant (email, name, phone, jobTitle)</span></div>
-                <div class="svc-list-item"><code>Organization</code> <span>Container de tenant (name, domain, tenantId)</span></div>
-                <div class="svc-list-item"><code>Workspace</code> <span>Espaco de trabalho (companyName, siteUrl, businessModel)</span></div>
-                <div class="svc-list-item"><code>Subscription</code> <span>Assinatura SaaS (status, plan, period)</span></div>
-                <div class="svc-list-item"><code>Plan</code> <span>Planos de assinatura (price, interval, features)</span></div>
-                <div class="svc-list-item"><code>Diagnosis</code> <span>Diagnostico AI de marketing (steps, profile)</span></div>
-                <div class="svc-list-item"><code>DeepResearch</code> <span>Pesquisa profunda (CNPJ, evidencias)</span></div>
-                <div class="svc-list-item"><code>Artifact</code> <span>Artefatos gerados (content, type)</span></div>
-                <div class="svc-list-item"><code>Payment</code> <span>Pagamentos Eduzz (orderId, amount)</span></div>
-                <div class="svc-list-item"><code>InviteUser</code> <span>Convites de workspace (role, origin)</span></div>
+            <div class="callout warning">
+              <div class="callout-icon">!</div>
+              <div class="callout-content">
+                <h3 class="callout-title">Prisma e APENAS para migrations</h3>
+                <p>Nunca use Prisma Client para queries em runtime. Use Kysely. O Prisma Client nem e instalado como dep de runtime — serve apenas para <code>prisma generate</code> e <code>prisma migrate</code>.</p>
               </div>
             </div>
-
-            <!-- Routes -->
-            <div class="svc-card svc-card--wide">
-              <h4>Rotas Principais</h4>
-              <div class="svc-routes">
-                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces</code><span>Criar workspace</span></div>
-                <div class="svc-route"><span class="method method--get">GET</span><code>/workspaces/:id</code><span>Buscar workspace</span></div>
-                <div class="svc-route"><span class="method method--get">GET</span><code>/workspaces/:id/diagnoses</code><span>Listar diagnosticos</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces/:id/invite</code><span>Convidar usuario</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces/:id/marketing-profile</code><span>Processar perfil</span></div>
-                <div class="svc-route"><span class="method method--get">GET</span><code>/users/:id</code><span>Buscar usuario</span></div>
-                <div class="svc-route"><span class="method method--get">GET</span><code>/users/:id/workspaces</code><span>Workspaces do usuario</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/diagnoses</code><span>Criar diagnostico</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/plans</code><span>CRUD de planos</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/webhook/eduzz</code><span>Webhook pagamento</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/webhook/linear</code><span>Webhook Linear</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/feature-access/check</code><span>Checar feature flag</span></div>
+            <div class="callout warning">
+              <div class="callout-icon">!</div>
+              <div class="callout-content">
+                <h3 class="callout-title">Repos separados usam package managers diferentes</h3>
+                <p><code>v4-marketing-api</code> usa <strong>npm</strong> (nao pnpm). <code>v4-marketing-data</code> usa <strong>yarn</strong> + <strong>uv</strong> (Python). Nao misture — o pnpm nao gerencia esses repos.</p>
               </div>
             </div>
-
-            <!-- Events -->
-            <div class="svc-card">
-              <h4>Eventos (SQS + RabbitMQ)</h4>
-              <div class="svc-tags">
-                <span class="svc-tag svc-tag--rabbit">CreateTenantEvent</span>
-                <span class="svc-tag svc-tag--rabbit">AttachUserToTenantEvent</span>
-                <span class="svc-tag svc-tag--rabbit">DefaultUserOperatorCreatedEvent</span>
-                <span class="svc-tag svc-tag--rabbit">NotificationEmailEvent</span>
-                <span class="svc-tag svc-tag--rabbit">NotificationWhatsappEvent</span>
-                <span class="svc-tag svc-tag--rabbit">OpportunityClosedEvent</span>
-                <span class="svc-tag svc-tag--sqs">DiagnosisStepCreatedEvent</span>
-                <span class="svc-tag svc-tag--sqs">WebScrapingRequestedEvent</span>
-                <span class="svc-tag svc-tag--sqs">DeepResearchRequestedEvent</span>
-              </div>
-              <div class="svc-legend">
-                <span class="svc-tag svc-tag--rabbit">RabbitMQ</span> single event
-                <span class="svc-tag svc-tag--sqs">SQS</span> batch processing
+            <div class="callout warning">
+              <div class="callout-icon">!</div>
+              <div class="callout-content">
+                <h3 class="callout-title">LangSmith Hub: prompts carregados em runtime</h3>
+                <p>O <code>chat</code> carrega prompts do LangSmith Hub em runtime. Se falhar ao iniciar, verifique <code>LANGSMITH_API_KEY</code> no <code>.env</code>. Sem a key, o agent nao consegue carregar o system prompt.</p>
               </div>
             </div>
-
-            <!-- Database Tables -->
-            <div class="svc-card">
-              <h4>Tabelas (19)</h4>
-              <div class="svc-tags">
-                <span class="svc-tag">Users</span>
-                <span class="svc-tag">Organizations</span>
-                <span class="svc-tag">Workspaces</span>
-                <span class="svc-tag">Subscriptions</span>
-                <span class="svc-tag">Plans</span>
-                <span class="svc-tag">Payments</span>
-                <span class="svc-tag">WorkspaceUsers</span>
-                <span class="svc-tag">OrganizationUsers</span>
-                <span class="svc-tag">InviteUsers</span>
-                <span class="svc-tag">MarketingProfiles</span>
-                <span class="svc-tag">Diagnosis</span>
-                <span class="svc-tag">DiagnosisStep</span>
-                <span class="svc-tag">Artifacts</span>
-                <span class="svc-tag">DeepResearches</span>
-                <span class="svc-tag">WebsiteCollectedData</span>
-                <span class="svc-tag">DefaultUserOperator</span>
-                <span class="svc-tag">Integrations</span>
-                <span class="svc-tag">AnomalyEvents</span>
-                <span class="svc-tag">ErrorsHistory</span>
+            <div class="callout warning">
+              <div class="callout-icon">!</div>
+              <div class="callout-content">
+                <h3 class="callout-title">workspace_id em 3 lugares diferentes</h3>
+                <p>O Authorizer Lambda extrai o <code>workspace_id</code> de 3 fontes: header <code>x-workspace-id</code>, path param <code>/workspaces/:workspaceId</code> e query string <code>?workspaceId=</code>. Seja consistente ao construir requests.</p>
+              </div>
+            </div>
+            <div class="callout warning">
+              <div class="callout-icon">!</div>
+              <div class="callout-content">
+                <h3 class="callout-title">Service accounts: headers especiais</h3>
+                <p>Service accounts nao usam <code>Authorization: Bearer</code>. Usam <code>x-client-id</code> e <code>x-client-secret</code> como headers. Se integrar M2M, use esses headers em vez de token JWT.</p>
+              </div>
+            </div>
+            <div class="callout warning">
+              <div class="callout-icon">!</div>
+              <div class="callout-content">
+                <h3 class="callout-title">AWS credentials para v4-marketing-data</h3>
+                <p>O <code>v4-marketing-data</code> acessa AWS diretamente (S3, Lambda, ECS, Aurora). Precisa de credenciais AWS configuradas no ambiente. Peca ao tech lead o perfil AWS correto.</p>
               </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- ===== TAB: integration-hub ===== -->
-        <div class="tabs__panel" id="tab-hub">
-          <div class="svc-header">
-            <div class="svc-header__info">
-              <h3>integration-hub</h3>
-              <p>Gerencia conexoes com plataformas externas: OAuth flows, CRUD de integracoes, listagem de contas. Clean Architecture / DDD.</p>
-              <div class="svc-header__meta">
-                <span class="svc-meta">Porta <strong>3001</strong></span>
-                <span class="svc-meta">Fastify 5</span>
-                <span class="svc-meta">OAuth2</span>
-                <span class="svc-meta">AWS SigV4</span>
-              </div>
-            </div>
-            <div class="svc-header__stats">
-              <div class="svc-stat"><span>14</span>Use Cases</div>
-              <div class="svc-stat"><span>14</span>Rotas</div>
-              <div class="svc-stat"><span>130+</span>Tipos Integ.</div>
-              <div class="svc-stat"><span>1</span>Tabela</div>
-            </div>
+      <!-- 14 SETUP LOCAL -->
+      <section class="section" id="section-14">
+        <div class="section-header">
+          <span class="section-number">14</span>
+          <h1 class="section-title">Setup Local</h1>
+        </div>
+        <p class="section-lead">Tudo que voce precisa para rodar o V4MOS localmente do zero.</p>
+
+        <h2 class="subsection-title">Pre-requisitos</h2>
+        <div class="prereq-grid">
+          <div class="prereq-item">
+            <span class="prereq-name">Node.js</span><span class="prereq-version">v20+</span>
+            <div class="code-block"><code>nvm install 20 &amp;&amp; nvm use 20</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
           </div>
-
-          <div class="svc-grid">
-            <div class="svc-card">
-              <h4>OAuth Flows</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>FacebookAuthUseCase</code> <span>OAuth code exchange + ad accounts</span></div>
-                <div class="svc-list-item"><code>GoogleAuthUseCase</code> <span>OAuth + Ads API + GA4 API</span></div>
-                <div class="svc-list-item"><code>KommoAuthUseCase</code> <span>Kommo CRM OAuth flow</span></div>
-              </div>
-            </div>
-
-            <div class="svc-card">
-              <h4>CRUD de Integracoes</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>CreateIntegrationUseCase</code> <span>Criar conexao com plataforma</span></div>
-                <div class="svc-list-item"><code>UpdateIntegrationUseCase</code> <span>Atualizar nome, email, frequencia</span></div>
-                <div class="svc-list-item"><code>DeleteIntegrationUseCase</code> <span>Soft delete (status = 4)</span></div>
-                <div class="svc-list-item"><code>ReconnectIntegrationUseCase</code> <span>Reconectar com novos tokens</span></div>
-                <div class="svc-list-item"><code>GetWorkspaceIntegrationsUseCase</code> <span>Listar com paginacao</span></div>
-              </div>
-            </div>
-
-            <div class="svc-card svc-card--wide">
-              <h4>Plataformas Suportadas (130+ tipos)</h4>
-              <div class="svc-platforms">
-                <div class="svc-platform-group">
-                  <h5>Ads</h5>
-                  <span>Facebook Ads (14 tipos)</span>
-                  <span>Google Ads (14 tipos)</span>
-                  <span>TikTok (5 tipos)</span>
-                  <span>LinkedIn (3 tipos)</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Analytics</h5>
-                  <span>Google Analytics (10 tipos)</span>
-                  <span>Instagram Insights (6 tipos)</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>CRM</h5>
-                  <span>Kommo</span>
-                  <span>Bitrix</span>
-                  <span>Pipedrive</span>
-                  <span>RD Station</span>
-                  <span>Piperun</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>E-Commerce</h5>
-                  <span>Shopify</span>
-                  <span>VTEX</span>
-                  <span>Tray</span>
-                  <span>Nuvem Shop</span>
-                  <span>Loja Integrada</span>
-                  <span>Wake</span>
-                  <span>WooCommerce</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Outros</h5>
-                  <span>Zendesk</span>
-                  <span>Meetime</span>
-                  <span>Inhire</span>
-                  <span>Unbounce</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="svc-card svc-card--wide">
-              <h4>Rotas</h4>
-              <div class="svc-routes">
-                <div class="svc-route"><span class="method method--post">POST</span><code>/integrations</code><span>Criar integracao</span></div>
-                <div class="svc-route"><span class="method method--get">GET</span><code>/workspaces/:id/integrations</code><span>Listar integracoes</span></div>
-                <div class="svc-route"><span class="method method--get">GET</span><code>/workspaces/:id/integrations/status</code><span>Status agregado</span></div>
-                <div class="svc-route"><span class="method method--put">PUT</span><code>/integrations</code><span>Atualizar integracao</span></div>
-                <div class="svc-route"><span class="method method--delete">DEL</span><code>/integrations</code><span>Deletar integracoes</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/integrations/reconnect</code><span>Reconectar</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/facebook/auth</code><span>Facebook OAuth</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/facebook/ad-accounts</code><span>Listar Ad Accounts</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/google/auth</code><span>Google OAuth</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/google/ad-accounts</code><span>Listar Google Ads</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/google/analytics-accounts</code><span>Listar GA4</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/kommo/auth</code><span>Kommo OAuth</span></div>
-              </div>
-            </div>
+          <div class="prereq-item">
+            <span class="prereq-name">pnpm</span><span class="prereq-version">v9.15+</span>
+            <div class="code-block"><code>npm i -g pnpm@9.15</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          </div>
+          <div class="prereq-item">
+            <span class="prereq-name">Docker</span><span class="prereq-version">v24+</span>
+            <div class="code-block"><code>docker --version</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          </div>
+          <div class="prereq-item">
+            <span class="prereq-name">Python</span><span class="prereq-version">3.11+</span>
+            <div class="code-block"><code>python3 --version</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          </div>
+          <div class="prereq-item">
+            <span class="prereq-name">uv</span><span class="prereq-version">latest</span>
+            <div class="code-block"><code>pip install uv</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
+          </div>
+          <div class="prereq-item">
+            <span class="prereq-name">Git</span><span class="prereq-version">v2+</span>
+            <div class="code-block"><code>git --version</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
           </div>
         </div>
 
-        <!-- ===== TAB: chat (AI) ===== -->
-        <div class="tabs__panel" id="tab-chat">
-          <div class="svc-header">
-            <div class="svc-header__info">
-              <h3>chat (AI)</h3>
-              <p>Assistente AI com 10 agentes especializados, 40+ tools, multi-model (OpenAI, Anthropic, Gemini), streaming SSE, e sub-agentes Bedrock.</p>
-              <div class="svc-header__meta">
-                <span class="svc-meta">Porta <strong>3013</strong></span>
-                <span class="svc-meta">LangGraph</span>
-                <span class="svc-meta">SSE Streaming</span>
-                <span class="svc-meta">Sem Domain Layer</span>
-              </div>
-            </div>
-            <div class="svc-header__stats">
-              <div class="svc-stat"><span>13</span>Use Cases</div>
-              <div class="svc-stat"><span>10</span>Agentes AI</div>
-              <div class="svc-stat"><span>40+</span>Tools</div>
-              <div class="svc-stat"><span>3</span>Tabelas</div>
-            </div>
-          </div>
+        <h2 class="subsection-title" style="margin-top:40px">Passo a Passo</h2>
 
-          <div class="svc-grid">
-            <div class="svc-card">
-              <h4>Agentes</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>default</code> <span>Marketing AI geral — 32 tools</span></div>
-                <div class="svc-list-item"><code>support</code> <span>Suporte interno — 19 tools</span></div>
-                <div class="svc-list-item"><code>support-public</code> <span>FAQ publico — 1 tool (Algolia)</span></div>
-                <div class="svc-list-item"><code>goal-tree</code> <span>Arvore de metas — 3 tools</span></div>
-                <div class="svc-list-item"><code>crt-agent</code> <span>Current Reality Tree</span></div>
-                <div class="svc-list-item"><code>frt-agent</code> <span>Future Reality Tree</span></div>
-                <div class="svc-list-item"><code>prt-agent</code> <span>Prerequisite Tree</span></div>
-                <div class="svc-list-item"><code>transition-agent</code> <span>Transition planning</span></div>
-                <div class="svc-list-item"><code>evaporating-cloud</code> <span>Conflict resolution</span></div>
-                <div class="svc-list-item"><code>questionnaire-agent</code> <span>Questionario guiado</span></div>
-              </div>
-            </div>
+        <div class="setup-step">
+          <div class="setup-step-num">1</div>
+          <div class="setup-step-content">
+            <h3 class="setup-step-title">Clone os repositorios</h3>
+            <div class="code-block"><code><span class="code-comment"># Backend monorepo (principal)</span>
+git clone git@github.com:v4company/v4-marketing-backend.git
 
-            <div class="svc-card">
-              <h4>Modelos Suportados</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>OpenAI</code> <span>GPT-5.4, GPT-4o, GPT-4o-mini</span></div>
-                <div class="svc-list-item"><code>Anthropic</code> <span>Claude Opus 4.6, Sonnet 4.6, Haiku 4.5</span></div>
-                <div class="svc-list-item"><code>Google</code> <span>Gemini 2.5 Pro, Gemini 2.5 Flash</span></div>
-                <div class="svc-list-item"><code>Bedrock</code> <span>Sub-agentes especialistas (docs, data, mkt)</span></div>
-              </div>
-              <h4 style="margin-top:16px">Tabelas</h4>
-              <div class="svc-tags">
-                <span class="svc-tag">ChatMetadata</span>
-                <span class="svc-tag">Skill</span>
-                <span class="svc-tag">UserMemory</span>
-                <span class="svc-tag">checkpoints (LangGraph)</span>
-              </div>
-            </div>
+<span class="code-comment"># API de dados de plataformas</span>
+git clone git@github.com:v4company/v4-marketing-api.git
 
-            <div class="svc-card svc-card--wide">
-              <h4>AI Tools (13 dominios)</h4>
-              <div class="svc-platforms">
-                <div class="svc-platform-group">
-                  <h5>Diagnostico</h5>
-                  <span>get-workspace-diagnosis</span>
-                  <span>get-workspace-questionnaires</span>
-                  <span>save-markdown</span>
-                  <span>get-markdown</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Usuario</h5>
-                  <span>get-user-profile</span>
-                  <span>get-user-workspaces</span>
-                  <span>get-user-organizations</span>
-                  <span>get-user-payments</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Workspace</h5>
-                  <span>invite-workspace-member</span>
-                  <span>accept-workspace-invite</span>
-                  <span>update-member-role</span>
-                  <span>remove-member</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Especialistas</h5>
-                  <span>documentation-agent-v4</span>
-                  <span>data-agent-v4</span>
-                  <span>digital-marketing-agent-v4</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Outros</h5>
-                  <span>faq-search (Algolia)</span>
-                  <span>list/load/create skills</span>
-                  <span>save-user-memory</span>
-                  <span>deep-research</span>
-                  <span>integrations (list/disconnect)</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="svc-card svc-card--wide">
-              <h4>Rotas</h4>
-              <div class="svc-routes">
-                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces/:id/chats</code><span>Criar chat</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces/:id/chats/:chatId/messages</code><span>Enviar mensagem (SSE)</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/public/chats/:sessionId/messages</code><span>Chat publico (SSE)</span></div>
-                <div class="svc-route"><span class="method method--get">GET</span><code>/users/:id/chats</code><span>Listar chats do usuario</span></div>
-                <div class="svc-route"><span class="method method--get">GET</span><code>/workspaces/:id/chats/:chatId/history</code><span>Historico</span></div>
-                <div class="svc-route"><span class="method method--delete">DEL</span><code>/workspaces/:id/chats/:chatId</code><span>Deletar chat</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/chats/feedback</code><span>Feedback LangSmith</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/workspaces/:id/skills</code><span>CRUD skills</span></div>
-                <div class="svc-route"><span class="method method--post">POST</span><code>/upload-presigned-url</code><span>Upload S3</span></div>
-              </div>
-            </div>
+<span class="code-comment"># Data pipeline (AWS + Python)</span>
+git clone git@github.com:v4company/v4-marketing-data.git</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
           </div>
         </div>
 
-        <!-- ===== TAB: lib ===== -->
-        <div class="tabs__panel" id="tab-lib">
-          <div class="svc-header">
-            <div class="svc-header__info">
-              <h3>@v4-company/lib</h3>
-              <p>Biblioteca compartilhada: base classes, decorators, event bus, server builder, auth, value objects. Todos os servicos dependem dela.</p>
-              <div class="svc-header__meta">
-                <span class="svc-meta"><code>pnpm build:lib</code> primeiro!</span>
-                <span class="svc-meta">17 modulos</span>
-              </div>
-            </div>
-          </div>
+        <div class="setup-step">
+          <div class="setup-step-num">2</div>
+          <div class="setup-step-content">
+            <h3 class="setup-step-title">Instale as dependencias</h3>
+            <div class="code-block"><code><span class="code-comment"># v4-marketing-backend (pnpm)</span>
+cd v4-marketing-backend
+pnpm install
 
-          <div class="svc-grid">
-            <div class="svc-card">
-              <h4>Base Classes</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>Entity&lt;T&gt;</code> <span>Base de todas entidades (ID, props, events)</span></div>
-                <div class="svc-list-item"><code>AggregateRoot&lt;T&gt;</code> <span>Aggregate root com raiseEvent()</span></div>
-                <div class="svc-list-item"><code>UseCase&lt;I,O&gt;</code> <span>Interface para use cases</span></div>
-                <div class="svc-list-item"><code>Service&lt;I,O&gt;</code> <span>Base para services multi-step</span></div>
-                <div class="svc-list-item"><code>FastifyController</code> <span>Controller HTTP com decorators</span></div>
-                <div class="svc-list-item"><code>ValueObject&lt;T&gt;</code> <span>Base para value objects</span></div>
-                <div class="svc-list-item"><code>BaseRepository</code> <span>Repository com transacao</span></div>
-                <div class="svc-list-item"><code>BaseUnitOfWork</code> <span>Unit of Work pattern</span></div>
-              </div>
-            </div>
+<span class="code-comment"># v4-marketing-api (npm — NAO use pnpm aqui)</span>
+cd ../v4-marketing-api
+npm install
 
-            <div class="svc-card">
-              <h4>Decorators</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>@Route(method, path)</code> <span>Define rota HTTP</span></div>
-                <div class="svc-list-item"><code>@Auth()</code> <span>Exige autenticacao</span></div>
-                <div class="svc-list-item"><code>@Auth(resource, action)</code> <span>Auth + permissao especifica</span></div>
-                <div class="svc-list-item"><code>@RequireFeature(name)</code> <span>Exige feature flag</span></div>
-                <div class="svc-list-item"><code>@ApiTag(tag)</code> <span>Swagger tag grouping</span></div>
-                <div class="svc-list-item"><code>@ApiBodySchema(Zod)</code> <span>Documenta request body</span></div>
-                <div class="svc-list-item"><code>@ApiResponseSchema({})</code> <span>Documenta responses</span></div>
-                <div class="svc-list-item"><code>@Logging()</code> <span>Auto-logging em metodos</span></div>
-              </div>
-            </div>
-
-            <div class="svc-card">
-              <h4>Event Bus</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>RabbitMQEventBus</code> <span>Topic exchange + DLQ + dedup Redis</span></div>
-                <div class="svc-list-item"><code>SQSEventBus</code> <span>Batch processing + long polling</span></div>
-                <div class="svc-list-item"><code>Event&lt;T&gt;</code> <span>Base: id, type, payload, occurredOn</span></div>
-                <div class="svc-list-item"><code>EventHandler&lt;T&gt;</code> <span>Handler single event</span></div>
-                <div class="svc-list-item"><code>BatchEventHandler&lt;T&gt;</code> <span>Handler batch SQS</span></div>
-              </div>
-            </div>
-
-            <div class="svc-card">
-              <h4>Server Builder</h4>
-              <pre class="svc-tree"><code>FastifyServerBuilder.create()
-  .withConfig({ port, host })
-  .withCors({ origin: '*' })
-  .withSwagger({ enabled: true })
-  .withContainer(diContainer)
-  .withControllers(...)
-  .withTracing(ddTracer)
-  .buildAndListen()</code></pre>
-            </div>
-
-            <div class="svc-card">
-              <h4>Value Objects</h4>
-              <div class="svc-tags">
-                <span class="svc-tag">EntityIdVO</span>
-                <span class="svc-tag">EmailVO</span>
-                <span class="svc-tag">StringVO</span>
-                <span class="svc-tag">RequiredStringVO</span>
-                <span class="svc-tag">NumberVO</span>
-                <span class="svc-tag">IntegerVO</span>
-                <span class="svc-tag">DateVO</span>
-                <span class="svc-tag">BooleanVO</span>
-                <span class="svc-tag">ObjectVO</span>
-                <span class="svc-tag">EnumVO</span>
-              </div>
-            </div>
-
-            <div class="svc-card">
-              <h4>Outros Modulos</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>StringCipher</code> <span>AES-256-CBC encryption</span></div>
-                <div class="svc-list-item"><code>GenericErrorHandler</code> <span>Mapeia exceptions p/ HTTP</span></div>
-                <div class="svc-list-item"><code>ApiAdapter / Axios</code> <span>HTTP client abstraction</span></div>
-                <div class="svc-list-item"><code>KyselyUnitOfWork</code> <span>UoW com transacao Kysely</span></div>
-                <div class="svc-list-item"><code>PersistenceMapper</code> <span>Domain -> DB mapping</span></div>
-                <div class="svc-list-item"><code>ResponseMapper</code> <span>Domain -> API response</span></div>
-              </div>
-            </div>
+<span class="code-comment"># v4-marketing-data (yarn + uv para Python)</span>
+cd ../v4-marketing-data
+yarn install
+uv sync</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
           </div>
         </div>
 
-        <!-- ===== TAB: web-client ===== -->
-        <div class="tabs__panel" id="tab-web">
-          <div class="svc-header">
-            <div class="svc-header__info">
-              <h3>web-client</h3>
-              <p>Frontend Next.js 15 (App Router) com React 19, Clerk auth, Tailwind + Radix UI, Datadog RUM, Mixpanel.</p>
-              <div class="svc-header__meta">
-                <span class="svc-meta">Porta <strong>3000</strong></span>
-                <span class="svc-meta">Next.js 15</span>
-                <span class="svc-meta">React 19</span>
-                <span class="svc-meta">Tailwind + Radix</span>
-              </div>
-            </div>
-            <div class="svc-header__stats">
-              <div class="svc-stat"><span>20+</span>Paginas</div>
-              <div class="svc-stat"><span>50+</span>UI Comps</div>
-              <div class="svc-stat"><span>48</span>AI Comps</div>
-              <div class="svc-stat"><span>20+</span>Hooks</div>
-            </div>
-          </div>
-
-          <div class="svc-grid">
-            <div class="svc-card">
-              <h4>Rotas (App Router)</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>/signin, /signup</code> <span>Auth (publico)</span></div>
-                <div class="svc-list-item"><code>/panel</code> <span>Dashboard principal</span></div>
-                <div class="svc-list-item"><code>/chat, /chat/[uuid]</code> <span>Chat AI</span></div>
-                <div class="svc-list-item"><code>/chat/agents</code> <span>Selecao de agentes</span></div>
-                <div class="svc-list-item"><code>/diagnosis</code> <span>Diagnostico de marketing</span></div>
-                <div class="svc-list-item"><code>/settings</code> <span>Configuracoes</span></div>
-                <div class="svc-list-item"><code>/admin</code> <span>Painel admin</span></div>
-                <div class="svc-list-item"><code>/onboarding</code> <span>Fluxo de onboarding</span></div>
-                <div class="svc-list-item"><code>/workspace-selection</code> <span>Selecao de workspace</span></div>
-                <div class="svc-list-item"><code>/track</code> <span>Tracking</span></div>
-              </div>
-            </div>
-
-            <div class="svc-card">
-              <h4>Commons Packages</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>@workspace/core</code> <span>Auth (Clerk), API client, hooks, user context</span></div>
-                <div class="svc-list-item"><code>@workspace/ui</code> <span>50+ componentes Radix + Tailwind + CVA</span></div>
-                <div class="svc-list-item"><code>@workspace/eslint-config</code> <span>ESLint compartilhado</span></div>
-                <div class="svc-list-item"><code>@workspace/typescript-config</code> <span>tsconfig compartilhado</span></div>
-              </div>
-              <h4 style="margin-top:16px">Hooks por dominio</h4>
-              <div class="svc-tags">
-                <span class="svc-tag">workspaces</span>
-                <span class="svc-tag">organizations</span>
-                <span class="svc-tag">chat</span>
-                <span class="svc-tag">diagnosis</span>
-                <span class="svc-tag">commitment</span>
-                <span class="svc-tag">facebookads</span>
-                <span class="svc-tag">funnel</span>
-                <span class="svc-tag">retention</span>
-                <span class="svc-tag">exposure</span>
-              </div>
-            </div>
-
-            <div class="svc-card svc-card--wide">
-              <h4>AI Components (48+)</h4>
-              <div class="svc-platforms">
-                <div class="svc-platform-group">
-                  <h5>Chat UI</h5>
-                  <span>message.tsx</span>
-                  <span>prompt-input.tsx</span>
-                  <span>chain-of-thought.tsx</span>
-                  <span>reasoning.tsx</span>
-                  <span>model-selector.tsx</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Content</h5>
-                  <span>artifact.tsx</span>
-                  <span>code-block.tsx</span>
-                  <span>web-preview.tsx</span>
-                  <span>file-tree.tsx</span>
-                  <span>canvas.tsx</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Dev Tools</h5>
-                  <span>terminal.tsx</span>
-                  <span>test-results.tsx</span>
-                  <span>stack-trace.tsx</span>
-                  <span>sandbox.tsx</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Audio/Input</h5>
-                  <span>speech-input.tsx</span>
-                  <span>voice-selector.tsx</span>
-                  <span>audio-player.tsx</span>
-                  <span>attachments.tsx</span>
-                </div>
-              </div>
-            </div>
+        <div class="setup-step">
+          <div class="setup-step-num">3</div>
+          <div class="setup-step-content">
+            <h3 class="setup-step-title">Build da shared library</h3>
+            <div class="code-block"><code><span class="code-comment"># OBRIGATORIO — rode ANTES de qualquer servico</span>
+cd v4-marketing-backend
+pnpm build:lib</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
           </div>
         </div>
 
-        <!-- ===== TAB: authorizer ===== -->
-        <div class="tabs__panel" id="tab-auth">
-          <div class="svc-header">
-            <div class="svc-header__info">
-              <h3>authorizer</h3>
-              <p>Lambda AWS que valida tokens JWT e acesso a workspaces no API Gateway. Suporta user tokens e service accounts.</p>
-              <div class="svc-header__meta">
-                <span class="svc-meta">AWS Lambda</span>
-                <span class="svc-meta">Inversify</span>
-                <span class="svc-meta">Kysely</span>
-              </div>
-            </div>
-          </div>
+        <div class="setup-step">
+          <div class="setup-step-num">4</div>
+          <div class="setup-step-content">
+            <h3 class="setup-step-title">Configure o .env</h3>
+            <div class="code-block"><code><span class="code-comment"># Copie o exemplo</span>
+cp .env.example .env
 
-          <div class="svc-grid">
-            <div class="svc-card">
-              <h4>Fluxo de Validacao</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>1.</code> <span>Recebe request do API Gateway</span></div>
-                <div class="svc-list-item"><code>2.</code> <span>Detecta metodo: Authorization header ou x-client-id</span></div>
-                <div class="svc-list-item"><code>3a.</code> <span>User token: valida via Identity service + checa workspace membership</span></div>
-                <div class="svc-list-item"><code>3b.</code> <span>Service account: valida x-client-id + x-client-secret</span></div>
-                <div class="svc-list-item"><code>4.</code> <span>Retorna IAM policy (Allow/Deny)</span></div>
-              </div>
-            </div>
-
-            <div class="svc-card">
-              <h4>Estrutura</h4>
-              <pre class="svc-tree"><code>src/
-├── handlers/
-│   └── authorizer.ts        <span class="tree-note"># Lambda entry</span>
-├── app/usecases/
-│   └── ValidateWorkspaceAccessUseCase.ts
-├── domain/
-│   ├── repositories/
-│   │   └── WorkspaceUserRepository.ts
-│   └── schemas/
-│       └── AuthResponseSchema.ts
-└── infra/
-    ├── di/container.ts      <span class="tree-note"># Inversify DI</span>
-    ├── database/kysely/     <span class="tree-note"># workspace_users</span>
-    └── providers/
-        └── AxiosIdentityProvider.ts</code></pre>
-            </div>
-
-            <div class="svc-card">
-              <h4>Workspace ID Extraction</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>Headers</code> <span>x-workspace-id, workspace-id, workspaceid</span></div>
-                <div class="svc-list-item"><code>Path</code> <span>/workspaces/{id}/...</span></div>
-                <div class="svc-list-item"><code>Query</code> <span>?workspaceId=...</span></div>
-              </div>
-            </div>
+<span class="code-comment"># Variaveis sensiveis — peca ao tech lead:</span>
+<span class="code-comment"># OPENAI_API_KEY, ANTHROPIC_API_KEY</span>
+<span class="code-comment"># LANGSMITH_API_KEY</span>
+<span class="code-comment"># CLERK_SECRET_KEY</span>
+<span class="code-comment"># DATABASE_URL (uma por servico)</span></code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
           </div>
         </div>
 
-        <!-- ===== TAB: v4-marketing-api ===== -->
-        <div class="tabs__panel" id="tab-api">
-          <div class="svc-header">
-            <div class="svc-header__info">
-              <h3>v4-marketing-api</h3>
-              <p>API NestJS de dados de marketing. 92 modulos consumindo dados de 15+ plataformas. Repo separado.</p>
-              <div class="svc-header__meta">
-                <span class="svc-meta">Repo separado</span>
-                <span class="svc-meta">NestJS</span>
-                <span class="svc-meta">TypeORM</span>
-                <span class="svc-meta">PostgreSQL (Redshift)</span>
-              </div>
-            </div>
-            <div class="svc-header__stats">
-              <div class="svc-stat"><span>92</span>Modulos</div>
-              <div class="svc-stat"><span>15+</span>Plataformas</div>
-              <div class="svc-stat"><span>npm</span>Pkg Manager</div>
-            </div>
-          </div>
-
-          <div class="svc-grid">
-            <div class="svc-card svc-card--wide">
-              <h4>Modulos por Plataforma</h4>
-              <div class="svc-platforms">
-                <div class="svc-platform-group">
-                  <h5>Facebook Ads (25 modulos)</h5>
-                  <span>Campaigns, Ads, AdSets, Creatives, Demographics, Regions, Platforms, Actions, Accounts</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Google Ads (14 modulos)</h5>
-                  <span>Campaigns, Ad Groups, Keywords, Conversions, Geographic, Age Range, Gender, Accounts</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Google Analytics (6)</h5>
-                  <span>Events, Transactions, Sessions, Customers, Products, Custom Events</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Instagram (7)</h5>
-                  <span>Profile, Media, Age/Gender/City Insights</span>
-                </div>
-                <div class="svc-platform-group">
-                  <h5>Outros</h5>
-                  <span>TikTok (5), LinkedIn (3), Shopify (4), VTEX (2), Tray (2), Nuvem Shop (3), Loja Integrada (2), Bitrix (4), Kommo (4), Pipedrive (8), RD Station (3), Unbounce (1)</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="svc-card">
-              <h4>Patterns NestJS</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>Module-per-integration</code> <span>Cada plataforma = modulo isolado</span></div>
-                <div class="svc-list-item"><code>Repository pattern</code> <span>Interface + TypeORM impl</span></div>
-                <div class="svc-list-item"><code>ThrottlerGuard</code> <span>Rate limit: 100 req/60s</span></div>
-                <div class="svc-list-item"><code>FeatureAccessInterceptor</code> <span>Feature flags global</span></div>
-                <div class="svc-list-item"><code>Redis cache</code> <span>cache-manager-redis-yet</span></div>
-              </div>
-            </div>
-
-            <div class="svc-card">
-              <h4>Comandos</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>npm run start:dev</code> <span>Dev com hot reload</span></div>
-                <div class="svc-list-item"><code>npm test</code> <span>Jest unit tests</span></div>
-                <div class="svc-list-item"><code>npm run test:e2e</code> <span>E2E tests</span></div>
-                <div class="svc-list-item"><code>npm run migration:run</code> <span>TypeORM migrations</span></div>
-                <div class="svc-list-item"><code>npm run lint</code> <span>ESLint</span></div>
-              </div>
-            </div>
+        <div class="setup-step">
+          <div class="setup-step-num">5</div>
+          <div class="setup-step-content">
+            <h3 class="setup-step-title">Suba a infra local</h3>
+            <div class="code-block"><code><span class="code-comment"># Docker deve estar rodando</span>
+<span class="code-comment"># Sobe PostgreSQL, LocalStack (S3/SQS), RabbitMQ</span>
+<span class="code-comment"># Sincroniza .env e roda migrations Prisma</span>
+pnpm dev:prepare</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
           </div>
         </div>
 
-        <!-- ===== TAB: v4-marketing-data ===== -->
-        <div class="tabs__panel" id="tab-data">
-          <div class="svc-header">
-            <div class="svc-header__info">
-              <h3>v4-marketing-data</h3>
-              <p>Plataforma de dados serverless. IaC com SST v3, pipelines em Lambda (Python) e ECS (Python), storage em S3 + Aurora. Repo separado.</p>
-              <div class="svc-header__meta">
-                <span class="svc-meta">Repo separado</span>
-                <span class="svc-meta">Python + SST v3</span>
-                <span class="svc-meta">AWS (Lambda, ECS, S3, Aurora, SQS, SNS)</span>
-              </div>
-            </div>
-            <div class="svc-header__stats">
-              <div class="svc-stat"><span>13</span>Lambdas</div>
-              <div class="svc-stat"><span>20</span>ECS Services</div>
-              <div class="svc-stat"><span>7</span>SQS Queues</div>
-              <div class="svc-stat"><span>2</span>Crons</div>
-            </div>
-          </div>
+        <div class="setup-step">
+          <div class="setup-step-num">6</div>
+          <div class="setup-step-content">
+            <h3 class="setup-step-title">Rode os servicos</h3>
+            <div class="code-block"><code><span class="code-comment"># Todos os servicos + frontend</span>
+pnpm dev:all
 
-          <div class="svc-grid">
-            <div class="svc-card">
-              <h4>Lambda Functions</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>accountsScheduler</code> <span>Agenda tarefas de sync</span></div>
-                <div class="svc-list-item"><code>requestEvent</code> <span>Enfileira requests da API</span></div>
-                <div class="svc-list-item"><code>firstExtraction</code> <span>Primeira extracao de dados</span></div>
-                <div class="svc-list-item"><code>dataProcessor</code> <span>Processa dados extraidos</span></div>
-                <div class="svc-list-item"><code>insertAurora</code> <span>Escreve no Aurora</span></div>
-                <div class="svc-list-item"><code>insertDocument</code> <span>Escreve docs no S3</span></div>
-                <div class="svc-list-item"><code>statusUpdate</code> <span>Atualiza status via SNS</span></div>
-                <div class="svc-list-item"><code>errorProcessor</code> <span>Trata erros</span></div>
-                <div class="svc-list-item"><code>errorNotification</code> <span>Notifica erros</span></div>
-                <div class="svc-list-item"><code>materializedViews</code> <span>Refresh materialized views</span></div>
-                <div class="svc-list-item"><code>workerPipeline</code> <span>Workers do pipeline</span></div>
-                <div class="svc-list-item"><code>writePipeline</code> <span>Escrita do pipeline</span></div>
-              </div>
-            </div>
+<span class="code-comment"># Apenas backend (sem frontend)</span>
+pnpm dev:backend
 
-            <div class="svc-card">
-              <h4>ECS Services (20 connectors)</h4>
-              <div class="svc-tags">
-                <span class="svc-tag">Google Ads</span>
-                <span class="svc-tag">Google Analytics</span>
-                <span class="svc-tag">Instagram</span>
-                <span class="svc-tag">TikTok</span>
-                <span class="svc-tag">LinkedIn</span>
-                <span class="svc-tag">Kommo</span>
-                <span class="svc-tag">Pipedrive</span>
-                <span class="svc-tag">Piperun</span>
-                <span class="svc-tag">RD Station</span>
-                <span class="svc-tag">Shopify</span>
-                <span class="svc-tag">VTEX</span>
-                <span class="svc-tag">Tray</span>
-                <span class="svc-tag">Nuvem Shop</span>
-                <span class="svc-tag">WooCommerce</span>
-                <span class="svc-tag">Wake</span>
-                <span class="svc-tag">Unbounce</span>
-                <span class="svc-tag">Zendesk</span>
-                <span class="svc-tag">Meetime</span>
-                <span class="svc-tag">Inhire</span>
-                <span class="svc-tag">Default</span>
-              </div>
-            </div>
-
-            <div class="svc-card">
-              <h4>Infra (SQS + Cron)</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>queueInputRequest</code> <span>Fila de entrada</span></div>
-                <div class="svc-list-item"><code>queueFirstExtraction</code> <span>Fila de 1a extracao</span></div>
-                <div class="svc-list-item"><code>queueInsertDocument</code> <span>Fila de insercao S3</span></div>
-                <div class="svc-list-item"><code>queueWrite</code> <span>Fila de escrita Aurora</span></div>
-                <div class="svc-list-item"><code>queueErrorTask</code> <span>Fila de erros</span></div>
-                <div class="svc-list-item"><code>queueDeadLetter</code> <span>DLQ</span></div>
-                <div class="svc-list-item"><code>cronEnqueueAccounts</code> <span>Sync periodico</span></div>
-                <div class="svc-list-item"><code>cronMaterializedViews</code> <span>Refresh de views</span></div>
-              </div>
-            </div>
-
-            <div class="svc-card">
-              <h4>Comandos</h4>
-              <div class="svc-list">
-                <div class="svc-list-item"><code>yarn install</code> <span>Deps Node (SST)</span></div>
-                <div class="svc-list-item"><code>uv sync</code> <span>Deps Python</span></div>
-                <div class="svc-list-item"><code>npx sst dev</code> <span>Dev mode (AWS creds)</span></div>
-                <div class="svc-list-item"><code>npx sst deploy</code> <span>Deploy para AWS</span></div>
-              </div>
-            </div>
+<span class="code-comment"># Servico individual</span>
+cd packages/chat &amp;&amp; pnpm dev</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
           </div>
         </div>
 
-      </div><!-- /tabs -->
-    </div>
-  </section>
-
-  <!-- ========== QUICK START ========== -->
-  <section id="quickstart" class="section">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Setup</span>
-        <h2 class="section__title">Quick Start</h2>
-        <p class="section__desc">Do zero ao ambiente rodando em minutos</p>
-      </div>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step__number">1</div>
-          <div class="step__content">
-            <h3>Clone o onboarding</h3>
-            <div class="code-block">
-              <div class="code-block__header">
-                <span>terminal</span>
-                <button class="code-block__copy" onclick="copyCode(this)">copiar</button>
-              </div>
-              <pre><code>git clone git@github.com:V4-Company/v4mos-team-onboarding.git
-cd v4mos-team-onboarding</code></pre>
-            </div>
+        <div class="setup-step">
+          <div class="setup-step-num">7</div>
+          <div class="setup-step-content">
+            <h3 class="setup-step-title">Abra o frontend</h3>
+            <div class="code-block"><code>open http://localhost:3000</code><button class="copy-btn" onclick="copyCode(this)">copy</button></div>
           </div>
         </div>
 
-        <div class="step">
-          <div class="step__number">2</div>
-          <div class="step__content">
-            <h3>Rode o bootstrap</h3>
-            <p>Clona os 3 repos, instala deps e cria os <code>.env</code></p>
-            <div class="code-block">
-              <div class="code-block__header">
-                <span>terminal</span>
-                <button class="code-block__copy" onclick="copyCode(this)">copiar</button>
-              </div>
-              <pre><code>./scripts/bootstrap.sh</code></pre>
-            </div>
-          </div>
+        <h2 class="subsection-title" style="margin-top:40px">Servicos e Portas</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Servico</th><th>Porta</th><th>Comando</th></tr></thead>
+            <tbody>
+              <tr><td>web-client</td><td>:3000</td><td><code>pnpm dev:all</code></td></tr>
+              <tr><td>v4-marketing</td><td>:3012</td><td><code>pnpm dev:all</code></td></tr>
+              <tr><td>integration-hub</td><td>:3001</td><td><code>pnpm dev:all</code></td></tr>
+              <tr><td>chat</td><td>:3013</td><td><code>pnpm dev:all</code></td></tr>
+              <tr><td>v4-marketing-api</td><td>:3000</td><td><code>cd v4-marketing-api &amp;&amp; npm run start:dev</code></td></tr>
+            </tbody>
+          </table>
         </div>
 
-        <div class="step">
-          <div class="step__number">3</div>
-          <div class="step__content">
-            <h3>Configure o .env</h3>
-            <p>Peca as variaveis sensiveis (DB, AWS, Clerk) para alguem do time via 1Password ou DM.</p>
-          </div>
+        <h2 class="subsection-title" style="margin-top:32px">Comandos Uteis</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Comando</th><th>O que faz</th></tr></thead>
+            <tbody>
+              <tr><td><code>pnpm install</code></td><td>Instala todas as dependencias</td></tr>
+              <tr><td><code>pnpm build:lib</code></td><td>Build da shared library (rode primeiro!)</td></tr>
+              <tr><td><code>pnpm dev:prepare</code></td><td>Sync env + Docker infra + migrations</td></tr>
+              <tr><td><code>pnpm dev:all</code></td><td>Todos os servicos + frontend</td></tr>
+              <tr><td><code>pnpm dev:backend</code></td><td>Apenas servicos backend</td></tr>
+              <tr><td><code>pnpm test</code></td><td>Vitest (backend)</td></tr>
+              <tr><td><code>pnpm lint</code></td><td>ESLint + DDD rules</td></tr>
+              <tr><td><code>pnpm typecheck</code></td><td>TypeScript check</td></tr>
+              <tr><td><code>cd packages/&lt;svc&gt; &amp;&amp; pnpm migrate</code></td><td>Rodar Prisma migrations</td></tr>
+              <tr><td><code>pnpm localstack:start</code></td><td>Inicia LocalStack</td></tr>
+              <tr><td><code>pnpm openapi:export</code></td><td>Exporta spec OpenAPI</td></tr>
+            </tbody>
+          </table>
         </div>
 
-        <div class="step">
-          <div class="step__number">4</div>
-          <div class="step__content">
-            <h3>Suba a infra e rode</h3>
-            <div class="code-block">
-              <div class="code-block__header">
-                <span>terminal — v4-marketing-backend</span>
-                <button class="code-block__copy" onclick="copyCode(this)">copiar</button>
-              </div>
-              <pre><code># Sobe Postgres, LocalStack, RabbitMQ + roda migrations
-pnpm dev:prepare
-
-# Roda todos os servicos + frontend
-pnpm dev:all</code></pre>
-            </div>
-          </div>
+        <h2 class="subsection-title" style="margin-top:32px">Troubleshooting</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Problema</th><th>Solucao</th></tr></thead>
+            <tbody>
+              <tr><td><code>Module not found: @v4-company/lib</code></td><td>Rode <code>pnpm build:lib</code></td></tr>
+              <tr><td>Docker containers nao sobem</td><td><code>docker ps</code>, mate conflitos, <code>docker system prune</code></td></tr>
+              <tr><td>Migrations falham</td><td>Verifique <code>DATABASE_URL</code> no .env, certifique que Postgres esta rodando</td></tr>
+              <tr><td>Portas em uso</td><td><code>lsof -i :3012 &amp;&amp; kill &lt;PID&gt;</code></td></tr>
+              <tr><td>chat falha ao iniciar</td><td>Verifique <code>LANGSMITH_API_KEY</code> e <code>OPENAI_API_KEY</code> no .env</td></tr>
+              <tr><td><code>TypeError: z.string is not a function</code></td><td>Mude para <code>import &#123; z &#125; from 'zod/v4'</code></td></tr>
+              <tr><td>pnpm install falha no v4-marketing-api</td><td>Esse repo usa <strong>npm</strong>, nao pnpm. Use <code>npm install</code></td></tr>
+            </tbody>
+          </table>
         </div>
 
-        <div class="step">
-          <div class="step__number">5</div>
-          <div class="step__content">
-            <h3>Abra no VS Code</h3>
-            <div class="code-block">
-              <div class="code-block__header">
-                <span>terminal</span>
-                <button class="code-block__copy" onclick="copyCode(this)">copiar</button>
-              </div>
-              <pre><code>code v4mos.code-workspace</code></pre>
-            </div>
-            <p>Abre os 3 repos como multi-root workspace com extensoes recomendadas.</p>
-          </div>
-        </div>
-      </div>
+      </section>
 
-      <div class="prereqs">
-        <h3>Pre-requisitos</h3>
-        <div class="prereqs__grid">
-          <div class="prereq">
-            <code>node</code>
-            <span>v20+</span>
-          </div>
-          <div class="prereq">
-            <code>pnpm</code>
-            <span>v9.15+</span>
-          </div>
-          <div class="prereq">
-            <code>docker</code>
-            <span>v24+</span>
-          </div>
-          <div class="prereq">
-            <code>python3</code>
-            <span>v3.11+</span>
-          </div>
-          <div class="prereq">
-            <code>uv</code>
-            <span>latest</span>
-          </div>
-          <div class="prereq">
-            <code>git</code>
-            <span>v2+</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== COMMANDS ========== -->
-  <section id="commands" class="section">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Referencia</span>
-        <h2 class="section__title">Comandos Essenciais</h2>
-        <p class="section__desc">Cheat sheet dos comandos que voce vai usar todo dia</p>
-      </div>
-
-      <div class="commands">
-        <div class="cmd-group">
-          <h3 class="cmd-group__title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            v4-marketing-backend
-          </h3>
-          <div class="cmd-table">
-            <div class="cmd-row">
-              <code>pnpm install</code>
-              <span>Instalar dependencias</span>
-            </div>
-            <div class="cmd-row">
-              <code>pnpm build:lib</code>
-              <span>Build da lib compartilhada (rode primeiro!)</span>
-            </div>
-            <div class="cmd-row">
-              <code>pnpm dev:prepare</code>
-              <span>Sync env + sobe infra Docker + migrations</span>
-            </div>
-            <div class="cmd-row">
-              <code>pnpm dev:all</code>
-              <span>Roda todos os servicos + frontend</span>
-            </div>
-            <div class="cmd-row">
-              <code>pnpm dev:backend</code>
-              <span>Roda apenas os servicos backend</span>
-            </div>
-            <div class="cmd-row">
-              <code>pnpm test</code>
-              <span>Rodar testes (Vitest)</span>
-            </div>
-            <div class="cmd-row">
-              <code>pnpm lint</code>
-              <span>ESLint + DDD rules</span>
-            </div>
-            <div class="cmd-row">
-              <code>pnpm typecheck</code>
-              <span>Type checking</span>
-            </div>
-            <div class="cmd-row">
-              <code>cd packages/&lt;svc&gt; && pnpm migrate</code>
-              <span>Rodar migrations Prisma</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="cmd-group">
-          <h3 class="cmd-group__title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            v4-marketing-api
-          </h3>
-          <div class="cmd-table">
-            <div class="cmd-row">
-              <code>npm install</code>
-              <span>Instalar dependencias</span>
-            </div>
-            <div class="cmd-row">
-              <code>npm run start:dev</code>
-              <span>Dev server com hot reload</span>
-            </div>
-            <div class="cmd-row">
-              <code>npm test</code>
-              <span>Testes unitarios (Jest)</span>
-            </div>
-            <div class="cmd-row">
-              <code>npm run test:e2e</code>
-              <span>Testes end-to-end</span>
-            </div>
-            <div class="cmd-row">
-              <code>npm run lint</code>
-              <span>ESLint</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="cmd-group">
-          <h3 class="cmd-group__title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            v4-marketing-data
-          </h3>
-          <div class="cmd-table">
-            <div class="cmd-row">
-              <code>yarn install</code>
-              <span>Deps Node (SST)</span>
-            </div>
-            <div class="cmd-row">
-              <code>uv sync</code>
-              <span>Deps Python</span>
-            </div>
-            <div class="cmd-row">
-              <code>npx sst dev</code>
-              <span>Dev mode (requer AWS creds)</span>
-            </div>
-            <div class="cmd-row">
-              <code>npx sst deploy</code>
-              <span>Deploy para AWS</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== TIMELINE ========== -->
-  <section id="timeline" class="section section--dark">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Onboarding</span>
-        <h2 class="section__title">Sua Primeira Semana</h2>
-        <p class="section__desc">Roadmap dia a dia pra voce se sentir em casa</p>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline__item">
-          <div class="timeline__day">Dia 1</div>
-          <div class="timeline__card">
-            <h3>Setup & Contexto</h3>
-            <ul>
-              <li>Rodar o bootstrap e ter tudo funcionando</li>
-              <li>Ler a doc de arquitetura</li>
-              <li>Acessar o frontend em localhost:3000</li>
-              <li>Pedir acessos: GitHub, Clerk, AWS, Datadog, Slack</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline__item">
-          <div class="timeline__day">Dia 2</div>
-          <div class="timeline__card">
-            <h3>Explorar o Monorepo</h3>
-            <ul>
-              <li>Ler o CLAUDE.md (doc tecnica completa)</li>
-              <li>Navegar domain/app/infra do v4-marketing</li>
-              <li>Entender o fluxo: Controller &rarr; UseCase &rarr; Repository</li>
-              <li>Rodar os testes: <code>pnpm test</code></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline__item">
-          <div class="timeline__day">Dia 3</div>
-          <div class="timeline__card">
-            <h3>DDD & Convencoes</h3>
-            <ul>
-              <li>Entender a separacao de camadas e as regras DDD</li>
-              <li>Olhar o DI container (Inversify)</li>
-              <li>Entender Prisma (migrations) + Kysely (queries)</li>
-              <li>Criar uma branch e fazer uma mudanca trivial</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline__item">
-          <div class="timeline__day">Dia 4</div>
-          <div class="timeline__card">
-            <h3>Outros Repos</h3>
-            <ul>
-              <li>Explorar v4-marketing-api (modulos de integracoes)</li>
-              <li>Explorar v4-marketing-data (pipelines SST)</li>
-              <li>Entender como os repos se conectam</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline__item">
-          <div class="timeline__day">Dia 5</div>
-          <div class="timeline__card">
-            <h3>Primeiro PR</h3>
-            <ul>
-              <li>Pegar uma task pequena do backlog</li>
-              <li>Abrir PR seguindo as convencoes</li>
-              <li>Code review com alguem do time</li>
-              <li>Pair programming com um senior</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <span class="nav__logo-icon">V4</span>MOS Team
-        </div>
-        <div class="footer__links">
-          <a href="https://github.com/V4-Company" target="_blank">GitHub Org</a>
-          <a href="https://github.com/V4-Company/v4mos-team-onboarding" target="_blank">Este Repo</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </main>
+  </div>
 
   <script src="script.js"></script>
 </body>

@@ -2,80 +2,133 @@
 // V4MOS Developer Onboarding — Scripts
 // ============================================
 
-// Scroll-based nav style
-const nav = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('nav--scrolled', window.scrollY > 50);
-});
+// Scroll-based nav highlighting
+(function () {
+  const navItems = document.querySelectorAll('.nav-item');
+  const sections = document.querySelectorAll('.section');
 
-// Smooth scroll for nav links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => {
-    e.preventDefault();
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
-// Fade-in on scroll (Intersection Observer)
-const fadeElements = document.querySelectorAll(
-  '.arch__layer, .arch__connections, .repo-card, .step, .cmd-group, ' +
-  '.timeline__item, .ddd__layer, .ddd__arrow, .ddd__note, .prereqs'
-);
-
-fadeElements.forEach(el => el.classList.add('fade-in'));
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+  function getActiveSection() {
+    const scrollY = window.scrollY + 120;
+    let active = null;
+    sections.forEach(function (section) {
+      if (section.offsetTop <= scrollY) {
+        active = section.id;
       }
     });
-  },
-  { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-);
+    return active;
+  }
 
-fadeElements.forEach(el => observer.observe(el));
+  function updateNav() {
+    const activeId = getActiveSection();
+    navItems.forEach(function (item) {
+      const href = item.getAttribute('href');
+      if (href === '#' + activeId) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
 
-// Copy code to clipboard
-function copyCode(button) {
-  const codeBlock = button.closest('.code-block');
-  const code = codeBlock.querySelector('code').textContent;
-  navigator.clipboard.writeText(code).then(() => {
-    const original = button.textContent;
-    button.textContent = 'copiado!';
-    button.style.color = 'var(--green)';
-    button.style.borderColor = 'var(--green)';
-    setTimeout(() => {
-      button.textContent = original;
-      button.style.color = '';
-      button.style.borderColor = '';
-    }, 2000);
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-item').forEach(function (link) {
+  link.addEventListener('click', function (e) {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      // Close sidebar on mobile after click
+      closeSidebar();
+    }
   });
+});
+
+// Mobile sidebar toggle
+var hamburger = document.getElementById('hamburger');
+var sidebar = document.getElementById('sidebar');
+var overlay = document.getElementById('sidebar-overlay');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  overlay.classList.add('open');
+  hamburger.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
-// Staggered fade-in for elements in same section
-document.querySelectorAll('.section').forEach(section => {
-  const items = section.querySelectorAll('.fade-in');
-  items.forEach((item, i) => {
-    item.style.transitionDelay = `${i * 0.08}s`;
-  });
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', function () {
+  if (sidebar.classList.contains('open')) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
 });
 
-// Tab switching
-document.querySelectorAll('.tabs__btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const tabId = btn.dataset.tab;
-    const tabsContainer = btn.closest('.tabs');
+overlay.addEventListener('click', closeSidebar);
 
-    // Deactivate all buttons and panels in this tab group
-    tabsContainer.querySelectorAll('.tabs__btn').forEach(b => b.classList.remove('tabs__btn--active'));
-    tabsContainer.querySelectorAll('.tabs__panel').forEach(p => p.classList.remove('tabs__panel--active'));
+// Expandable sections
+function toggleExpand(id) {
+  var container = document.getElementById(id);
+  if (!container) return;
+  var btn = container.querySelector('.expandable-toggle');
+  var content = container.querySelector('.expandable-content');
+  if (!btn || !content) return;
 
-    // Activate clicked button and matching panel
-    btn.classList.add('tabs__btn--active');
-    document.getElementById(tabId).classList.add('tabs__panel--active');
+  var isOpen = content.classList.contains('open');
+  if (isOpen) {
+    content.classList.remove('open');
+    btn.classList.remove('open');
+  } else {
+    content.classList.add('open');
+    btn.classList.add('open');
+  }
+}
+
+// Copy button for code blocks
+function copyCode(btn) {
+  var block = btn.parentElement;
+  var code = block.querySelector('code');
+  if (!code) return;
+
+  // Strip HTML tags to get plain text
+  var text = code.innerText || code.textContent;
+
+  navigator.clipboard.writeText(text).then(function () {
+    var original = btn.textContent;
+    btn.textContent = 'copied!';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1800);
+  }).catch(function () {
+    // Fallback for older browsers
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'copied!';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = 'copy';
+      btn.classList.remove('copied');
+    }, 1800);
   });
-});
+}
